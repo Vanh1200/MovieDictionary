@@ -6,6 +6,8 @@ import android.databinding.ObservableList;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -70,8 +72,15 @@ public class BindingUtils {
         for (Genre genre : genres) {
             strings.add(genre.getName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(),
-                android.R.layout.simple_spinner_item, strings);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(spinner.getContext(),
+                android.R.layout.simple_spinner_item, strings){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                view.setVisibility(View.GONE);
+                return view;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

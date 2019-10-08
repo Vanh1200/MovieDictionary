@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.ui.main;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,12 +16,13 @@ import com.ptit.filmdictionary.ui.home.HomeFragment;
 import com.ptit.filmdictionary.ui.home.MainAdapter;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.
-        OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+        OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HomeFragment.OnScrollListener {
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_FAVORITE = 1;
     private static final int FRAGMENT_SETTING = 2;
     private ViewPager mViewPager;
     private BottomNavigationView mNavigationView;
+    private boolean isScrollToTop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mainAdapter);
         mViewPager.addOnPageChangeListener(this);
+        HomeFragment.getInstance().setListener(this);
     }
 
     private void registerEvents() {
@@ -55,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
             case R.id.menu_favorite:
                 mViewPager.setCurrentItem(FRAGMENT_FAVORITE);
+                // TODO: 20/03/2019 cho nay gay ra bug: bam sang favorite -> tro ve home -> slide khong hien???
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    setSystemBarTheme(this, false);
+//                }
                 return true;
             case R.id.menu_setting:
                 return false;
@@ -70,20 +77,52 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onPageSelected(int i) {
-        switch (i){
+        switch (i) {
             case FRAGMENT_HOME:
                 mNavigationView.setSelectedItemId(R.id.menu_home);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    setSystemBarTheme(this, !isScrollToTop);
+//                }
                 break;
             case FRAGMENT_FAVORITE:
                 mNavigationView.setSelectedItemId(R.id.menu_favorite);
+                // TODO: 20/03/2019 cho nay gay ra bug: bam sang favorite -> tro ve home -> slide khong hien???
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    setSystemBarTheme(this, false);
+//                }
+
                 break;
             default:
                 break;
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void setSystemBarTheme(final Activity pActivity, boolean isDark) {
+        int lFlags = pActivity.getWindow().getDecorView().getSystemUiVisibility();
+        getWindow().getDecorView().setSystemUiVisibility(isDark ?
+                (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) :
+                (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
+    }
+
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+
+    @Override
+    public void onSlideCollapsed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setSystemBarTheme(this, false);
+        }
+        isScrollToTop = true;
+    }
+
+    @Override
+    public void onSlideExpanded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setSystemBarTheme(this, true);
+        }
+        isScrollToTop = false;
     }
 }

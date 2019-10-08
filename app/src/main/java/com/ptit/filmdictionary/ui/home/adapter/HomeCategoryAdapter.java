@@ -1,11 +1,9 @@
 package com.ptit.filmdictionary.ui.home.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +44,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
     }
 
     public void update(ObservableList<ObservableList<Movie>> movies,
-                       ObservableList<String> categories){
+                       ObservableList<String> categories) {
         mMovies = movies;
         mCategories = categories;
         notifyDataSetChanged();

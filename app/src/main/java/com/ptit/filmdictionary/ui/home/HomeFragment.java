@@ -44,6 +44,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     private HomeViewModel mHomeViewModel;
     private FragmentHomeBinding mFragmentHomeBinding;
     private SlideAdapter mSlideAdapter;
+    private OnScrollListener mListener;
     private int mCurrentSlide;
 
     @Override
@@ -80,7 +81,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mSlideAdapter = new SlideAdapter(this);
         mFragmentHomeBinding.viewPager.setAdapter(mSlideAdapter);
         mFragmentHomeBinding.viewPager.addOnPageChangeListener(this);
-        mCurrentSlide = mSlideAdapter.getCurrentSlide();
+        mCurrentSlide = mFragmentHomeBinding.viewPager.getCurrentItem();
         initTimerChangeSlide();
         mFragmentHomeBinding.tabLayout.setupWithViewPager(mFragmentHomeBinding.viewPager, true);
         mFragmentHomeBinding.recyclerCategory.setAdapter(new HomeCategoryAdapter(this));
@@ -120,9 +121,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mFragmentHomeBinding.appBar.addOnOffsetChangedListener(getAppBarListener());
     }
 
+    public void setListener(OnScrollListener listener) {
+        mListener = listener;
+    }
+
     private AppBarLayout.OnOffsetChangedListener getAppBarListener() {
         return new AppBarLayout.OnOffsetChangedListener() {
             int scrollRange = DEFAULT_SCROLL_RANGE;
+
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (scrollRange == DEFAULT_SCROLL_RANGE) {
@@ -142,6 +148,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mFragmentHomeBinding.imageSearch.setColorFilter(ContextCompat.getColor(getActivity(),
                 R.color.color_white),
                 android.graphics.PorterDuff.Mode.SRC_IN);
+        if (mListener != null) {
+            mListener.onSlideExpanded();
+        }
     }
 
     private void handleCollapsedToolbar() {
@@ -149,6 +158,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mFragmentHomeBinding.imageSearch.setColorFilter(ContextCompat.getColor(getActivity(),
                 R.color.color_black),
                 android.graphics.PorterDuff.Mode.SRC_IN);
+        if (mListener != null) {
+            mListener.onSlideCollapsed();
+        }
     }
 
     public static HomeFragment getInstance() {
@@ -221,8 +233,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
 
     @Override
-    public void onSlideClickListener(Movie movie) {
-        startMovieDetailActivity(movie);
+    public void onSlideClickListener() {
+        startMovieDetailActivity(mFragmentHomeBinding
+                .getViewModel()
+                .topTrendingMoviesObservable
+                .get(mFragmentHomeBinding.viewPager.getCurrentItem()));
     }
 
     @Override
@@ -243,6 +258,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     @Override
     public void onItemClick(Genre genre) {
         startGenreActivity(genre.getId(), genre.getName());
+    }
+
+    public interface OnScrollListener {
+        void onSlideCollapsed();
+
+        void onSlideExpanded();
     }
 
 }

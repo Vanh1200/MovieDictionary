@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.ui.home.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
@@ -18,19 +19,10 @@ public class SlideAdapter extends PagerAdapter implements View.OnClickListener {
     private ObservableList<Movie> mMovies;
     private SlideListener mListener;
     private ItemSlideBinding mBinding;
-    private int mCurrentSlide;
 
     public SlideAdapter(SlideListener listener) {
         mListener = listener;
         mMovies = new ObservableArrayList<>();
-    }
-
-    public int getCurrentSlide() {
-        return mCurrentSlide;
-    }
-
-    public void setCurrentSlide(int currentSlide) {
-        mCurrentSlide = currentSlide;
     }
 
     @Override
@@ -43,7 +35,7 @@ public class SlideAdapter extends PagerAdapter implements View.OnClickListener {
         return view == o;
     }
 
-    public void update(ObservableList<Movie> movies){
+    public void update(ObservableList<Movie> movies) {
         mMovies.clear();
         mMovies.addAll(movies);
         notifyDataSetChanged();
@@ -55,15 +47,15 @@ public class SlideAdapter extends PagerAdapter implements View.OnClickListener {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         mBinding = DataBindingUtil.inflate(inflater, R.layout.item_slide, container,
                 true);
-        if(mBinding.getViewModel() == null){
+        if (mBinding.getViewModel() == null) {
             mBinding.setViewModel(new ItemMovieViewModel());
         }
         mBinding.getViewModel().setMovie(mMovies.get(position));
-        mCurrentSlide = position;
         mBinding.imageSlide.setOnClickListener(this);
         mBinding.executePendingBindings();
         return mBinding.getRoot();
     }
+
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
@@ -73,13 +65,13 @@ public class SlideAdapter extends PagerAdapter implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(mListener!= null){
-            mListener.onSlideClickListener(mBinding.getViewModel().getMovie());
+        if (mListener != null) {
+            mListener.onSlideClickListener();
         }
     }
 
     public interface SlideListener {
-        void onSlideClickListener(Movie movie);
+        void onSlideClickListener();
     }
 
 }
