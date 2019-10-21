@@ -16,7 +16,7 @@ import com.ptit.filmdictionary.data.model.CategoryKey;
 import com.ptit.filmdictionary.data.model.CategoryName;
 import com.ptit.filmdictionary.data.model.Genre;
 import com.ptit.filmdictionary.data.model.Movie;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.databinding.FragmentHomeBinding;

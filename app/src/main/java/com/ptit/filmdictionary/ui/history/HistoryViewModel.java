@@ -4,7 +4,7 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 
 import com.ptit.filmdictionary.data.model.History;
-import com.ptit.filmdictionary.data.source.HistoryRepository;
+import com.ptit.filmdictionary.data.repository.HistoryRepository;
 
 public class HistoryViewModel {
     private HistoryRepository mRepository;

@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 
 import com.ptit.filmdictionary.data.model.Actor;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

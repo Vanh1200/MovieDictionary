@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ptit.filmdictionary.R;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.databinding.FragmentActorInforBinding;

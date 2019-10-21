@@ -1,10 +1,11 @@
-package com.ptit.filmdictionary.data.source;
+package com.ptit.filmdictionary.data.repository;
 
 import android.databinding.ObservableArrayList;
 
 import com.ptit.filmdictionary.base.BaseRepository;
 import com.ptit.filmdictionary.data.model.Actor;
 import com.ptit.filmdictionary.data.model.Movie;
+import com.ptit.filmdictionary.data.source.MovieDataSource;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.response.GenreResponse;

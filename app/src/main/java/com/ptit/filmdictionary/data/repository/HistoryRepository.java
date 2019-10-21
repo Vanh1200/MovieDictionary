@@ -1,9 +1,9 @@
-package com.ptit.filmdictionary.data.source;
+package com.ptit.filmdictionary.data.repository;
 
-import android.content.Context;
 import android.databinding.ObservableList;
 
 import com.ptit.filmdictionary.data.model.History;
+import com.ptit.filmdictionary.data.source.HistoryDataSource;
 import com.ptit.filmdictionary.data.source.local.HistoryLocalDataSource;
 import com.ptit.filmdictionary.utils.MyApplication;
 

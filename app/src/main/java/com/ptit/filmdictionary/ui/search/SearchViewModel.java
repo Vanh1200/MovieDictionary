@@ -10,8 +10,8 @@ import com.ptit.filmdictionary.base.BaseViewModel;
 import com.ptit.filmdictionary.data.model.Genre;
 import com.ptit.filmdictionary.data.model.History;
 import com.ptit.filmdictionary.data.model.Movie;
-import com.ptit.filmdictionary.data.source.HistoryRepository;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.HistoryRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

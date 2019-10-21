@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.ptit.filmdictionary.base.BaseMoviesActivity;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.ui.category.CategoryAdapter;

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseRecyclerViewAdapter;
 import com.ptit.filmdictionary.data.model.History;
-import com.ptit.filmdictionary.data.source.HistoryRepository;
+import com.ptit.filmdictionary.data.repository.HistoryRepository;
 import com.ptit.filmdictionary.databinding.FragmentDialogHistoryBinding;
 import com.ptit.filmdictionary.ui.history.adapter.HistoryAdapter;
 

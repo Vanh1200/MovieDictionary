@@ -10,13 +10,11 @@ import com.ptit.filmdictionary.data.model.CategoryKey;
 import com.ptit.filmdictionary.data.model.CategoryName;
 import com.ptit.filmdictionary.data.model.Genre;
 import com.ptit.filmdictionary.data.model.Movie;
-import com.ptit.filmdictionary.data.source.MovieRepository;
-import com.ptit.filmdictionary.data.source.remote.response.MovieResponse;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomeViewModel extends BaseViewModel<HomeNavigator> {

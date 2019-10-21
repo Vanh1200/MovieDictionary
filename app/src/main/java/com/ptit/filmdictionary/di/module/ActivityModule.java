@@ -1,0 +1,16 @@
+package com.ptit.filmdictionary.di.module;
+
+import com.ptit.filmdictionary.ui.login.LoginActivity;
+
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
+
+/**
+ * Created by vanh1200 on 16/10/2019
+ */
+@Module
+public abstract class ActivityModule {
+
+    @ContributesAndroidInjector(modules = FragmentModule.class)
+    abstract LoginActivity contributeLoginActivity();
+}

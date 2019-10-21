@@ -4,7 +4,7 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 
 import com.ptit.filmdictionary.data.model.Movie;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.ui.main.OnInternetListener;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

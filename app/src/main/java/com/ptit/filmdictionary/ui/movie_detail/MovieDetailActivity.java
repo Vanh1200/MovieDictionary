@@ -14,8 +14,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ptit.filmdictionary.R;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.CommentRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
+import com.ptit.filmdictionary.data.source.remote.CommentRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.databinding.ActivityMovieDetailBinding;
 import com.ptit.filmdictionary.ui.main.OnInternetListener;
@@ -56,7 +58,7 @@ public class MovieDetailActivity extends AppCompatActivity
     private void initViewPager() {
         mPageAdapter = new MoviePageAdapter(getSupportFragmentManager());
 
-        MovieInfoFragment infoFragment = MovieInfoFragment.newInstance();
+        MovieInfoFragment infoFragment = MovieInfoFragment.newInstance(mMovieId);
         infoFragment.setViewModel(mViewModel);
         TrailerFragment trailerFragment = TrailerFragment.getInstance();
         trailerFragment.setViewModel(mViewModel);
@@ -75,8 +77,9 @@ public class MovieDetailActivity extends AppCompatActivity
     }
 
     private void initViewModel() {
-        mViewModel = new MovieDetailViewModel(MovieRepository.getInstance(MovieRemoteDataSource.getInstance(this),
-                MovieLocalDataSource.getInstance(this)), this);
+        mViewModel = new MovieDetailViewModel(
+                MovieRepository.getInstance(MovieRemoteDataSource.getInstance(this), MovieLocalDataSource.getInstance(this)),
+                CommentRepository.getInstance(CommentRemoteDataSource.getInstance(this)), this);
         mViewModel.setInternetListener(this);
         mViewModel.loadMovieDetail(mMovieId);
     }

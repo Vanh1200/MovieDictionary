@@ -24,12 +24,14 @@ public class RetrofitBuilder {
     private static final String API_KEY = BuildConfig.API_KEY;
     private static final long CACHE_SIZE = 10 * 1024 * 1024;
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
+    private static final String BASE_SECOND_URL = "http://192.168.0.105:8008/";
     private static final int READ_TIMEOUT = 5000;
     private static final int WRITE_TIMEOUT = 5000;
     private static final int CONNECT_TIMEOUT = 5000;
     private static final String TIME_CACHE_ONLINE = "public, max-age = 60";// 1 minute
     private static final String TIME_CACHE_OFFLINE = "public, only-if-cached, max-stale = 86400";//1 day
     private static Retrofit sRetrofit;
+    private static Retrofit sSecondRetrofit;
     private static String CACHE_CONTROL = "Cache-Control";
 
     public static Retrofit getInstance(Context context) {
@@ -44,6 +46,17 @@ public class RetrofitBuilder {
         return sRetrofit;
     }
 
+    public static Retrofit getSecondInstance(Context context) {
+        if (sSecondRetrofit == null) {
+            sSecondRetrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_SECOND_URL)
+                    .client(initSecondClient(context))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return sSecondRetrofit;
+    }
     private static OkHttpClient initClient(final Context context) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(READ_TIMEOUT, TimeUnit.MILLISECONDS)
@@ -76,6 +89,16 @@ public class RetrofitBuilder {
                         return chain.proceed(requestBuilder.build());
                     }
                 });
+        return builder.build();
+    }
+
+    private static OkHttpClient initSecondClient(final Context context) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .readTimeout(READ_TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
+                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
+                .retryOnConnectionFailure(true)
+                .cache(new Cache(context.getCacheDir(), CACHE_SIZE));
         return builder.build();
     }
 

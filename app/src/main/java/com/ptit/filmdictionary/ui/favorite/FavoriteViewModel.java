@@ -5,7 +5,7 @@ import android.databinding.ObservableList;
 
 import com.ptit.filmdictionary.base.BaseViewModel;
 import com.ptit.filmdictionary.data.model.Movie;
-import com.ptit.filmdictionary.data.source.MovieRepository;
+import com.ptit.filmdictionary.data.repository.MovieRepository;
 
 import io.reactivex.disposables.CompositeDisposable;
 
