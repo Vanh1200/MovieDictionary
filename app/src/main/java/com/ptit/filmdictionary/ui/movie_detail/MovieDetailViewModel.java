@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.ui.movie_detail;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.util.Log;
@@ -8,8 +9,11 @@ import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.repository.CommentRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
+import com.ptit.filmdictionary.data.source.remote.response.CommentResponse;
 import com.ptit.filmdictionary.ui.main.OnInternetListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import io.reactivex.Observable;
@@ -29,6 +33,17 @@ public class MovieDetailViewModel {
     private OnTrailerListener mListener;
     private OnInternetListener mInternetListener;
     private OnFavoriteListener mFavoriteListener;
+
+    private MutableLiveData<List<CommentResponse>> mLiveComments = new MutableLiveData<>();
+    private MutableLiveData<String> mLivePostComment = new MutableLiveData<>();
+
+    public MutableLiveData<List<CommentResponse>> getLiveComments() {
+        return mLiveComments;
+    }
+
+    public MutableLiveData<String> getLivePostComment() {
+        return mLivePostComment;
+    }
 
     public MovieDetailViewModel(MovieRepository repository, CommentRepository commentRepository,
                                 OnTrailerListener listener) {
@@ -70,6 +85,7 @@ public class MovieDetailViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                     Log.d("loadComment: size", data.getData().size() + "");
+                    mLiveComments.setValue(data.getData());
                 }, throwable -> {
                     Log.d("loadComment: error", throwable.toString());
                 });
@@ -82,6 +98,7 @@ public class MovieDetailViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                     Log.d("postComment: size", data.getData());
+                    mLivePostComment.setValue(data.getData());
                 }, throwable -> {
                     Log.d("postComment: error", throwable.toString());
                 });

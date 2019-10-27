@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.data.repository;
 
 import com.ptit.filmdictionary.base.BaseResponse;
-import com.ptit.filmdictionary.data.source.LoginDataSource;
+import com.ptit.filmdictionary.data.source.AuthDataSource;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
 import com.ptit.filmdictionary.data.source.remote.response.LoginResponse;
@@ -13,19 +13,19 @@ import io.reactivex.Single;
 /**
  * Created by vanh1200 on 16/10/2019
  */
-public class LoginRepository implements LoginDataSource.Remote {
-    private static LoginRepository sInstance;
-    private LoginDataSource.Remote mRemote;
+public class AuthRepository implements AuthDataSource.Remote {
+    private static AuthRepository sInstance;
+    private AuthDataSource.Remote mRemote;
 
-//    public static LoginRepository getInstance(LoginDataSource.Remote remote) {
+//    public static AuthRepository getInstance(AuthDataSource.Remote remote) {
 //        if (sInstance == null) {
-//            sInstance = new LoginRepository(remote);
+//            sInstance = new AuthRepository(remote);
 //        }
 //        return sInstance;
 //    }
 
     @Inject
-    public LoginRepository(LoginDataSource.Remote remote) {
+    public AuthRepository(AuthDataSource.Remote remote) {
         mRemote = remote;
     }
 

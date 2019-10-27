@@ -7,7 +7,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.data.repository.CommentRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
+import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.CommentRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.databinding.ActivityMovieDetailBinding;
@@ -27,6 +30,13 @@ import com.ptit.filmdictionary.ui.movie_detail.producer.ProducerFragment;
 import com.ptit.filmdictionary.ui.movie_detail.trailer.TrailerFragment;
 import com.ptit.filmdictionary.ui.search.SearchActivity;
 import com.ptit.filmdictionary.utils.Constants;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 public class MovieDetailActivity extends AppCompatActivity
         implements OnTrailerListener, OnInternetListener {
@@ -41,13 +51,18 @@ public class MovieDetailActivity extends AppCompatActivity
     private MoviePageAdapter mPageAdapter;
     private YoutubeFragment mYoutubeFragment;
 
+    @Inject
+    PreferenceUtil mPreferenceUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             setTextStatusBarColor();
         }
+        Log.d(MovieDetailActivity.class.getSimpleName(), "userId: " + mPreferenceUtil.getUserId());
         recieveData();
         initActionBar();
         initViewModel();
@@ -155,4 +170,5 @@ public class MovieDetailActivity extends AppCompatActivity
     public void onNoInternet() {
         Toast.makeText(this, Constants.NO_INTERNET, Toast.LENGTH_SHORT).show();
     }
+
 }

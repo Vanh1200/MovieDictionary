@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/avatar_def" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/view_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@drawable/bg_gray_corner"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_avatar"
+            app:layout_constraintTop_toTopOf="@id/image_avatar">
+
+            <TextView
+                android:id="@+id/text_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/san_francisco_display_semibold"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/sp_15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Thuy Duong" />
+
+            <TextView
+                android:id="@+id/text_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:fontFamily="@font/san_francisco_display_regular"
+                android:textColor="@color/color_black_0F0F0F"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_user_name"
+                tools:text="Duong xa qua lam luc thay minh le loi Duong xa qua lam luc thay minh le loi" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/text_time_ago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="12 phut truoc"
+            android:fontFamily="@font/san_francisco_display_regular"
+            android:textColor="@color/color_dark_gray"
+            android:layout_marginStart="@dimen/dp_10"
+            app:layout_constraintStart_toStartOf="@id/view_comment"
+            app:layout_constraintTop_toBottomOf="@id/view_comment"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

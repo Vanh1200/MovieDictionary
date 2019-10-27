@@ -4,14 +4,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ptit.filmdictionary.R;
-import com.ptit.filmdictionary.data.repository.LoginRepository;
 import com.ptit.filmdictionary.databinding.ActivityLoginBinding;
-import com.ptit.filmdictionary.databinding.FragmentLoginBinding;
-import com.ptit.filmdictionary.utils.ViewModelFactory;
 
 import javax.inject.Inject;
 
@@ -23,10 +19,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 /**
  * Created by vanh1200 on 15/10/2019
  */
-public class LoginActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding mBinding;
-    @Inject
-    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +33,4 @@ public class LoginActivity extends AppCompatActivity implements HasSupportFragme
 
     }
 
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return dispatchingAndroidInjector;
-    }
 }

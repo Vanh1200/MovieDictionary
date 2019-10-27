@@ -9,6 +9,8 @@ import com.ptit.filmdictionary.data.source.remote.response.CommentResponse;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 
 /**
@@ -25,7 +27,8 @@ public class CommentRepository implements CommentDataSource.Remote {
         return sInstance;
     }
 
-    private CommentRepository(CommentDataSource.Remote remote) {
+    @Inject
+    public CommentRepository(CommentDataSource.Remote remote) {
         mRemote = remote;
     }
 

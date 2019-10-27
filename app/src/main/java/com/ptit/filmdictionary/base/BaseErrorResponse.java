@@ -1,0 +1,30 @@
+package com.ptit.filmdictionary.base;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Created by vanh1200 on 22/10/2019
+ */
+public class BaseErrorResponse {
+    @SerializedName("code")
+    private int code;
+
+    @SerializedName("description")
+    private String description;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}

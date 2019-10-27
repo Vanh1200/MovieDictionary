@@ -2,14 +2,16 @@
 <resources>
     <color name="color_primary">#FFFFFF</color>
     <color name="color_primary_dark">#E9E9E9</color>
-    <color name="color_accent">#D81B60</color>
+    <color name="color_accent">#FF9800</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
+    <color name="color_black_0F0F0F">#0F0F0F</color>
     <color name="color_dark_gray">#555555</color>
     <color name="color_light_gray">#D6D6D6</color>
     <color name="color_transparent_black">#3B000000</color>
     <color name="color_star">#FF9800</color>
     <color name="color_bg_trailer_title">#80000000</color>
-    <color name="color_white_28">#47FFFFFF</color>
-    <color name="color_white_70">#CCFFFFFF</color>
+    <color name="color_accent_transparent">#0FFF5722</color>
+    <color name="color_accent_darker_transparent">#5BFF5722</color>
+    <color name="color_gray_D6D6D6">#F5F5F5</color>
 </resources>

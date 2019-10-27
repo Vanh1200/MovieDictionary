@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dp_0_5">0.5dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_200">200dp</dimen>
     <dimen name="dp_10">10dp</dimen>
@@ -38,4 +39,15 @@
     <dimen name="dp_32">32dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_52">52dp</dimen>
+    <dimen name="dp_300">300dp</dimen>
+    <dimen name="dp_230">230dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="sp_15">15sp</dimen>
+    <dimen name="dp_7">7dp</dimen>
+    <dimen name="size_36">36dp</dimen>
+    <dimen name="all_card_margin_12">12dp</dimen>
+    <dimen name="all_card_corner_radius_8">8dp</dimen>
+    <dimen name="size_5">5dp</dimen>
+    <dimen name="dp_35">35dp</dimen>
+    <dimen name="dp_45">45dp</dimen>
 </resources>

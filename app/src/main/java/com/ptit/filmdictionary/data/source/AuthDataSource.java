@@ -10,7 +10,7 @@ import io.reactivex.Single;
 /**
  * Created by vanh1200 on 16/10/2019
  */
-public interface LoginDataSource {
+public interface AuthDataSource {
     interface Local {
 
     }

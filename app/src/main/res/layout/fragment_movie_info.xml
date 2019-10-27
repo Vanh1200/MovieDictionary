@@ -59,6 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/dp_8"
+                        android:layout_marginStart="@dimen/dp_5"
                         android:text="@{viewModel.mMovie.title}"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/sp_16"
@@ -80,7 +81,7 @@
                         android:id="@+id/text_minutes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/dp_4"
+                        android:paddingStart="@dimen/dp_8"
                         android:text="@string/label_minutes"
                         android:textColor="@color/color_black"
                         app:layout_constraintStart_toEndOf="@id/text_runtime"
@@ -94,7 +95,7 @@
                         android:paddingBottom="@dimen/dp_4"
                         android:text="@{viewModel.mMovie.releaseDate}"
                         android:textColor="@color/color_black"
-                        app:layout_constraintStart_toStartOf="@id/text_name"
+                        app:layout_constraintStart_toStartOf="@id/text_runtime"
                         app:layout_constraintTop_toBottomOf="@id/text_runtime" />
 
                     <ImageView
@@ -151,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/label_overview"
                         android:textColor="@color/color_star"
+                        android:layout_marginStart="@dimen/dp_5"
                         android:textSize="@dimen/sp_26"
                         app:layout_constraintStart_toStartOf="@id/view_two"
                         app:layout_constraintTop_toTopOf="@id/view_two" />
@@ -161,6 +163,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
                         android:paddingStart="@dimen/dp_4"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:layout_marginEnd="@dimen/dp_5"
                         android:paddingEnd="@dimen/dp_4"
                         android:paddingBottom="@dimen/dp_8"
                         android:text="@{viewModel.mMovie.overview}"
@@ -201,7 +205,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/text_comment"
                             android:textColor="@color/color_star"
+                            android:textSize="@dimen/sp_15"
                             android:textStyle="bold"
+                            android:layout_marginStart="@dimen/dp_4"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -210,36 +216,50 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_10"
-                            android:text="100"
                             android:textColor="@color/color_dark_gray"
                             app:layout_constraintStart_toEndOf="@id/text_comment"
                             app:layout_constraintTop_toTopOf="@id/text_comment" />
+
+                        <ImageView
+                            android:id="@+id/image_see_all_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_next"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:padding="@dimen/dp_5"
+                            app:layout_constraintTop_toTopOf="@id/text_comment"
+                            app:layout_constraintBottom_toBottomOf="@id/text_comment"/>
+
+                        <TextView
+                            android:id="@+id/text_see_all_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/san_francisco_display_semibold"
+                            android:textColor="@color/color_accent"
+                            android:textSize="@dimen/sp_15"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/recycler_comment"
+                            android:text="See all comments"
+                            android:padding="@dimen/dp_5"/>
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_comment"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:layout_marginBottom="@dimen/dp_10"
                             android:background="@drawable/bg_round_conner_white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/text_comment" />
+                            app:layout_constraintTop_toBottomOf="@id/text_comment"
+                            tools:itemCount="3"
+                            tools:listitem="@layout/item_comment" />
 
                     </android.support.constraint.ConstraintLayout>
 
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
-
-        <include
-            android:id="@+id/layout_post_comment"
-            layout="@layout/layout_post_comment"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

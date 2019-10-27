@@ -1,6 +1,8 @@
 package com.ptit.filmdictionary.ui.main;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +25,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private ViewPager mViewPager;
     private BottomNavigationView mNavigationView;
     private boolean isScrollToTop = false;
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

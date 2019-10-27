@@ -7,7 +7,10 @@ import com.ptit.filmdictionary.data.source.CommentDataSource;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.data.source.remote.response.CommentResponse;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Single;
 
@@ -18,7 +21,8 @@ public class CommentRemoteDataSource implements CommentDataSource.Remote {
     private static CommentRemoteDataSource sCommentRemoteDataSource;
     private ApiSecondRequest mApiRequest;
 
-    private CommentRemoteDataSource(ApiSecondRequest apiRequest) {
+    @Inject
+    public CommentRemoteDataSource(ApiSecondRequest apiRequest) {
         mApiRequest = apiRequest;
     }
 

@@ -3,6 +3,7 @@ package com.ptit.filmdictionary.di.module;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
+import com.ptit.filmdictionary.ui.comment.CommentViewModel;
 import com.ptit.filmdictionary.ui.login.LoginViewModel;
 import com.ptit.filmdictionary.utils.ViewModelFactory;
 
@@ -24,5 +25,10 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel.class)
     protected abstract ViewModel loginViewModel(LoginViewModel loginViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CommentViewModel.class)
+    protected abstract ViewModel commentViewModel(CommentViewModel commentViewModel);
 
 }

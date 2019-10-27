@@ -13,6 +13,8 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
+import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
@@ -20,9 +22,10 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 
 @Singleton
-@Component(modules = {AndroidSupportInjectionModule.class, ViewModelModule.class, ActivityModule.class, NetworkModule.class, RepositoryModule.class,
-        FragmentModule.class})
-public interface AppComponent {
+@Component(modules = {AndroidSupportInjectionModule.class, AndroidInjectionModule.class,
+        ViewModelModule.class, ActivityModule.class, NetworkModule.class,
+        RepositoryModule.class, FragmentModule.class})
+public interface AppComponent extends AndroidInjector<MyApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance

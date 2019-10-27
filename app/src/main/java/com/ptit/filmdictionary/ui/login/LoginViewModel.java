@@ -2,11 +2,12 @@ package com.ptit.filmdictionary.ui.login;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.util.Log;
 
-import com.ptit.filmdictionary.data.repository.LoginRepository;
+import com.ptit.filmdictionary.base.BaseErrorResponse;
+import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.response.LoginResponse;
+import com.ptit.filmdictionary.utils.NetworkUtils;
 
 import javax.inject.Inject;
 
@@ -21,29 +22,38 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginViewModel extends ViewModel {
     private static final String TAG = "LoginViewModel";
 
-    private LoginRepository mLoginRepository;
+    private AuthRepository mAuthRepository;
 
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
     private MutableLiveData<LoginResponse> mLiveLoginResponse = new MutableLiveData<>();
+    private MutableLiveData<String> mLiveLoginFail = new MutableLiveData<>();
 
     public MutableLiveData<LoginResponse> getLiveLoginResponse() {
         return mLiveLoginResponse;
     }
 
+    public MutableLiveData<String> getLiveLoginFail() {
+        return mLiveLoginFail;
+    }
+
     @Inject
-    public LoginViewModel(LoginRepository loginRepository) {
-        mLoginRepository = loginRepository;
+    public LoginViewModel(AuthRepository authRepository) {
+        mAuthRepository = authRepository;
     }
 
     public void login(String username, String password) {
-        Disposable disposable = mLoginRepository.login(new LoginBody(username, password))
+        Disposable disposable = mAuthRepository.login(new LoginBody(username, password))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data -> {
-                    mLiveLoginResponse.setValue(data.getData());
-                }, throwable -> {
-                    Log.d(TAG, throwable.toString());
+                .subscribe(data -> mLiveLoginResponse.setValue(data.getData()),
+                        throwable -> {
+                    String error = throwable.toString();
+                    BaseErrorResponse errorResponse = NetworkUtils.getErrorResponse(throwable);
+                    if (errorResponse != null) {
+                        error = errorResponse.getDescription();
+                    }
+                    mLiveLoginFail.setValue(error);
                 });
         mDisposable.add(disposable);
     }

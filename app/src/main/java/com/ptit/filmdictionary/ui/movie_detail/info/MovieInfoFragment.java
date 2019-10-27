@@ -1,9 +1,11 @@
 package com.ptit.filmdictionary.ui.movie_detail.info;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +13,38 @@ import android.widget.Toast;
 
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.data.model.Genre;
+import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.databinding.FragmentMovieInfoBinding;
+import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
 import com.ptit.filmdictionary.ui.genre.GenreActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailViewModel;
+import com.ptit.filmdictionary.utils.BaseHelper;
+import com.ptit.filmdictionary.utils.ViewModelFactory;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
+import dagger.android.support.DaggerFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.ItemClickListener,
-        MovieDetailViewModel.OnFavoriteListener {
+        MovieDetailViewModel.OnFavoriteListener, View.OnClickListener {
     private static final String STR_ADDED = "Added";
     private static final String STR_DELETED = "Deleted";
     private static final String KEY_MOVIE_ID = "movie_id";
     private MovieDetailViewModel mViewModel;
     private FragmentMovieInfoBinding mBinding;
     private int movieId;
+    private CommentAdapter mCommentAdapter;
+
+    @Inject
+    PreferenceUtil mPreferenceUtil;
 
     public MovieInfoFragment() {
         // Required empty public constructor
@@ -45,6 +61,12 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        AndroidSupportInjection.inject(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_info, container, false);
@@ -53,7 +75,18 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
         initRecyclerView();
         initListener();
         loadData();
+        observeLiveData();
         return mBinding.getRoot();
+    }
+
+    private void observeLiveData() {
+        mViewModel.getLiveComments().observe(this, data -> {
+            if (data != null && data.size() > 3) {
+                mCommentAdapter.setData(data.subList(0, 3));
+            } else if (data != null){
+                mCommentAdapter.setData(data);
+            }
+        });
     }
 
     private void getIncomingData() {
@@ -67,15 +100,28 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
     private void initListener() {
         mViewModel.setFavoriteListener(this);
         mBinding.imageFavorite.setOnClickListener(v -> mViewModel.changeFavorite());
-        mBinding.layoutPostComment.imageSend.setOnClickListener(v -> {
-            mViewModel.postComments(movieId,
-                    new CommentBody("1", "anh", mBinding.layoutPostComment.textComment.getText().toString()));
-            mBinding.layoutPostComment.textComment.setText("");
-        });
+//        mBinding.layoutPostComment.imageSend.setOnClickListener(v -> {
+//            if (!mBinding.layoutPostComment.textComment.getText().toString().isEmpty()) {
+//                if (BaseHelper.isInternetOn(getContext())) {
+//                    mViewModel.postComments(movieId,
+//                            new CommentBody(mPreferenceUtil.getUserId(), mPreferenceUtil.getUserName(), mBinding.layoutPostComment.textComment.getText().toString()));
+//                    mBinding.layoutPostComment.textComment.setText("");
+//                } else {
+//                    BaseHelper.showCustomSnackbarView(mBinding.viewOne, getContext(), getString(R.string.text_no_internet));
+//                }
+//            }
+//        });
+        mBinding.imageSeeAllComment.setOnClickListener(this);
+        mBinding.textSeeAllComment.setOnClickListener(this);
     }
 
     private void initRecyclerView() {
         mBinding.recyclerGenre.setAdapter(new GenreRecylerAdapter(new ArrayList<>(), this));
+
+        mCommentAdapter = new CommentAdapter(getContext());
+        mBinding.recyclerComment.setAdapter(mCommentAdapter);
+        mBinding.recyclerComment.setNestedScrollingEnabled(false);
+        mBinding.recyclerComment.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public MovieDetailViewModel getViewModel() {
@@ -95,5 +141,15 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
     @Override
     public void onFavoriteClick(boolean isFavorite) {
         Toast.makeText(getContext(), isFavorite ? STR_ADDED : STR_DELETED, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_see_all_comment:
+            case R.id.text_see_all_comment:
+                CommentDialogFragment.newInstance(movieId).show(getChildFragmentManager(), null);
+                break;
+        }
     }
 }

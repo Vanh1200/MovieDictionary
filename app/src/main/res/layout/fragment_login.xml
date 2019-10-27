@@ -11,24 +11,25 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_sign_in">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image_avatar"
-            android:layout_width="@dimen/dp_180"
-            android:layout_height="@dimen/dp_180"
-            android:layout_marginTop="@dimen/dp_56"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_230"
             android:src="@drawable/image_logo"
             android:tint="@color/color_white"
+            android:paddingTop="@dimen/dp_30"
+            android:paddingBottom="@dimen/dp_30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/color_accent"/>
 
         <ImageView
             android:id="@+id/image_background_full_name"
-            android:layout_width="@dimen/dp_250"
+            android:layout_width="@dimen/dp_300"
             android:layout_height="@dimen/dp_48"
             android:layout_marginTop="@dimen/dp_32"
             android:src="@drawable/bg_edittext"
@@ -38,19 +39,20 @@
 
         <EditText
             android:id="@+id/text_user_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:background="@null"
             android:ems="10"
             android:hint="@string/signin_username"
             android:inputType="textPersonName"
-            android:textColor="@color/color_white"
-            android:textColorHint="@color/color_white"
+            android:textColor="@color/color_dark_gray"
+            android:textColorHint="@color/color_light_gray"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@+id/image_background_full_name"
             app:layout_constraintStart_toEndOf="@+id/image_full_name"
+            app:layout_constraintEnd_toEndOf="@id/image_background_full_name"
             app:layout_constraintTop_toTopOf="@+id/image_background_full_name" />
 
         <ImageView
@@ -65,19 +67,20 @@
 
         <EditText
             android:id="@+id/text_password"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:background="@null"
             android:ems="10"
             android:hint="@string/signin_password"
             android:inputType="textPassword"
-            android:textColor="@color/color_white"
-            android:textColorHint="@color/color_white"
+            android:textColor="@color/color_dark_gray"
+            android:textColorHint="@color/color_light_gray"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@+id/image_background_email"
             app:layout_constraintStart_toEndOf="@+id/image_email"
+            app:layout_constraintEnd_toEndOf="@id/image_background_email"
             app:layout_constraintTop_toTopOf="@+id/image_background_email" />
 
         <ImageView
@@ -92,7 +95,7 @@
 
         <ImageView
             android:id="@+id/image_background_email"
-            android:layout_width="@dimen/dp_250"
+            android:layout_width="@dimen/dp_300"
             android:layout_height="@dimen/dp_48"
             android:layout_marginTop="@dimen/dp_16"
             android:src="@drawable/bg_edittext"
@@ -107,7 +110,7 @@
             android:layout_marginTop="@dimen/dp_32"
             android:background="@drawable/bg_button_sign_in"
             android:text="@string/signin"
-            android:textColor="@color/color_white"
+            android:textColor="@color/color_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_background_email" />
@@ -119,7 +122,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:text="@string/signin_dont_have_account"
-            android:textColor="@color/color_white_70"
+            android:textColor="@color/color_black"
             app:layout_constraintEnd_toStartOf="@+id/text_sign_up"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -134,7 +137,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:layout_marginEnd="@dimen/dp_8"
             android:text="@string/signup"
-            android:textColor="@color/color_white"
+            android:textColor="@color/color_black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

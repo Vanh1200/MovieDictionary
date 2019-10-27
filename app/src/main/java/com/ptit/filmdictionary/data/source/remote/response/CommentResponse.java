@@ -30,7 +30,7 @@ public class CommentResponse {
     @SerializedName("content")
     private String content;
 
-    @SerializedName("createAt")
+    @SerializedName("createdAt")
     private long createdAt;
 
     public String getUserAvatarUrl() {

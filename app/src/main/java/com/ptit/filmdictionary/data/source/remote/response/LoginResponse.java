@@ -24,6 +24,9 @@ public class LoginResponse {
     @SerializedName("role")
     private String role;
 
+    @SerializedName("username")
+    private String userName;
+
     @SerializedName("updatedAt")
     private long updatedAt;
 
@@ -32,6 +35,25 @@ public class LoginResponse {
 
     @SerializedName("createdAt")
     private long createdAt;
+
+    @SerializedName("_id")
+    private String id;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public LoginLocal getLocal() {
         return local;

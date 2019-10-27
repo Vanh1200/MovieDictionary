@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.ui.login;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ptit.filmdictionary.R;
+import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.databinding.FragmentLoginBinding;
+import com.ptit.filmdictionary.ui.main.MainActivity;
 import com.ptit.filmdictionary.utils.ViewModelFactory;
 
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by vanh1200 on 16/10/2019
@@ -25,6 +29,11 @@ import dagger.android.support.AndroidSupportInjection;
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private static LoginFragment sInstance;
     private FragmentLoginBinding mBinding;
+    private AlertDialog mDialog;
+
+    @Inject
+    PreferenceUtil mPreferenceUtil;
+
     @Inject
     ViewModelFactory mViewModelFactory;
 
@@ -65,12 +74,30 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void initObservers() {
         mViewModel.getLiveLoginResponse().observe(this, data -> {
-            Toast.makeText(getActivity(), data.getAvatar() , Toast.LENGTH_SHORT).show();
+            mDialog.dismiss();
+            if (data != null) {
+                Toast.makeText(getActivity(), data.getUserName(), Toast.LENGTH_SHORT).show();
+                mPreferenceUtil.setEmail(data.getLocal().getEmail());
+                mPreferenceUtil.setUserName(data.getUserName());
+                mPreferenceUtil.setPassword(data.getLocal().getPassword());
+                mPreferenceUtil.setUserId(data.getId());
+                mPreferenceUtil.setUserAvatar(data.getAvatar());
+                MainActivity.start(getActivity());
+            }
+        });
+        mViewModel.getLiveLoginFail().observe(this, data -> {
+            mDialog.dismiss();
+            if (data != null) {
+                Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     private void initListeners() {
         mBinding.buttonSignIn.setOnClickListener(this);
+
+        mBinding.textUserName.setText("axitpicric@gmail.com");
+        mBinding.textPassword.setText("Aa@123456");
     }
 
     @Override
@@ -89,6 +116,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), "Please input your username and password", Toast.LENGTH_SHORT).show();
             return;
         }
+        mDialog = new SpotsDialog.Builder()
+                .setContext(getContext())
+                .setTheme(R.style.SpotDialogCustom)
+                .setMessage("Logging in")
+                .setCancelable(false)
+                .build();
+        mDialog.show();
         mViewModel.login(username, password);
     }
 }

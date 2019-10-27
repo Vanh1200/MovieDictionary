@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.di.module;
 
 import com.ptit.filmdictionary.ui.login.LoginActivity;
+import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -13,4 +14,7 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract LoginActivity contributeLoginActivity();
+
+    @ContributesAndroidInjector(modules = FragmentModule.class)
+    abstract MovieDetailActivity contributeMovieDetailActivity();
 }
