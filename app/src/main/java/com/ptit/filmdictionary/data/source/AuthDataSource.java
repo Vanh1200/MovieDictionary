@@ -3,7 +3,7 @@ package com.ptit.filmdictionary.data.source;
 import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
-import com.ptit.filmdictionary.data.source.remote.response.LoginResponse;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 
 import io.reactivex.Single;
 
@@ -16,7 +16,7 @@ public interface AuthDataSource {
     }
 
     interface Remote {
-        Single<BaseResponse<LoginResponse>> login(LoginBody body);
+        Single<BaseResponse<UserResponse>> login(LoginBody body);
 
         Single<BaseResponse<String>> register(RegisterBody body);
     }

@@ -7,15 +7,21 @@ import android.support.v4.app.Fragment;
 
 import com.ptit.filmdictionary.di.component.DaggerAppComponent;
 
+import java.net.URISyntaxException;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import io.socket.client.IO;
+import io.socket.client.Socket;
 
 public class MyApplication extends Application implements HasActivityInjector, HasSupportFragmentInjector {
     private static Context sContext;
+    private Socket mSocket;
+
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
@@ -30,10 +36,20 @@ public class MyApplication extends Application implements HasActivityInjector, H
                 .application(this)
                 .build()
                 .inject(this);
+
+        try {
+            mSocket = IO.socket(Constants.BASE_VANH_URL);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Context getContext() {
         return sContext;
+    }
+
+    public Socket getSocket() {
+        return mSocket;
     }
 
     @Override

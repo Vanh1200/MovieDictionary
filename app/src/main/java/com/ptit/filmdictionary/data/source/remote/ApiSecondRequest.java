@@ -1,16 +1,14 @@
 package com.ptit.filmdictionary.data.source.remote;
 
 import com.ptit.filmdictionary.base.BaseResponse;
-import com.ptit.filmdictionary.data.model.Actor;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
 import com.ptit.filmdictionary.data.source.remote.response.CommentResponse;
-import com.ptit.filmdictionary.data.source.remote.response.LoginResponse;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -24,10 +22,10 @@ public interface ApiSecondRequest {
     Single<BaseResponse<List<CommentResponse>>> getCommentsByTrailerId(@Path("trailerId") String trailerId, @Query("page") int page);
 
     @POST("api/comments/{trailerId}")
-    Single<BaseResponse<String>> createComment(@Path("trailerId") String trailerId, @Body CommentBody commentBody);
+    Single<BaseResponse<CommentResponse>> createComment(@Path("trailerId") String trailerId, @Body CommentBody commentBody);
 
     @POST("api/login")
-    Single<BaseResponse<LoginResponse>> login (@Body LoginBody body);
+    Single<BaseResponse<UserResponse>> login (@Body LoginBody body);
 
     @POST("api/register")
     Single<BaseResponse<String>> register (@Body RegisterBody body);

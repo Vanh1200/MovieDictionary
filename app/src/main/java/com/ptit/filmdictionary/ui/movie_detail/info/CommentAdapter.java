@@ -71,11 +71,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         public void bindData(CommentResponse comment) {
-            ImageHelper.loadImageCircle(mBinding.imageAvatar, comment.getUserAvatarUrl());
+            ImageHelper.loadImageCircle(mBinding.imageAvatar, comment.getUser().getAvatar());
             mBinding.textComment.setText(comment.getContent());
-            mBinding.textUserName.setText(comment.getUserName());
-            Log.d(CommentAdapter.class.getName(), "createAt " + comment.getCreatedAt());
-            mBinding.textTimeAgo.setText(BaseHelper.convertTimeStampToTimeAgo(comment.getCreatedAt()));
+            mBinding.textUserName.setText(comment.getUser().getUserName());
+            if (comment.getCreatedAt() != 0) {
+                mBinding.textTimeAgo.setText(BaseHelper.convertTimeStampToTimeAgo(comment.getCreatedAt()));
+            }
         }
 
     }

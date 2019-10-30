@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by vanh1200 on 16/10/2019
  */
-public class LoginLocal {
+public class UserLocal {
     @SerializedName("isActive")
     private boolean isActive;
 

@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by vanh1200 on 16/10/2019
  */
-public class LoginResponse {
+public class UserResponse {
     @SerializedName("local")
-    private LoginLocal local;
+    private UserLocal local;
 
     @SerializedName("gender")
     private String gender;
@@ -55,11 +55,11 @@ public class LoginResponse {
         this.id = id;
     }
 
-    public LoginLocal getLocal() {
+    public UserLocal getLocal() {
         return local;
     }
 
-    public void setLocal(LoginLocal local) {
+    public void setLocal(UserLocal local) {
         this.local = local;
     }
 

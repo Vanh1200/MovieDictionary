@@ -30,6 +30,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true" />
 
+            <include
+                android:id="@+id/layout_someone_typing"
+                layout="@layout/layout_someone_typing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_above="@id/layout_post_comment"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/dp_10"/>
+
         </RelativeLayout>
 
     </RelativeLayout>

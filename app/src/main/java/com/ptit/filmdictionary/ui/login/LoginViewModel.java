@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import com.ptit.filmdictionary.base.BaseErrorResponse;
 import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
-import com.ptit.filmdictionary.data.source.remote.response.LoginResponse;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.utils.NetworkUtils;
 
 import javax.inject.Inject;
@@ -26,10 +26,10 @@ public class LoginViewModel extends ViewModel {
 
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
-    private MutableLiveData<LoginResponse> mLiveLoginResponse = new MutableLiveData<>();
+    private MutableLiveData<UserResponse> mLiveLoginResponse = new MutableLiveData<>();
     private MutableLiveData<String> mLiveLoginFail = new MutableLiveData<>();
 
-    public MutableLiveData<LoginResponse> getLiveLoginResponse() {
+    public MutableLiveData<UserResponse> getLiveLoginResponse() {
         return mLiveLoginResponse;
     }
 
