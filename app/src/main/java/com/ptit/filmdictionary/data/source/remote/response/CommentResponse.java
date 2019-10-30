@@ -6,9 +6,6 @@ import com.google.gson.annotations.SerializedName;
  * Created by vanh1200 on 14/10/2019
  */
 public class CommentResponse {
-    @SerializedName("userAvatarUrl")
-    private String userAvatarUrl;
-
     @SerializedName("updatedAt")
     private long updatedAt;
 
@@ -21,25 +18,14 @@ public class CommentResponse {
     @SerializedName("trailerId")
     private String trailerId;
 
-    @SerializedName("userId")
-    private String userId;
-
-    @SerializedName("userName")
-    private String userName;
+    @SerializedName("user")
+    private UserResponse user;
 
     @SerializedName("content")
     private String content;
 
     @SerializedName("createdAt")
     private long createdAt;
-
-    public String getUserAvatarUrl() {
-        return userAvatarUrl;
-    }
-
-    public void setUserAvatarUrl(String userAvatarUrl) {
-        this.userAvatarUrl = userAvatarUrl;
-    }
 
     public long getUpdatedAt() {
         return updatedAt;
@@ -73,20 +59,12 @@ public class CommentResponse {
         this.trailerId = trailerId;
     }
 
-    public String getUserId() {
-        return userId;
+    public UserResponse getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(UserResponse user) {
+        this.user = user;
     }
 
     public String getContent() {

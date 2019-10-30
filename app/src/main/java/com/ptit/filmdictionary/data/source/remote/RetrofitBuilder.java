@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.ptit.filmdictionary.BuildConfig;
-import com.ptit.filmdictionary.utils.ErrorHandlingExecutorCallAdapterFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,12 +19,13 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.ptit.filmdictionary.utils.Constants.BASE_VANH_URL;
+
 public class RetrofitBuilder {
     private static final String QUERRY_PARAMETER_API_KEY = "api_key";
     private static final String API_KEY = BuildConfig.API_KEY;
     private static final long CACHE_SIZE = 10 * 1024 * 1024;
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
-    private static final String BASE_SECOND_URL = "https://movie-dictionary.herokuapp.com/";
     private static final int READ_TIMEOUT = 5000;
     private static final int WRITE_TIMEOUT = 5000;
     private static final int CONNECT_TIMEOUT = 5000;
@@ -50,7 +50,7 @@ public class RetrofitBuilder {
     public static Retrofit getSecondInstance(Context context) {
         if (sSecondRetrofit == null) {
             sSecondRetrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_SECOND_URL)
+                    .baseUrl(BASE_VANH_URL)
                     .client(initSecondClient(context))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

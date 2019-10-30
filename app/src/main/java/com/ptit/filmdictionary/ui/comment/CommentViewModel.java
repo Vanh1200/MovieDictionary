@@ -24,7 +24,7 @@ public class CommentViewModel extends ViewModel {
     private CommentRepository mCommentRepository;
     private CompositeDisposable mCompositeDisposable;
     private MutableLiveData<List<CommentResponse>> mLiveComments = new MutableLiveData<>();
-    private MutableLiveData<String> mLivePostComment = new MutableLiveData<>();
+    private MutableLiveData<CommentResponse> mLivePostComment = new MutableLiveData<>();
 
     @Inject
     public CommentViewModel(CommentRepository commentRepository) {
@@ -36,7 +36,7 @@ public class CommentViewModel extends ViewModel {
         return mLiveComments;
     }
 
-    public MutableLiveData<String> getLivePostComment() {
+    public MutableLiveData<CommentResponse> getLivePostComment() {
         return mLivePostComment;
     }
 
@@ -58,7 +58,7 @@ public class CommentViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
-                    Log.d("postComment: size", data.getData());
+                    Log.d("postComment: ", data.getData().getContent());
                     mLivePostComment.setValue(data.getData());
                 }, throwable -> {
                     Log.d("postComment: error", throwable.toString());

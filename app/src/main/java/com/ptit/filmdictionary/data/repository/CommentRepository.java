@@ -39,7 +39,7 @@ public class CommentRepository implements CommentDataSource.Remote {
     }
 
     @Override
-    public Single<BaseResponse<String>> createComment(String trailerId, CommentBody commentBody) {
+    public Single<BaseResponse<CommentResponse>> createComment(String trailerId, CommentBody commentBody) {
         return mRemote.createComment(trailerId, commentBody);
     }
 }

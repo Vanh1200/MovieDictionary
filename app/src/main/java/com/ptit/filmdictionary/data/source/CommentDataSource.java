@@ -19,6 +19,6 @@ public interface CommentDataSource {
     interface Remote {
         Single<BaseResponse<List<CommentResponse>>> getCommentsByTrailerId(String trailerId, int page);
 
-        Single<BaseResponse<String>> createComment(String trailerId, CommentBody commentBody);
+        Single<BaseResponse<CommentResponse>> createComment(String trailerId, CommentBody commentBody);
     }
 }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -24,9 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
             android:background="@drawable/bg_gray_corner"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/image_avatar"
             app:layout_constraintTop_toTopOf="@id/image_avatar">
 
@@ -54,16 +53,17 @@
 
         </android.support.constraint.ConstraintLayout>
 
+
         <TextView
             android:id="@+id/text_time_ago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="12 phut truoc"
-            android:fontFamily="@font/san_francisco_display_regular"
-            android:textColor="@color/color_dark_gray"
             android:layout_marginStart="@dimen/dp_10"
+            android:fontFamily="@font/san_francisco_display_regular"
+            android:text="@string/comment_posting"
+            android:textColor="@color/color_dark_gray"
             app:layout_constraintStart_toStartOf="@id/view_comment"
-            app:layout_constraintTop_toBottomOf="@id/view_comment"/>
+            app:layout_constraintTop_toBottomOf="@id/view_comment" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

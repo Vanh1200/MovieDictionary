@@ -4,7 +4,7 @@ import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.source.AuthDataSource;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
-import com.ptit.filmdictionary.data.source.remote.response.LoginResponse;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 
 import javax.inject.Inject;
 
@@ -30,7 +30,7 @@ public class AuthRepository implements AuthDataSource.Remote {
     }
 
     @Override
-    public Single<BaseResponse<LoginResponse>> login(LoginBody body) {
+    public Single<BaseResponse<UserResponse>> login(LoginBody body) {
         return mRemote.login(body);
     }
 

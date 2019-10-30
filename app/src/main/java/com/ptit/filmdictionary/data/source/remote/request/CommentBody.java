@@ -9,18 +9,14 @@ public class CommentBody {
     @SerializedName("userId")
     private String useId;
 
-    @SerializedName("userName")
-    private String userName;
-
     @SerializedName("content")
     private String content;
 
     public CommentBody() {
     }
 
-    public CommentBody(String useId, String userName, String content) {
+    public CommentBody(String useId, String content) {
         this.useId = useId;
-        this.userName = userName;
         this.content = content;
     }
 
@@ -30,14 +26,6 @@ public class CommentBody {
 
     public void setUseId(String useId) {
         this.useId = useId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getContent() {

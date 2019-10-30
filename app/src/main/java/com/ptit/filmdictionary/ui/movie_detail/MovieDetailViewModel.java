@@ -92,19 +92,6 @@ public class MovieDetailViewModel {
         mCompositeDisposable.add(disposable);
     }
 
-    public void postComments(int movieId, CommentBody body) {
-        Disposable disposable = mCommentRepository.createComment(movieId+"", body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data -> {
-                    Log.d("postComment: size", data.getData());
-                    mLivePostComment.setValue(data.getData());
-                }, throwable -> {
-                    Log.d("postComment: error", throwable.toString());
-                });
-        mCompositeDisposable.add(disposable);
-    }
-
     public void checkFavorite(int movieId) {
         Disposable disposable = Observable.defer(() -> Observable.just(mMovieRepository.isFavorite(movieId)))
                 .subscribeOn(Schedulers.io())
