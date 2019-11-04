@@ -209,7 +209,7 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
         dialog.setOnShowListener(dialogInterface -> {
             BottomSheetDialog d = (BottomSheetDialog) dialog;
             View bottomSheetInternal =
-                    d.findViewById(android.support.design.R.id.design_bottom_sheet);
+                    d.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheetInternal == null) {
                 return;
             }
