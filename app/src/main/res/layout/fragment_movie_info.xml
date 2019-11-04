@@ -10,7 +10,7 @@
             type="com.ptit.filmdictionary.ui.movie_detail.MovieDetailViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -36,7 +36,7 @@
                     android:indeterminateTint="@color/color_black"
                     android:visibility="@{viewModel.mShowProgress ? View.VISIBLE : View.GONE}" />
 
-                <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/view_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -173,7 +173,7 @@
                         app:layout_constraintStart_toStartOf="@id/view_two"
                         app:layout_constraintTop_toBottomOf="@id/label_overview" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_genre"
                         bindGenres="@{viewModel.mMovie.genres}"
                         android:layout_width="0dp"
@@ -183,12 +183,12 @@
                         android:background="@drawable/bg_round_conner_white"
                         android:orientation="horizontal"
                         android:padding="@dimen/dp_4"
-                        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/view_two" />
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_comment"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -243,7 +243,7 @@
                             android:text="See all comments"
                             android:padding="@dimen/dp_5"/>
 
-                        <android.support.v7.widget.RecyclerView
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_comment"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -255,11 +255,11 @@
                             tools:itemCount="3"
                             tools:listitem="@layout/item_comment" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

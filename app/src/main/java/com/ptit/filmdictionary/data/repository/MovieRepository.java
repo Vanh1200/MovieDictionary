@@ -1,6 +1,6 @@
 package com.ptit.filmdictionary.data.repository;
 
-import android.databinding.ObservableArrayList;
+import androidx.databinding.ObservableArrayList;
 
 import com.ptit.filmdictionary.base.BaseRepository;
 import com.ptit.filmdictionary.data.model.Actor;

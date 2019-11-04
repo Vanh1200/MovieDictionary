@@ -28,13 +28,13 @@
             android:indeterminateTint="@color/color_black"
             android:visibility="@{viewModel.mShowProgress ? View.VISIBLE : View.GONE}" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_casts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_primary_dark"
             app:bindCasts="@{viewModel.mMovie.castResult.actors}"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2" />
     </LinearLayout>
 </layout>

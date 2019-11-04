@@ -1,6 +1,6 @@
 package com.ptit.filmdictionary.ui.history;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 import com.ptit.filmdictionary.data.model.History;
 

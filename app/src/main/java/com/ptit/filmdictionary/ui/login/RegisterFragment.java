@@ -1,6 +1,6 @@
 package com.ptit.filmdictionary.ui.login;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by vanh1200 on 16/10/2019

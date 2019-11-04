@@ -1,23 +1,19 @@
 package com.ptit.filmdictionary.ui.movie_detail;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 import android.util.Log;
 
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.repository.CommentRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
-import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.data.source.remote.response.CommentResponse;
 import com.ptit.filmdictionary.ui.main.OnInternetListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.ui.movie_detail.trailer;
 
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 
 import com.ptit.filmdictionary.data.model.Video;
 

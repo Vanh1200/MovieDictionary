@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.data.source.local;
 
 import android.content.Context;
-import android.databinding.ObservableArrayList;
+import androidx.databinding.ObservableArrayList;
 
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.source.MovieDataSource;

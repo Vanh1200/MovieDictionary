@@ -1,6 +1,6 @@
 package com.ptit.filmdictionary.ui.home;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 
 import com.ptit.filmdictionary.data.model.Movie;
 

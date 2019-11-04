@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.di.module;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.ptit.filmdictionary.ui.comment.CommentViewModel;
 import com.ptit.filmdictionary.ui.login.LoginViewModel;

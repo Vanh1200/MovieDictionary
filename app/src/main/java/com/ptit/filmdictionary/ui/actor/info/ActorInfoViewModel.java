@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.ui.actor.info;
 
-import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 
 import com.ptit.filmdictionary.data.model.Actor;
 import com.ptit.filmdictionary.data.repository.MovieRepository;

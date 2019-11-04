@@ -1,6 +1,6 @@
 package com.ptit.filmdictionary.data.model;
 
-import android.support.annotation.StringDef;
+import androidx.annotation.StringDef;
 
 @StringDef({HistoryEntity.TABLE_HISTORY, HistoryEntity.ID, HistoryEntity.TITLE})
 public @interface HistoryEntity {

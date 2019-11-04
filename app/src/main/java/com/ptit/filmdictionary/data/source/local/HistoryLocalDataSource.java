@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.data.source.local;
 
 import android.content.Context;
-import android.databinding.ObservableList;
+import androidx.databinding.ObservableList;
 
 import com.ptit.filmdictionary.data.model.History;
 import com.ptit.filmdictionary.data.source.HistoryDataSource;

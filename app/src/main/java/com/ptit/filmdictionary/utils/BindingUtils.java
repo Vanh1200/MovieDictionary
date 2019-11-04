@@ -1,11 +1,11 @@
 package com.ptit.filmdictionary.utils;
 
-import android.databinding.BindingAdapter;
-import android.databinding.ObservableField;
-import android.databinding.ObservableList;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableList;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,7 +35,6 @@ import com.ptit.filmdictionary.ui.movie_detail.info.GenreRecylerAdapter;
 import com.ptit.filmdictionary.ui.search.adapter.SearchAdapter;
 import com.ptit.filmdictionary.ui.movie_detail.producer.ProducerRecyclerAdapter;
 import com.ptit.filmdictionary.ui.movie_detail.trailer.TrailerRecyclerAdapter;
-import com.ptit.filmdictionary.ui.search.adapter.SearchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

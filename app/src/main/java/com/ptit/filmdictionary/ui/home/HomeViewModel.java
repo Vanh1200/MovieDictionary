@@ -1,8 +1,8 @@
 package com.ptit.filmdictionary.ui.home;
 
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableList;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableList;
 
 import com.ptit.filmdictionary.base.BaseRepository;
 import com.ptit.filmdictionary.base.BaseViewModel;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.databinding.ObservableArrayList;
+import androidx.databinding.ObservableArrayList;
 
 import com.ptit.filmdictionary.data.model.History;
 import com.ptit.filmdictionary.data.model.HistoryEntity;

@@ -1,6 +1,6 @@
 package com.ptit.filmdictionary.base;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 import java.lang.ref.WeakReference;
 

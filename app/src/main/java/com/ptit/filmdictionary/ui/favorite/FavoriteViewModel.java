@@ -1,7 +1,7 @@
 package com.ptit.filmdictionary.ui.favorite;
 
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
 
 import com.ptit.filmdictionary.base.BaseViewModel;
 import com.ptit.filmdictionary.data.model.Movie;

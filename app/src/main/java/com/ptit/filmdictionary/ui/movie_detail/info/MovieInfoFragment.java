@@ -2,10 +2,10 @@ package com.ptit.filmdictionary.ui.movie_detail.info;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +14,16 @@ import android.widget.Toast;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.data.model.Genre;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
-import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.databinding.FragmentMovieInfoBinding;
 import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
 import com.ptit.filmdictionary.ui.genre.GenreActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailViewModel;
-import com.ptit.filmdictionary.utils.BaseHelper;
-import com.ptit.filmdictionary.utils.ViewModelFactory;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 
 /**
  * A simple {@link Fragment} subclass.
