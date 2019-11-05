@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_48"
-    android:background="@color/color_accent">
 
-    <ImageView
-        android:id="@+id/image_back"
-        android:layout_width="@dimen/dp_16"
-        android:layout_height="@dimen/dp_16"
-        android:layout_marginStart="@dimen/dp_16"
-        android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<layout>
 
-    <ImageView
-        android:id="@+id/image_avatar"
-        android:layout_width="@dimen/dp_42"
-        android:layout_height="@dimen/dp_42"
-        android:layout_marginStart="@dimen/dp_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_back"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/color_accent">
 
-    <TextView
-        android:id="@+id/text_name"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_8"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/sp_16"
-        app:layout_constraintBottom_toTopOf="@+id/text_last_online"
-        app:layout_constraintStart_toEndOf="@+id/image_avatar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_last_online"
-        android:layout_width="@dimen/dp_90"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_name"
-        android:layout_marginStart="@dimen/dp_8"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/text_name"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        <ImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="@dimen/dp_42"
+            android:layout_height="@dimen/dp_42"
+            android:layout_marginStart="@dimen/dp_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_back"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_profile"
-        android:layout_width="@dimen/dp_20"
-        android:layout_height="@dimen/dp_20"
-        android:layout_marginEnd="@dimen/dp_16"
-        android:src="@drawable/ic_info"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@+id/text_last_online"
+            app:layout_constraintStart_toEndOf="@+id/image_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageView
-        android:id="@+id/image_user_state"
-        android:layout_width="@dimen/dp_10"
-        android:layout_height="@dimen/dp_10"
-        app:layout_constraintBottom_toBottomOf="@+id/image_avatar"
-        app:layout_constraintEnd_toEndOf="@+id/image_avatar"
-        app:srcCompat="@drawable/bg_dot_online" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_last_online"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_name"
+            android:layout_marginStart="@dimen/dp_8"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/text_name"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <ImageView
+            android:id="@+id/image_profile"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:src="@drawable/ic_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_user_state"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_10"
+            app:layout_constraintBottom_toBottomOf="@+id/image_avatar"
+            app:layout_constraintEnd_toEndOf="@+id/image_avatar"
+            app:srcCompat="@drawable/bg_dot_online" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

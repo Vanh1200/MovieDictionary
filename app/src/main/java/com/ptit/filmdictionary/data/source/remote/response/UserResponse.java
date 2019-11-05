@@ -1,11 +1,14 @@
 package com.ptit.filmdictionary.data.source.remote.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by vanh1200 on 16/10/2019
  */
-public class UserResponse {
+public class UserResponse implements Parcelable {
     @SerializedName("local")
     private UserLocal local;
 
@@ -38,6 +41,34 @@ public class UserResponse {
 
     @SerializedName("_id")
     private String id;
+
+    public UserResponse() {
+    }
+
+    protected UserResponse(Parcel in) {
+        gender = in.readString();
+        phone = in.readString();
+        address = in.readString();
+        avatar = in.readString();
+        role = in.readString();
+        userName = in.readString();
+        updatedAt = in.readLong();
+        deletedAt = in.readLong();
+        createdAt = in.readLong();
+        id = in.readString();
+    }
+
+    public static final Creator<UserResponse> CREATOR = new Creator<UserResponse>() {
+        @Override
+        public UserResponse createFromParcel(Parcel in) {
+            return new UserResponse(in);
+        }
+
+        @Override
+        public UserResponse[] newArray(int size) {
+            return new UserResponse[size];
+        }
+    };
 
     public String getUserName() {
         return userName;
@@ -125,5 +156,24 @@ public class UserResponse {
 
     public void setCreatedAt(long createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(gender);
+        parcel.writeString(phone);
+        parcel.writeString(address);
+        parcel.writeString(avatar);
+        parcel.writeString(role);
+        parcel.writeString(userName);
+        parcel.writeLong(updatedAt);
+        parcel.writeLong(deletedAt);
+        parcel.writeLong(createdAt);
+        parcel.writeString(id);
     }
 }

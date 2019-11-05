@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.di.module;
 
+import com.ptit.filmdictionary.ui.chat.ChatActivity;
 import com.ptit.filmdictionary.ui.login.LoginActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 
@@ -17,4 +18,7 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract MovieDetailActivity contributeMovieDetailActivity();
+
+    @ContributesAndroidInjector
+    abstract ChatActivity contributeChatActivity();
 }

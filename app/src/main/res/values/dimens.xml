@@ -55,4 +55,5 @@
     <dimen name="dp_90">90dp</dimen>
     <dimen name="dp_1000">1000dp</dimen>
     <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_11">11dp</dimen>
 </resources>

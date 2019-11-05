@@ -4,12 +4,15 @@ import android.app.Application;
 
 import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.repository.CommentRepository;
+import com.ptit.filmdictionary.data.repository.MessageRepository;
 import com.ptit.filmdictionary.data.source.AuthDataSource;
 import com.ptit.filmdictionary.data.source.CommentDataSource;
+import com.ptit.filmdictionary.data.source.MessageDataSource;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.ApiSecondRequest;
 import com.ptit.filmdictionary.data.source.remote.AuthRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.CommentRemoteDataSource;
+import com.ptit.filmdictionary.data.source.remote.MessageRemoteDataSource;
 
 import javax.inject.Singleton;
 
@@ -25,14 +28,14 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    AuthRepository provideAuthRepository(AuthDataSource.Remote remote) {
-        return new AuthRepository(remote);
+    PreferenceUtil providePreference(Application application) {
+        return new PreferenceUtil(application);
     }
 
     @Provides
     @Singleton
-    CommentRepository provideCommentRepository(CommentDataSource.Remote remote) {
-        return new CommentRepository(remote);
+    AuthRepository provideAuthRepository(AuthDataSource.Remote remote) {
+        return new AuthRepository(remote);
     }
 
     @Provides
@@ -43,13 +46,26 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
+    CommentRepository provideCommentRepository(CommentDataSource.Remote remote) {
+        return new CommentRepository(remote);
+    }
+
+    @Provides
+    @Singleton
     CommentDataSource.Remote provideCommentRemoteDataSource(ApiSecondRequest apiSecondRequest) {
         return new CommentRemoteDataSource(apiSecondRequest);
     }
 
     @Provides
     @Singleton
-    PreferenceUtil providePreference(Application application) {
-        return new PreferenceUtil(application);
+    MessageRepository provideMessageRepository(MessageDataSource.Remote remote) {
+        return new MessageRepository(remote);
     }
+
+    @Provides
+    @Singleton
+    MessageDataSource.Remote provideMessageRemoteDataSource(ApiSecondRequest apiSecondRequest) {
+        return new MessageRemoteDataSource(apiSecondRequest);
+    }
+
 }
