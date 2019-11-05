@@ -5,8 +5,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"
         android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3"/>
 
         <TextView
             android:id="@+id/text_message"
@@ -15,9 +23,13 @@
             android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_message_send"
             android:padding="@dimen/dp_11"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="1"
             android:textColor="@color/color_white"
             android:fontFamily="@font/san_francisco_display_regular"
             android:textSize="@dimen/sp_15"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_80"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

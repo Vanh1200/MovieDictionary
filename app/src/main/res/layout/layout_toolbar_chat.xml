@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/image_avatar"
-            android:layout_width="@dimen/dp_42"
-            android:layout_height="@dimen/dp_42"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             android:layout_marginStart="@dimen/dp_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_back"

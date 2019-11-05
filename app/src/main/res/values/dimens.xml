@@ -56,4 +56,7 @@
     <dimen name="dp_1000">1000dp</dimen>
     <dimen name="dp_3">3dp</dimen>
     <dimen name="dp_11">11dp</dimen>
+    <dimen name="dp_84">84dp</dimen>
+    <dimen name="sp_13">13sp</dimen>
+    <dimen name="dp_80">80dp</dimen>
 </resources>

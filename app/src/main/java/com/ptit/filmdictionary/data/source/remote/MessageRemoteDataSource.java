@@ -46,18 +46,81 @@ public class MessageRemoteDataSource implements MessageDataSource.Remote {
         messageResponses.add(mess1);
 
         MessageResponse mess2 = new MessageResponse();
-        mess1.setSernder(sender);
-        mess1.setReceiver(receiver);
-        mess1.setType(MessageType.TEXT_MESSAGE);
-        mess1.setText("2. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        mess2.setSernder(receiver);
+        mess2.setReceiver(sender);
+        mess2.setType(MessageType.TEXT_MESSAGE);
+        mess2.setText("2. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
         messageResponses.add(mess2);
 
         MessageResponse mess3 = new MessageResponse();
-        mess1.setSernder(sender);
-        mess1.setReceiver(receiver);
-        mess1.setType(MessageType.TEXT_MESSAGE);
-        mess1.setText("3. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        mess3.setSernder(sender);
+        mess3.setReceiver(receiver);
+        mess3.setType(MessageType.TEXT_MESSAGE);
+        mess3.setText("3. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
         messageResponses.add(mess3);
+
+        MessageResponse mess4 = new MessageResponse();
+        mess4.setSernder(sender);
+        mess4.setReceiver(receiver);
+        mess4.setType(MessageType.TEXT_MESSAGE);
+        mess4.setText("1. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess4);
+
+        MessageResponse mess5 = new MessageResponse();
+        mess5.setSernder(receiver);
+        mess5.setReceiver(sender);
+        mess5.setType(MessageType.TEXT_MESSAGE);
+        mess5.setText("2. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess5);
+
+        MessageResponse mess6 = new MessageResponse();
+        mess6.setSernder(sender);
+        mess6.setReceiver(receiver);
+        mess6.setType(MessageType.TEXT_MESSAGE);
+        mess6.setText("3. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess6);
+
+        MessageResponse mess7 = new MessageResponse();
+        mess7.setSernder(sender);
+        mess7.setReceiver(receiver);
+        mess7.setType(MessageType.TEXT_MESSAGE);
+        mess7.setText("1. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess7);
+
+        MessageResponse mess8 = new MessageResponse();
+        mess8.setSernder(receiver);
+        mess8.setReceiver(sender);
+        mess8.setType(MessageType.TEXT_MESSAGE);
+        mess8.setText("2. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess8);
+
+        MessageResponse mess9 = new MessageResponse();
+        mess9.setSernder(sender);
+        mess9.setReceiver(receiver);
+        mess9.setType(MessageType.TEXT_MESSAGE);
+        mess9.setText("3. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess9);
+
+        MessageResponse mess10 = new MessageResponse();
+        mess10.setSernder(sender);
+        mess10.setReceiver(receiver);
+        mess10.setType(MessageType.TEXT_MESSAGE);
+        mess10.setText("1. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess10);
+
+        MessageResponse mess11 = new MessageResponse();
+        mess11.setSernder(receiver);
+        mess11.setReceiver(sender);
+        mess11.setType(MessageType.TEXT_MESSAGE);
+        mess11.setText("2. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess11);
+
+        MessageResponse mess12 = new MessageResponse();
+        mess12.setSernder(sender);
+        mess12.setReceiver(receiver);
+        mess12.setType(MessageType.TEXT_MESSAGE);
+        mess12.setText("3. Đây là tiếng nói Việt Nam phát đi từ Hà Nội thủ đô nước cộng hòa xã hội chủ nghĩa Việt Nam");
+        messageResponses.add(mess12);
 
         BaseResponse<List<MessageResponse>> response = new BaseResponse<>();
         response.setCode(200);

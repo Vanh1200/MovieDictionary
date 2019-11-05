@@ -23,6 +23,7 @@ import java.util.List;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private List<CommentResponse> mComments = new ArrayList<>();
     private LayoutInflater mInflater;
+    private OnCommentListener mListener;
 
     public CommentAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -32,6 +33,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         mComments.clear();
         mComments.addAll(comments);
         notifyDataSetChanged();
+    }
+
+    public void setListener(OnCommentListener listener) {
+        mListener = listener;
     }
 
     public void addItem(CommentResponse comment) {
@@ -68,6 +73,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         public ViewHolder(@NonNull ItemCommentBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
+            mBinding.getRoot().setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.onClickItem(mComments.get(getAdapterPosition()), getAdapterPosition());
+                }
+            });
         }
 
         public void bindData(CommentResponse comment) {
@@ -79,5 +89,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             }
         }
 
+    }
+
+    public interface OnCommentListener {
+        void onClickItem (CommentResponse comment, int position);
     }
 }

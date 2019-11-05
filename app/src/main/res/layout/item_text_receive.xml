@@ -7,13 +7,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"
         android:padding="@dimen/dp_1">
 
         <ImageView
             android:id="@+id/image_avatar"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginStart="@dimen/dp_4"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_10"
             android:fontFamily="@font/san_francisco_display_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -22,11 +24,15 @@
             android:id="@+id/text_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_10"
             android:background="@drawable/bg_message_receive"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginEnd="@dimen/dp_60"
             android:padding="@dimen/dp_11"
             android:textColor="@color/color_black"
             android:textSize="@dimen/sp_15"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_avatar"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
