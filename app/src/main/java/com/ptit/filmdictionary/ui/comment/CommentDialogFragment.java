@@ -264,8 +264,9 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
                 @Override
                 public void run() {
                     if (!isConnected) {
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                R.string.connect, Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "connected");
+//                        Toast.makeText(getActivity().getApplicationContext(),
+//                                R.string.connect, Toast.LENGTH_LONG).show();
                         isConnected = true;
                     }
                 }
@@ -281,8 +282,8 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
                 public void run() {
                     Log.i(TAG, "diconnected");
                     isConnected = false;
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            R.string.disconnect, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity().getApplicationContext(),
+//                            R.string.disconnect, Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -295,8 +296,8 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
                 @Override
                 public void run() {
                     Log.e(TAG, "Error connecting");
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            R.string.error_connect, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity().getApplicationContext(),
+//                            R.string.error_connect, Toast.LENGTH_LONG).show();
                 }
             });
         }

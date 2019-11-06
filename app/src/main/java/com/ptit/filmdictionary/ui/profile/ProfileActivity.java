@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidInjection.inject(this);
-        setTheme(R.style.TransparentStatusTheme);
+//        setTheme(R.style.TransparentStatusTheme);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         getIncomingData();
         initData();
