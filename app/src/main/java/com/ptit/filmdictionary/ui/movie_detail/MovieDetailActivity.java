@@ -98,7 +98,7 @@ public class MovieDetailActivity extends AppCompatActivity
     private void initActionBar() {
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setTitle(mMovieName);
-        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_left_black_24dp);
         mBinding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 

@@ -75,7 +75,7 @@ public abstract class BaseMoviesActivity<T, V extends RecyclerView.Adapter> exte
     private void initActionBar() {
         setSupportActionBar(mBinding.toolbarCategory);
         getSupportActionBar().setTitle(mActionBarTitle);
-        mBinding.toolbarCategory.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        mBinding.toolbarCategory.setNavigationIcon(R.drawable.ic_arrow_left_black_24dp);
         mBinding.toolbarCategory.setNavigationOnClickListener(v -> onBackPressed());
     }
 

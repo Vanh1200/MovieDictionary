@@ -34,6 +34,7 @@ import com.ptit.filmdictionary.data.source.remote.response.CommentResponse;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentCommentBinding;
 import com.ptit.filmdictionary.ui.movie_detail.info.CommentAdapter;
+import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 import com.ptit.filmdictionary.utils.BaseHelper;
 import com.ptit.filmdictionary.utils.Constants;
 import com.ptit.filmdictionary.utils.ImageHelper;
@@ -52,7 +53,7 @@ import io.socket.emitter.Emitter;
 /**
  * Created by vanh1200 on 23/10/2019
  */
-public class CommentDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
+public class CommentDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener, CommentAdapter.OnCommentListener {
     private static final String TAG = "CommentDialogFragment";
     private FragmentCommentBinding mBinding;
     private int movieId;
@@ -192,6 +193,7 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
 
     private void initAdapters() {
         mCommentAdapter = new CommentAdapter(getContext());
+        mCommentAdapter.setListener(this);
         mCommentLayoutManager = new LinearLayoutManager(getContext());
         mBinding.recyclerComment.setAdapter(mCommentAdapter);
         mBinding.recyclerComment.setLayoutManager(mCommentLayoutManager);
@@ -379,4 +381,8 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
         mCommentLayoutManager.scrollToPosition(mCommentAdapter.getItemCount() - 1);
     }
 
+    @Override
+    public void onClickItem(CommentResponse comment, int position) {
+        ProfileActivity.start(getActivity(), comment.getUser());
+    }
 }

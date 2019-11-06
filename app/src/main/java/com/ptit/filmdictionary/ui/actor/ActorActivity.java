@@ -57,12 +57,12 @@ public class ActorActivity extends AppCompatActivity {
                 }
                 if (scrollRange + verticalOffset == 0) {
                     mBinding.collapsingToolbarActor.setTitle(mActor.getName());
-                    mBinding.toolbarActor.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+                    mBinding.toolbarActor.setNavigationIcon(R.drawable.ic_arrow_left_black_24dp);
                     mBinding.imageSearch.setColorFilter(Color.BLACK);
                     isShow = true;
                 } else if (isShow) {
                     mBinding.collapsingToolbarActor.setTitle(NONE_TITLE);
-                    mBinding.toolbarActor.setNavigationIcon(R.drawable.ic_arrow_white_24dp);
+                    mBinding.toolbarActor.setNavigationIcon(R.drawable.ic_arrow_left_white_24dp);
                     mBinding.imageSearch.setColorFilter(Color.WHITE);
                     isShow = false;
                 }
@@ -72,7 +72,7 @@ public class ActorActivity extends AppCompatActivity {
 
     private void initActionBar() {
         setSupportActionBar(mBinding.toolbarActor);
-        mBinding.toolbarActor.setNavigationIcon(R.drawable.ic_arrow_white_24dp);
+        mBinding.toolbarActor.setNavigationIcon(R.drawable.ic_arrow_left_white_24dp);
         mBinding.toolbarActor.setNavigationOnClickListener(v -> onBackPressed());
     }
 

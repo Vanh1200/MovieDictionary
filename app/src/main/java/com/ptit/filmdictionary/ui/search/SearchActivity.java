@@ -95,7 +95,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
 
     private void setUpActionBar() {
         setSupportActionBar(mBinding.toolbarSearch);
-        mBinding.toolbarSearch.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        mBinding.toolbarSearch.setNavigationIcon(R.drawable.ic_arrow_left_black_24dp);
         mBinding.toolbarSearch.setNavigationOnClickListener(a -> onBackPressed());
     }
 

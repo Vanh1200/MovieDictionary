@@ -54,6 +54,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         AndroidInjection.inject(this);
         getIncomingData();
         initComponents();
+        initListeners();
         loadData();
         observeLiveData();
     }
@@ -69,22 +70,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        ImageHelper.loadImageCircle(mBinding.toolBar.imageAvatar, mInteractiveUser.getAvatar());
-        mBinding.toolBar.textName.setText(mInteractiveUser.getUserName());
+        ImageHelper.loadImageCircle(mBinding.layoutToolbarChat.imageAvatar, mInteractiveUser.getAvatar());
+        mBinding.layoutToolbarChat.textName.setText(mInteractiveUser.getUserName());
         mWidthTextMessage = getResources().getDimensionPixelOffset(R.dimen.dp_180);
         mWidthLayoutCollapse = getResources().getDimensionPixelOffset(R.dimen.dp_84);
         mChatAdapter = new ChatAdapter(this, mCurrentUserId);
         mBinding.recyclerMessage.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, true));
         mBinding.recyclerMessage.setAdapter(mChatAdapter);
         setupAnimationTextMessage();
-        initListeners();
     }
 
     private void initListeners() {
         mBinding.layoutBottomBarChat.imageAdd.setOnClickListener(this);
         mBinding.layoutBottomBarChat.imagePhoto.setOnClickListener(this);
         mBinding.layoutBottomBarChat.imageCamera.setOnClickListener(this);
-        mBinding.toolBar.imageBack.setOnClickListener(this);
+        mBinding.layoutToolbarChat.imageBack.setOnClickListener(this);
     }
 
     private void getIncomingData() {
@@ -178,6 +178,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.image_camera:
                 break;
             case R.id.image_back:
+                onBackPressed();
+                break;
+            default:
                 break;
         }
     }

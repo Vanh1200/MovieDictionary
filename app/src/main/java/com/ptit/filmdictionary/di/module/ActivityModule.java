@@ -3,6 +3,7 @@ package com.ptit.filmdictionary.di.module;
 import com.ptit.filmdictionary.ui.chat.ChatActivity;
 import com.ptit.filmdictionary.ui.login.LoginActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
+import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -21,4 +22,7 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract ChatActivity contributeChatActivity();
+
+    @ContributesAndroidInjector
+    abstract ProfileActivity contributeProfileActivity();
 }
