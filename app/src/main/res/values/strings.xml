@@ -61,4 +61,12 @@ Ut justo velit, consectetur sit amet porttitor et, scelerisque et odio. Suspendi
 
 Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra tortor vel pretium. Curabitur vitae ex sed ex convallis suscipit. Pellentesque malesuada hendrerit neque, et vestibulum ligula mollis at. Mauris vehicula nisl quam, et eleifend orci varius eget. Quisque ut urna eu ipsum commodo feugiat. Suspendisse ac sem nec enim laoreet dictum venenatis eget neque. Donec egestas suscipit leo, sodales posuere nibh accumsan nec. Sed nec erat aliquam, hendrerit sapien non, fermentum diam. Aliquam erat volutpat. Aliquam varius semper purus, ac accumsan arcu finibus non.
     </string>
+
+    // Feed
+    <string name="feed_question_create_post">What\'s on your mind?</string>
+    <string name="feed_movie">Movie</string>
+    <string name="feed_video">Video</string>
+    <string name="feed_image">Image</string>
+    <string name="feed_heart">Heart</string>
+    <string name="feed_comment">Comment</string>
 </resources>
