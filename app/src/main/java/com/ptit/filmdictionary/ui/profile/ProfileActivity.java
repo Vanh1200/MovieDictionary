@@ -2,10 +2,12 @@ package com.ptit.filmdictionary.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -42,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         AndroidInjection.inject(this);
 //        setTheme(R.style.TransparentStatusTheme);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            setTextStatusBarColor();
+        }
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         getIncomingData();
         initData();
@@ -88,6 +93,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 mBinding.imageMore.setImageResource(R.drawable.ic_more_white_horizontal);
             }
         };
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void setTextStatusBarColor() {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     @Override
