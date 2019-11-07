@@ -27,12 +27,12 @@
             android:maxLines="2"
             android:textColor="@color/color_black"
             android:textSize="@dimen/sp_17"
+            android:text="Kiều Việt Anh đẹp zai"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/image_avatar"
-            app:layout_constraintTop_toTopOf="@id/image_avatar"
-            tools:text="@tools:sample/lorem/random" />
+            app:layout_constraintTop_toTopOf="@id/image_avatar" />
 
         <TextView
             android:id="@+id/text_time_ago"

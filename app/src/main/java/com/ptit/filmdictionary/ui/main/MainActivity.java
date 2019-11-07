@@ -33,18 +33,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.TransparentStatusTheme);
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
         initViewPager();
         registerEvents();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            setTextStatusBarColor();
+        }
     }
 
     private void initViewPager() {
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mainAdapter);
         mViewPager.addOnPageChangeListener(this);
+        mViewPager.setOffscreenPageLimit(2);
         HomeFragment.getInstance().setListener(this);
     }
 
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //                }
                 return true;
             case R.id.menu_setting:
+                mViewPager.setCurrentItem(FRAGMENT_SETTING);
                 return false;
             default:
                 return false;
@@ -99,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //                }
 
                 break;
+            case FRAGMENT_SETTING:
+                mNavigationView.setSelectedItemId(R.id.menu_setting);
+
             default:
                 break;
         }
@@ -119,17 +127,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onSlideCollapsed() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            setSystemBarTheme(this, false);
-        }
-        isScrollToTop = true;
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            setSystemBarTheme(this, false);
+//        }
+//        isScrollToTop = true;
     }
 
     @Override
     public void onSlideExpanded() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            setSystemBarTheme(this, true);
-        }
-        isScrollToTop = false;
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            setSystemBarTheme(this, true);
+//        }
+//        isScrollToTop = false;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void setTextStatusBarColor() {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 }
