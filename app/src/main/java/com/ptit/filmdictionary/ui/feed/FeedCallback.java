@@ -10,13 +10,13 @@ public interface FeedCallback {
     void onClickVideoCreatePost();
     void onClickReviewCreatePost();
     void onClickAvatarCreatePost();
-    void onClickTextCrreatePost();
+    void onClickTextCreatePost();
 
-    void onClickUser (UserResponse userResponse);
-    void onClickHeart (BaseFeed item);
-    void onClickComment (BaseFeed item);
+    void onClickUser (UserResponse userResponse, int position);
+    void onClickHeart (BaseFeed item, int position);
+    void onClickComment (BaseFeed item, int position);
     void onClickImage (BaseFeed item, int position);
-    void onClickVideo (BaseFeed item);
-    void onClickMovie (BaseFeed item);
+    void onClickVideo (BaseFeed item, int position);
+    void onClickMovie (BaseFeed item, int position);
 
 }

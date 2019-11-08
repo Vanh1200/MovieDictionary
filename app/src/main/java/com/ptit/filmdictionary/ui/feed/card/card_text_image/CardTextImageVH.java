@@ -29,8 +29,9 @@ public class CardTextImageVH extends BaseVH implements View.OnClickListener {
 
     private void initListeners() {
         mBinding.layoutHeader.getRoot().setOnClickListener(this);
-        mBinding.layoutFooter.imageComment.setOnClickListener(this);
-        mBinding.layoutFooter.imageHeart.setOnClickListener(this);
+        mBinding.layoutFooter.layoutComment.setOnClickListener(this);
+        mBinding.layoutFooter.layoutHeart.setOnClickListener(this);
+        mBinding.imageContent.setOnClickListener(this);
     }
 
 
@@ -39,21 +40,24 @@ public class CardTextImageVH extends BaseVH implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.layout_header:
                 if (mCallback != null) {
-                    mCallback.onClickUser(mCardTextImage.getUser());
+                    mCallback.onClickUser(mCardTextImage.getUser(), getAdapterPosition() - 1);
                 }
                 break;
-            case R.id.image_heart:
+            case R.id.layout_heart:
                 if (mCallback != null) {
-                    mCallback.onClickHeart(mCardTextImage);
+                    mCallback.onClickHeart(mCardTextImage, getAdapterPosition() - 1);
                 }
-            case R.id.image_comment:
+                break;
+            case R.id.layout_comment:
                 if (mCallback != null) {
-                    mCallback.onClickComment(mCardTextImage);
+                    mCallback.onClickComment(mCardTextImage, getAdapterPosition() - 1);
                 }
-            case R.id.image_image:
+                break;
+            case R.id.image_content:
                 if (mCallback != null) {
-                    mCallback.onClickImage(mCardTextImage, -1);
+                    mCallback.onClickImage(mCardTextImage, getAdapterPosition() - 1);
                 }
+                break;
             default:
                 break;
         }

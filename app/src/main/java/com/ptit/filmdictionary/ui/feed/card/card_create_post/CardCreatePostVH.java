@@ -42,6 +42,17 @@ public class CardCreatePostVH extends BaseVH implements View.OnClickListener {
                     mCallback.onClickVideoCreatePost();
                 }
                 break;
+
+            case R.id.image_avatar:
+                if(mCallback != null) {
+                    mCallback.onClickAvatarCreatePost();
+                }
+                break;
+            case R.id.text_question:
+                if(mCallback != null) {
+                    mCallback.onClickTextCreatePost();
+                }
+                break;
             default:
                 break;
         }
@@ -57,5 +68,7 @@ public class CardCreatePostVH extends BaseVH implements View.OnClickListener {
         mBinding.layoutPostImage.setOnClickListener(this);
         mBinding.layoutPostReview.setOnClickListener(this);
         mBinding.layoutPostVideo.setOnClickListener(this);
+        mBinding.imageAvatar.setOnClickListener(this);
+        mBinding.textQuestion.setOnClickListener(this);
     }
 }
