@@ -24,6 +24,7 @@ import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentFeedBinding;
+import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
 import com.ptit.filmdictionary.ui.feed.card.card_text_image.CardTextImage;
 
 import java.io.File;
@@ -38,6 +39,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class FeedFragment extends Fragment implements FeedCallback, View.OnClickListener {
     private static final int REQUEST_PERMISSION_CODE_STORAGE = 1;
+    private static final int REQUEST_PERMISSION_CAMERA = 3;
     private static final int REQUEST_IMAGE_TAKEN_BY_CAM = 2;
     private FragmentFeedBinding mBinding;
     private FeedAdapter mFeedAdapter;
@@ -79,9 +81,9 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         return true;
     }
 
-    private void requestPermissionFeed() {
+    private void requestPermissionCamera() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            getActivity().requestPermissions(permissions, REQUEST_PERMISSION_CODE_STORAGE);
+            getActivity().requestPermissions(permissions, REQUEST_PERMISSION_CAMERA);
         }
     }
 
@@ -152,7 +154,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case REQUEST_PERMISSION_CODE_STORAGE:
+            case REQUEST_PERMISSION_CAMERA:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openCameraIntent();
                 }
@@ -166,7 +168,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         switch (requestCode) {
             case REQUEST_IMAGE_TAKEN_BY_CAM:
                 if (resultCode == RESULT_OK) {
-                    Toast.makeText(getActivity(), imageFilePath, Toast.LENGTH_SHORT).show();
+                    CreatePostActivity.start(getActivity(), imageFilePath);
                 }
                 break;
         }
@@ -178,7 +180,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         if (checkPermissionFeed()) {
             openCameraIntent();
         } else {
-            requestPermissionFeed();
+            requestPermissionCamera();
         }
     }
 
@@ -199,7 +201,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
     @Override
     public void onClickTextCreatePost() {
-        Toast.makeText(getActivity(), "Click What is on you mind?", Toast.LENGTH_SHORT).show();
+        CreatePostActivity.start(getActivity(), "");
     }
 
     @Override
@@ -263,20 +265,6 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
             startActivityForResult(pictureIntent, REQUEST_IMAGE_TAKEN_BY_CAM);
         }
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == REQUEST_IMAGE_TAKEN_BY_CAM) {
-//            if (resultCode == RESULT_OK) {
-//                imageView.setImageURI(Uri.parse(imageFilePath));
-//            }
-//            else if (resultCode == RESULT_CANCELED) {
-//                Toast.makeText(this, "You cancelled the operation", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
 
     private File createImageFile() throws IOException {
 

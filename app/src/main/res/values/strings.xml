@@ -69,4 +69,8 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="feed_image">Image</string>
     <string name="feed_heart">Heart</string>
     <string name="feed_comment">Comment</string>
+    <string name="create_post_title">Create post</string>
+    <string name="create_post_done">Done</string>
+    <string name="create_post_camera">Camera</string>
+    <string name="create_post_image_video">Image/Video</string>
 </resources>
