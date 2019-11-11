@@ -24,8 +24,11 @@ public interface SocketData {
     interface Key {
         String TRAILER_ID = "trailerId";
         String USER_ID = "userId";
+        String SENDER_ID = "senderId";
+        String RECEIVER_ID = "receiverId";
         String SESSION_ID = "sessionId";
         String COMMENT_JSON = "comment";
+        String MESSAGE_JSON = "message";
     }
 
 }

@@ -30,6 +30,17 @@
             app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
         <include
+            android:id="@+id/layout_someone_typing"
+            layout="@layout/layout_someone_typing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/layout_bottom_bar_chat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/dp_10"/>
+
+        <include
             android:id="@+id/layout_bottom_bar_chat"
             layout="@layout/layout_bottom_bar_chat"
             android:layout_width="match_parent"
