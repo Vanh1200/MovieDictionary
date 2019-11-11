@@ -25,7 +25,7 @@ public class MessageRepository implements MessageDataSource.Remote {
     }
 
     @Override
-    public Single<BaseResponse<MessageResponse>> sendMessage(String currentUserId, String interactiveUserId, MessageBody body) {
-        return mRemote.sendMessage(currentUserId, interactiveUserId, body);
+    public Single<BaseResponse<MessageResponse>> sendMessage(String currentUserId, String interactiveUserId, String text) {
+        return mRemote.sendMessage(currentUserId, interactiveUserId, text);
     }
 }

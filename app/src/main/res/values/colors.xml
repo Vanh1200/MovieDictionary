@@ -27,4 +27,5 @@
     <color name="color_light_blue">#D3DCE6</color>
     <color name="color_blue_gray">#39444E</color>
     <color name="color_light_black">#2B2B2B</color>
+    <color name="color_blue_1F9FFC">#1F9FFC</color>
 </resources>

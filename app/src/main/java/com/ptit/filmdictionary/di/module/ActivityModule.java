@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.di.module;
 
 import com.ptit.filmdictionary.ui.chat.ChatActivity;
+import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
 import com.ptit.filmdictionary.ui.login.LoginActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 import com.ptit.filmdictionary.ui.profile.ProfileActivity;
@@ -25,4 +26,7 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract ProfileActivity contributeProfileActivity();
+
+    @ContributesAndroidInjector
+    abstract CreatePostActivity contributeCreatePostActivity();
 }

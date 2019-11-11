@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.ptit.filmdictionary.ui.chat.ChatViewModel;
 import com.ptit.filmdictionary.ui.comment.CommentViewModel;
+import com.ptit.filmdictionary.ui.create_post.CreatePostViewModel;
 import com.ptit.filmdictionary.ui.login.LoginViewModel;
 import com.ptit.filmdictionary.utils.ViewModelFactory;
 
@@ -36,5 +37,10 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChatViewModel.class)
     protected abstract ViewModel chatViewModel(ChatViewModel chatViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreatePostViewModel.class)
+    protected abstract ViewModel createPostViewModel(CreatePostViewModel createPostViewModel);
 
 }

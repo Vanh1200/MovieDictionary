@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,13 +61,17 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void observeLiveData() {
-        mViewModel.getLiveMessages().observe(this, data -> {
+        mViewModel.getLiveGetMessages().observe(this, data -> {
             mChatAdapter.setData(data);
+        });
+        mViewModel.getLiveSendMessages().observe(this, data -> {
+//            mChatAdapter.setData(data);
+            Toast.makeText(this, data.getText(), Toast.LENGTH_SHORT).show();
         });
     }
 
     private void loadData() {
-        mViewModel.loadMessages(mPreferenceUtil.getUserId(), "5d9cc76c3405950023ab0bd1");
+        mViewModel.loadMessages(mPreferenceUtil.getUserId(), mInteractiveUser.getId());
     }
 
     private void initComponents() {
@@ -85,6 +90,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.layoutBottomBarChat.imagePhoto.setOnClickListener(this);
         mBinding.layoutBottomBarChat.imageCamera.setOnClickListener(this);
         mBinding.layoutToolbarChat.imageBack.setOnClickListener(this);
+        mBinding.layoutBottomBarChat.imageSend.setOnClickListener(this);
     }
 
     private void getIncomingData() {
@@ -172,6 +178,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.image_send:
+                sendMessage();
                 break;
             case R.id.image_photo:
                 break;
@@ -182,6 +189,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 break;
+        }
+    }
+
+    private void sendMessage() {
+        String text = mBinding.layoutBottomBarChat.textMessage.getText().toString();
+        if (!text.isEmpty()) {
+            mViewModel.sendMessage(mCurrentUserId, mInteractiveUser.getId(), text);
         }
     }
 

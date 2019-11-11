@@ -9,12 +9,24 @@ public class MessageRequest {
     @SerializedName("receiver")
     private String receiver;
 
+    @SerializedName("text")
+    private String text;
+
     public MessageRequest() {
     }
 
-    public MessageRequest(String sender, String receiver) {
+    public MessageRequest(String sender, String receiver, String text) {
         this.sender = sender;
         this.receiver = receiver;
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getSender() {

@@ -4,14 +4,17 @@ import android.app.Application;
 
 import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.repository.CommentRepository;
+import com.ptit.filmdictionary.data.repository.FileRepository;
 import com.ptit.filmdictionary.data.repository.MessageRepository;
 import com.ptit.filmdictionary.data.source.AuthDataSource;
 import com.ptit.filmdictionary.data.source.CommentDataSource;
+import com.ptit.filmdictionary.data.source.FileDataSource;
 import com.ptit.filmdictionary.data.source.MessageDataSource;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.ApiSecondRequest;
 import com.ptit.filmdictionary.data.source.remote.AuthRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.CommentRemoteDataSource;
+import com.ptit.filmdictionary.data.source.remote.FileRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.MessageRemoteDataSource;
 
 import javax.inject.Singleton;
@@ -66,6 +69,18 @@ public class RepositoryModule {
     @Singleton
     MessageDataSource.Remote provideMessageRemoteDataSource(ApiSecondRequest apiSecondRequest) {
         return new MessageRemoteDataSource(apiSecondRequest);
+    }
+
+    @Provides
+    @Singleton
+    FileRepository provideFileRepository(FileDataSource.Remote remote) {
+        return new FileRepository(remote);
+    }
+
+    @Provides
+    @Singleton
+    FileDataSource.Remote provideFileRemoteDataSource(ApiSecondRequest apiSecondRequest) {
+        return new FileRemoteDataSource(apiSecondRequest);
     }
 
 }

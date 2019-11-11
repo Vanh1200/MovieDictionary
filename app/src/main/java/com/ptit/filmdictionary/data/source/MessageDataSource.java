@@ -17,6 +17,6 @@ public interface MessageDataSource {
     interface Remote {
         Single<BaseResponse<List<MessageResponse>>> getMessageByTwoUserId(String currentUserId, String interactiveUserId, int page);
 
-        Single<BaseResponse<MessageResponse>> sendMessage(String currentUserId, String interactiveUserId, MessageBody body);
+        Single<BaseResponse<MessageResponse>> sendMessage(String currentUserId, String interactiveUserId, String text);
     }
 }
