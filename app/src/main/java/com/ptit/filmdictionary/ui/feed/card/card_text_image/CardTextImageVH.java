@@ -9,10 +9,12 @@ import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseVH;
 import com.ptit.filmdictionary.databinding.CardTextImageBinding;
 import com.ptit.filmdictionary.ui.feed.FeedCallback;
+import com.ptit.filmdictionary.utils.BaseHelper;
+import com.ptit.filmdictionary.utils.ImageHelper;
 
 public class CardTextImageVH extends BaseVH implements View.OnClickListener {
     private CardTextImageBinding mBinding;
-    private CardTextImage mCardTextImage;
+    private BaseFeed mBaseFeed;
     private FeedCallback mCallback;
 
     public CardTextImageVH(@NonNull CardTextImageBinding binding, FeedCallback callback) {
@@ -24,8 +26,21 @@ public class CardTextImageVH extends BaseVH implements View.OnClickListener {
 
     @Override
     public void bindData(BaseFeed baseFeed) {
-        mCardTextImage = (CardTextImage) baseFeed;
+        mBaseFeed = baseFeed;
+        ImageHelper.loadImage(mBinding.imageContent, baseFeed.getImageUrl());
+        mBinding.textContent.setText(baseFeed.getText());
+        ImageHelper.loadImage(mBinding.layoutHeader.imageAvatar, baseFeed.getUser().getAvatar());
+        mBinding.layoutHeader.textUserName.setText(baseFeed.getUser().getUserName());
+        mBinding.layoutHeader.textTimeAgo.setText(BaseHelper.convertTimeStampToTimeAgo(mBaseFeed.getCreatedAt()));
+        mBinding.layoutFooter.textNumLike.setText(baseFeed.getNumHeart());
+        mBinding.layoutFooter.textNumComment.setText(baseFeed.getNumComment());
+        if (baseFeed.isLike()) {
+            mBinding.layoutFooter.imageHeart.setImageResource(R.drawable.ic_red_heart);
+        } else {
+            mBinding.layoutFooter.imageHeart.setImageResource(R.drawable.ic_gray_heart);
+        }
     }
+
 
     private void initListeners() {
         mBinding.layoutHeader.getRoot().setOnClickListener(this);
@@ -40,22 +55,22 @@ public class CardTextImageVH extends BaseVH implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.layout_header:
                 if (mCallback != null) {
-                    mCallback.onClickUser(mCardTextImage.getUser(), getAdapterPosition() - 1);
+                    mCallback.onClickUser(mBaseFeed.getUser(), getAdapterPosition() - 1);
                 }
                 break;
             case R.id.layout_heart:
                 if (mCallback != null) {
-                    mCallback.onClickHeart(mCardTextImage, getAdapterPosition() - 1);
+                    mCallback.onClickHeart(mBaseFeed, getAdapterPosition() - 1);
                 }
                 break;
             case R.id.layout_comment:
                 if (mCallback != null) {
-                    mCallback.onClickComment(mCardTextImage, getAdapterPosition() - 1);
+                    mCallback.onClickComment(mBaseFeed, getAdapterPosition() - 1);
                 }
                 break;
             case R.id.image_content:
                 if (mCallback != null) {
-                    mCallback.onClickImage(mCardTextImage, getAdapterPosition() - 1);
+                    mCallback.onClickImage(mBaseFeed, getAdapterPosition() - 1);
                 }
                 break;
             default:

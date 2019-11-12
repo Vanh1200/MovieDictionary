@@ -56,7 +56,7 @@ import io.socket.emitter.Emitter;
 public class CommentDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener, CommentAdapter.OnCommentListener {
     private static final String TAG = "CommentDialogFragment";
     private FragmentCommentBinding mBinding;
-    private int movieId;
+    private String movieId;
     private CommentAdapter mCommentAdapter;
     private LinearLayoutManager mCommentLayoutManager;
     private CommentViewModel mViewModel;
@@ -75,10 +75,10 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
     @Inject
     PreferenceUtil mPreferenceUtil;
 
-    public static CommentDialogFragment newInstance(int movieId) {
+    public static CommentDialogFragment newInstance(String movieId) {
 
         Bundle args = new Bundle();
-        args.putInt(Constants.ARGUMENT_MOVIE_ID, movieId);
+        args.putString(Constants.ARGUMENT_MOVIE_ID, movieId);
         CommentDialogFragment fragment = new CommentDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -94,7 +94,7 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle);
-        movieId = getArguments().getInt(Constants.ARGUMENT_MOVIE_ID);
+        movieId = getArguments().getString(Constants.ARGUMENT_MOVIE_ID);
         connectSocket();
     }
 

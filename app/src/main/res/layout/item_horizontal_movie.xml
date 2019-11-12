@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.ptit.filmdictionary.ui.search.HorizontalMovieViewModel" />
+            type="com.ptit.filmdictionary.ui.search_movie.HorizontalMovieViewModel" />
 
     </data>
 

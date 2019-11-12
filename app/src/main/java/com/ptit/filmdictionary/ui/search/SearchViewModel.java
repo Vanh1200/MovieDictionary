@@ -12,6 +12,7 @@ import com.ptit.filmdictionary.data.model.History;
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.repository.HistoryRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
+import com.ptit.filmdictionary.ui.search_movie.SearchNavigator;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -73,6 +74,10 @@ public class SearchViewModel extends BaseViewModel<SearchNavigator> {
                     totalResultObservable.set(movieResponse.getTotalResult());
                 });
         compositeDisposable.add(disposable);
+    }
+
+    public void searchUser(String query) {
+//        Disposable disposable =
     }
 
     private void loadGenres() {

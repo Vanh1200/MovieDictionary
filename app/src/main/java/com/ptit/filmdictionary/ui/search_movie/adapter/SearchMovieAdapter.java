@@ -1,4 +1,4 @@
-package com.ptit.filmdictionary.ui.search.adapter;
+package com.ptit.filmdictionary.ui.search_movie.adapter;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.annotation.NonNull;
@@ -11,11 +11,11 @@ import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseRecyclerViewAdapter;
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.databinding.ItemHorizontalMovieBinding;
-import com.ptit.filmdictionary.ui.search.HorizontalMovieViewModel;
+import com.ptit.filmdictionary.ui.search_movie.HorizontalMovieViewModel;
 
-public class SearchAdapter extends BaseRecyclerViewAdapter<Movie, SearchAdapter.ViewHolder> {
+public class SearchMovieAdapter extends BaseRecyclerViewAdapter<Movie, SearchMovieAdapter.ViewHolder> {
 
-    public SearchAdapter() {
+    public SearchMovieAdapter() {
         super();
     }
 

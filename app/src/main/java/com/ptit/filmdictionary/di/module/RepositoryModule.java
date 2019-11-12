@@ -4,10 +4,13 @@ import android.app.Application;
 
 import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.repository.CommentRepository;
+import com.ptit.filmdictionary.data.repository.FeedRepository;
 import com.ptit.filmdictionary.data.repository.FileRepository;
 import com.ptit.filmdictionary.data.repository.MessageRepository;
 import com.ptit.filmdictionary.data.source.AuthDataSource;
 import com.ptit.filmdictionary.data.source.CommentDataSource;
+import com.ptit.filmdictionary.data.source.FeedDataSource;
+import com.ptit.filmdictionary.data.source.FeedRemoteDataSource;
 import com.ptit.filmdictionary.data.source.FileDataSource;
 import com.ptit.filmdictionary.data.source.MessageDataSource;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
@@ -81,6 +84,18 @@ public class RepositoryModule {
     @Singleton
     FileDataSource.Remote provideFileRemoteDataSource(ApiSecondRequest apiSecondRequest) {
         return new FileRemoteDataSource(apiSecondRequest);
+    }
+
+    @Provides
+    @Singleton
+    FeedRepository provideFeedRepository(FeedDataSource.Remote remote) {
+        return new FeedRepository(remote);
+    }
+
+    @Provides
+    @Singleton
+    FeedDataSource.Remote provideFeedRemoteDataSource(ApiSecondRequest apiSecondRequest) {
+        return new FeedRemoteDataSource(apiSecondRequest);
     }
 
 }

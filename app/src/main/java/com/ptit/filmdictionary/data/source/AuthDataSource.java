@@ -5,6 +5,8 @@ import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 
+import java.util.List;
+
 import io.reactivex.Single;
 
 /**
@@ -19,5 +21,7 @@ public interface AuthDataSource {
         Single<BaseResponse<UserResponse>> login(LoginBody body);
 
         Single<BaseResponse<String>> register(RegisterBody body);
+
+        Single<BaseResponse<List<UserResponse>>> searchUser(String query);
     }
 }

@@ -11,7 +11,7 @@ import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseRecyclerViewAdapter;
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.databinding.ItemHorizontalMovieBinding;
-import com.ptit.filmdictionary.ui.search.HorizontalMovieViewModel;
+import com.ptit.filmdictionary.ui.search_movie.HorizontalMovieViewModel;
 
 public class FavoriteAdapter extends BaseRecyclerViewAdapter<Movie, FavoriteAdapter.ViewHolder> {
     @NonNull

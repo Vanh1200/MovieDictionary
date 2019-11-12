@@ -40,8 +40,8 @@ public class CommentViewModel extends ViewModel {
         return mLivePostComment;
     }
 
-    public void loadComments(int movieId) {
-        Disposable disposable = mCommentRepository.getCommentsByTrailerId(movieId+"", 0)
+    public void loadComments(String movieId) {
+        Disposable disposable = mCommentRepository.getCommentsByTrailerId(movieId, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
@@ -53,8 +53,8 @@ public class CommentViewModel extends ViewModel {
         mCompositeDisposable.add(disposable);
     }
 
-    public void postComments(int movieId, CommentBody body) {
-        Disposable disposable = mCommentRepository.createComment(movieId+"", body)
+    public void postComments(String movieId, CommentBody body) {
+        Disposable disposable = mCommentRepository.createComment(movieId, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {

@@ -81,4 +81,8 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
 
     //Chat
     <string name="chat_opponent_typing">%s is typing …</string>
+
+    //Search
+    <string name="search_movie">Movie</string>
+    <string name="search_user">User</string>
 </resources>

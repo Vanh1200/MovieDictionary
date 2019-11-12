@@ -17,112 +17,100 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_search"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="0dp"
-            android:layout_height="?android:actionBarSize"
-            android:background="@color/color_white"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/color_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/text_search"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@color/color_white"
-                    android:hint="@string/text_search_movie"
-                    android:textSize="@dimen/sp_16"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPersonName"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/spinner_search"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:maxLength="30"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Spinner
-                    android:id="@+id/spinner_search"
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/image_history"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:spinnerAdapter="@{viewModel.genresObservable}" />
+                    <EditText
+                        android:id="@+id/text_search"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@color/color_white"
+                        android:hint="@string/text_search_movie"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPersonName"
+                        android:maxLength="30"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/spinner_search"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/image_history"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_15"
-                    android:src="@drawable/ic_history_black_24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <Spinner
+                        android:id="@+id/spinner_search"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/image_history"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:spinnerAdapter="@{viewModel.genresObservable}" />
 
-        </androidx.appcompat.widget.Toolbar>
+                    <ImageView
+                        android:id="@+id/image_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:src="@drawable/ic_history_black_24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/text_total_result"
-            android:layout_width="0dp"
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/color_primary_dark"
-            android:gravity="left"
-            android:paddingStart="@dimen/dp_5"
-            android:paddingTop="@dimen/dp_5"
-            android:paddingBottom="@dimen/dp_5"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/sp_16"
-            android:textStyle="bold"
-            android:visibility="@{viewModel.isLoadedResults ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="@id/recycler_search"
-            app:layout_constraintStart_toStartOf="@id/recycler_search"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_search"
-            app:totalResult="@{String.valueOf(viewModel.totalResultObservable)}" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tabIndicatorColor="@color/color_star"
+            app:tabSelectedTextColor="@color/color_star"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@color/color_black"
+            android:background="@color/color_white"
+            app:layout_constraintTop_toBottomOf="@id/app_bar">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_search"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_movie"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_user"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:orientation="vertical"
-            app:bindSearchMovies="@{viewModel.searchResultObservable}"
-            app:isLoadMore="@{viewModel.isLoadMore}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/progress_load_more"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_total_result" />
-
-        <ProgressBar
-            android:id="@+id/progress_load_search_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:indeterminateTint="@color/color_black"
-            android:visibility="@{viewModel.isLoadingResults ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_search" />
-
-        <ProgressBar
-            android:id="@+id/progress_load_more"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_10"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/color_black"
-            android:visibility="@{viewModel.isLoadingMoreResults ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

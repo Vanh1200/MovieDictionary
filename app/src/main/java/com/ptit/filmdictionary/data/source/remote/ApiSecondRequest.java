@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.data.source.remote;
 
+import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
@@ -16,6 +17,7 @@ import java.util.List;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -47,5 +49,23 @@ public interface ApiSecondRequest {
     @Multipart
     @POST("api/file")
     Single<FileResponse> uploadFile(@Part("file") RequestBody description, @Part MultipartBody.Part file);
+
+    @GET("api/users")
+    Single<BaseResponse<List<UserResponse>>> searchUser(@Query("q") String query);
+
+    @GET("api/users/{userId}")
+    Single<BaseResponse<UserResponse>> getUser(@Path("userId") String userId);
+
+    @GET("api/posts/{userId}")
+    Single<BaseResponse<List<BaseFeed>>> loadFeed(@Path("userId") String userId);
+
+    @POST("api/posts/create/{userId}")
+    Single<BaseResponse<BaseFeed>> createPost(@Path("userId") String userId, @Body BaseFeed baseFeed);
+
+    // like
+
+    // follow
+
+
 
 }

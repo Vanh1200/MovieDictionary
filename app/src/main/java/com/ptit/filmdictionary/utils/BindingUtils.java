@@ -1,7 +1,6 @@
 package com.ptit.filmdictionary.utils;
 
 import androidx.databinding.BindingAdapter;
-import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 import android.os.Build;
 import androidx.viewpager.widget.ViewPager;
@@ -32,7 +31,7 @@ import com.ptit.filmdictionary.ui.home.adapter.MovieAdapter;
 import com.ptit.filmdictionary.ui.home.adapter.SlideAdapter;
 import com.ptit.filmdictionary.ui.movie_detail.casts.CastsRecyclerAdapter;
 import com.ptit.filmdictionary.ui.movie_detail.info.GenreRecylerAdapter;
-import com.ptit.filmdictionary.ui.search.adapter.SearchAdapter;
+import com.ptit.filmdictionary.ui.search_movie.adapter.SearchMovieAdapter;
 import com.ptit.filmdictionary.ui.movie_detail.producer.ProducerRecyclerAdapter;
 import com.ptit.filmdictionary.ui.movie_detail.trailer.TrailerRecyclerAdapter;
 
@@ -99,7 +98,7 @@ public class BindingUtils {
     @BindingAdapter(value = {"bindSearchMovies", "isLoadMore"})
     public static void bindSearchMovies(RecyclerView recyclerView,
                                         List<Movie> movies, boolean isLoadMore) {
-        SearchAdapter adapter = (SearchAdapter) recyclerView.getAdapter();
+        SearchMovieAdapter adapter = (SearchMovieAdapter) recyclerView.getAdapter();
         if (adapter == null) return;
         if (isLoadMore) {
             adapter.addData(movies);

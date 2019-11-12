@@ -1,10 +1,13 @@
 package com.ptit.filmdictionary.ui.create_post;
 
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.ptit.filmdictionary.base.BaseFeed;
+import com.ptit.filmdictionary.data.repository.FeedRepository;
 import com.ptit.filmdictionary.data.repository.FileRepository;
 import com.ptit.filmdictionary.data.source.remote.response.FileResponse;
 import com.ptit.filmdictionary.utils.FileUtils;
@@ -25,12 +28,23 @@ import okhttp3.RequestBody;
  */
 public class CreatePostViewModel extends ViewModel {
     private FileRepository mFileRepository;
+    private FeedRepository mFeedRepository;
     private CompositeDisposable mDisposable = new CompositeDisposable();
     private MutableLiveData<FileResponse> mLiveFileRes = new MutableLiveData<>();
+    private MutableLiveData<BaseFeed> mLiveCreatePost = new MutableLiveData<>();
+
+    public MutableLiveData<BaseFeed> getLiveCreatePost() {
+        return mLiveCreatePost;
+    }
+
+    public MutableLiveData<FileResponse> getLiveFileRes() {
+        return mLiveFileRes;
+    }
 
     @Inject
-    public CreatePostViewModel(FileRepository fileRepository) {
+    public CreatePostViewModel(FileRepository fileRepository, FeedRepository feedRepository) {
         mFileRepository = fileRepository;
+        mFeedRepository = feedRepository;
     }
 
     public void uploadFile(String path) {
@@ -42,6 +56,18 @@ public class CreatePostViewModel extends ViewModel {
                 .subscribe(data -> mLiveFileRes.postValue(data),
                         throwable -> {});
         mDisposable.add(disposable);
+    }
+
+    public void createPost(String userId, BaseFeed baseFeed) {
+        Disposable disposable = mFeedRepository.createPost(userId, baseFeed)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                    Log.d("loadFeed: size", data.getData().getId() + "");
+                    mLiveCreatePost.setValue(data.getData());
+                }, throwable -> {
+                    Log.d("loadFeed: error", throwable.toString());
+                });
     }
 
     @Override
