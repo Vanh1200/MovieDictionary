@@ -49,6 +49,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public void insertItemAtPosition(MessageResponse message, int position) {
+        if (message != null) {
+            mMessages.add(position, message);
+            notifyItemInserted(position);
+        }
+    }
+
     public void removeItemAtPos(int position) {
         if (position >= 0 && position < mMessages.size()) {
             mMessages.remove(position);

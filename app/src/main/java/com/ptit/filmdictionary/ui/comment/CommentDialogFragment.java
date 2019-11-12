@@ -369,11 +369,11 @@ public class CommentDialogFragment extends BottomSheetDialogFragment implements 
     };
 
     private void addTyping() {
-        mBinding.layoutSomeoneTyping.setVisibility(View.VISIBLE);
+        mBinding.layoutSomeoneTyping.getRoot().setVisibility(View.VISIBLE);
     }
 
     private void removeTyping() {
-        mBinding.layoutSomeoneTyping.setVisibility(View.GONE);
+        mBinding.layoutSomeoneTyping.getRoot().setVisibility(View.GONE);
     }
 
     private void addComment(CommentResponse comment) {

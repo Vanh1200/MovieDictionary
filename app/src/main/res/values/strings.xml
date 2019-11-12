@@ -49,7 +49,7 @@
     </plurals>
     <string name="message_user_joined">%s joined</string>
     <string name="message_user_left">%s left</string>
-    <string name="someone_typing">Someone is typing ...</string>
+    <string name="someone_typing">Someone is typing …</string>
     <string name="hint_edit_text_chat">Type your message</string>
 
     // Profile
@@ -69,9 +69,16 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="feed_image">Image</string>
     <string name="feed_heart">Heart</string>
     <string name="feed_comment">Comment</string>
+
+    // Create post
     <string name="create_post_title">Create post</string>
     <string name="create_post_done">Done</string>
     <string name="create_post_camera">Camera</string>
     <string name="create_post_image_video">Image/Video</string>
+
+    //Custom gallery
     <string name="custom_gallery_gallery">Gallery</string>
+
+    //Chat
+    <string name="chat_opponent_typing">%s is typing …</string>
 </resources>

@@ -147,6 +147,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.recyclerMessage.setLayoutManager(mLinearLayoutManager);
         mBinding.recyclerMessage.setAdapter(mChatAdapter);
         setupAnimationTextMessage();
+        mBinding.layoutSomeoneTyping.textSomeoneTyping.setText(String.format(getString(R.string.chat_opponent_typing), mInteractiveUser.getUserName()));
     }
 
     private void initListeners() {
@@ -217,7 +218,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 if (!isTextMessageZoomOut && s.length() > 0) {
                     zoomOutTextMessage();
                 }
-                if (TextUtils.isEmpty(s) || count == 0) {
+                if (TextUtils.isEmpty(s)) {
                     zoomInTextMessage();
                 }
             }
@@ -298,11 +299,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         sender.setUserName(mPreferenceUtil.getUserName());
         sender.setId(mPreferenceUtil.getUserId());
         mMessageResponse.setType(MessageType.TEXT_MESSAGE); //todo text type, add other type later
-
         mMessageResponse.setText(mBinding.layoutBottomBarChat.textMessage.getText().toString());
         mMessageResponse.setSernder(sender);
         mMessageResponse.setReceiver(mInteractiveUser);
-        mLinearLayoutManager.scrollToPosition(mChatAdapter.getItemCount() - 1);
+        addMessage(mMessageResponse);
         mBinding.layoutBottomBarChat.textMessage.setText("");
         BaseHelper.hideKeyboardFrom(this, mBinding.getRoot());
     }
@@ -446,17 +446,17 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     private void addTyping() {
-        mBinding.layoutSomeoneTyping.setVisibility(View.VISIBLE);
+        mBinding.layoutSomeoneTyping.getRoot().setVisibility(View.VISIBLE);
     }
 
     private void removeTyping() {
-        mBinding.layoutSomeoneTyping.setVisibility(View.GONE);
+        mBinding.layoutSomeoneTyping.getRoot().setVisibility(View.GONE);
     }
 
     private void addMessage(MessageResponse message) {
-        mChatAdapter.insertItem(message);
+        mChatAdapter.insertItemAtPosition(message, 0);
 //        mCommentAdapter.notifyDataSetChanged();
-        mLinearLayoutManager.scrollToPosition(mChatAdapter.getItemCount() - 1);
+        mLinearLayoutManager.scrollToPosition(0);
     }
 
 }
