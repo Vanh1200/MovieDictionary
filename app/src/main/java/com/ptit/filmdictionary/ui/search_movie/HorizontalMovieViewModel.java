@@ -1,4 +1,4 @@
-package com.ptit.filmdictionary.ui.search;
+package com.ptit.filmdictionary.ui.search_movie;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;

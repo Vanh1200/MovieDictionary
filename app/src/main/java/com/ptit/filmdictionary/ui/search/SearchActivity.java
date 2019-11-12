@@ -4,19 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.ptit.filmdictionary.BR;
 import com.ptit.filmdictionary.R;
@@ -31,14 +28,14 @@ import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.databinding.ActivitySearchBinding;
 import com.ptit.filmdictionary.ui.history.HistoryDialogFragment;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
-import com.ptit.filmdictionary.ui.search.adapter.SearchAdapter;
+import com.ptit.filmdictionary.ui.search_movie.SearchNavigator;
 
 public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchViewModel> implements
         SearchNavigator, TextWatcher, BaseRecyclerViewAdapter.ItemListener<Movie>, View.OnClickListener,
         TextView.OnEditorActionListener, HistoryDialogFragment.HistoryClickListener {
     private SearchViewModel mSearchViewModel;
     private ActivitySearchBinding mBinding;
-    private boolean mIsScrolling;
+    private SearchPagerAdapter mSearchPagerAdapter;
 
     @Override
     protected int getBindingVariable() {
@@ -53,39 +50,16 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
         }
         mBinding = getViewDataBinding();
         setUpActionBar();
+        initComponents();
         initEvents();
-        initRecycler();
     }
 
-    private void initRecycler() {
-        SearchAdapter adapter = new SearchAdapter();
-        adapter.setItemListener(this);
-        mBinding.recyclerSearch.setAdapter(adapter);
-        mBinding.recyclerSearch.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    mIsScrolling = true;
-                }
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mBinding
-                        .recyclerSearch.getLayoutManager();
-                if (mIsScrolling && linearLayoutManager.findLastVisibleItemPosition() == adapter.getItemCount() - 1) {
-                    loadMore();
-                }
-            }
-        });
+    private void initComponents() {
+        mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchViewModel);
+        mBinding.viewPager.setAdapter(mSearchPagerAdapter);
+        mBinding.tabLayout.setupWithViewPager(mBinding.viewPager);
     }
 
-    private void loadMore() {
-        mIsScrolling = false;
-        mSearchViewModel.loadMore();
-    }
 
     private void initEvents() {
         mBinding.textSearch.addTextChangedListener(this);

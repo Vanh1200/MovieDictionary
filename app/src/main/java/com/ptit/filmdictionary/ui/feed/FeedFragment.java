@@ -22,10 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
+import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentFeedBinding;
+import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
 import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
 import com.ptit.filmdictionary.ui.feed.card.card_text_image.CardTextImage;
+import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +38,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
+
 import static android.app.Activity.RESULT_OK;
 
 public class FeedFragment extends Fragment implements FeedCallback, View.OnClickListener {
@@ -42,6 +49,13 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     private static final int REQUEST_PERMISSION_CAMERA = 3;
     private static final int REQUEST_IMAGE_TAKEN_BY_CAM = 2;
     private FragmentFeedBinding mBinding;
+
+    @Inject
+    FeedViewModel mFeedViewModel;
+
+    @Inject
+    PreferenceUtil mPreferenceUtil;
+
     private FeedAdapter mFeedAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private List<BaseFeed> mData = new ArrayList<>();
@@ -58,6 +72,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidSupportInjection.inject(this);
     }
 
     @Nullable
@@ -66,8 +81,20 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false);
         initComponents();
         initListeners();
-        fakeData();
+//        fakeData();
+        loadFeed();
+        observeData();
         return mBinding.getRoot();
+    }
+
+    private void loadFeed() {
+        mFeedViewModel.loadFeed(mPreferenceUtil.getUserId());
+    }
+
+    private void observeData() {
+        mFeedViewModel.getLiveFeed().observe(this, data -> {
+            mFeedAdapter.setData(data);
+        });
     }
 
     private boolean checkPermissionFeed() {
@@ -206,7 +233,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
     @Override
     public void onClickUser(UserResponse userResponse, int position) {
-        Toast.makeText(getActivity(), "Click User at " + position, Toast.LENGTH_SHORT).show();
+        ProfileActivity.start(getActivity(), userResponse);
     }
 
     @Override
@@ -216,7 +243,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
     @Override
     public void onClickComment(BaseFeed item, int position) {
-        Toast.makeText(getActivity(), "Click Comment at" + position, Toast.LENGTH_SHORT).show();
+        CommentDialogFragment.newInstance(item.getId()).show(getChildFragmentManager(), null);
     }
 
     @Override

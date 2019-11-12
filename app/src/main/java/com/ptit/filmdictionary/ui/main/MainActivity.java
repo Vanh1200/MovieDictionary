@@ -17,6 +17,8 @@ import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.ui.home.HomeFragment;
 import com.ptit.filmdictionary.ui.home.MainAdapter;
 
+import dagger.android.AndroidInjection;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.
         OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HomeFragment.OnScrollListener {
     private static final int FRAGMENT_HOME = 0;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AndroidInjection.inject(this);
         initViews();
         initViewPager();
         registerEvents();

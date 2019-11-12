@@ -74,4 +74,6 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="create_post_camera">Camera</string>
     <string name="create_post_image_video">Image/Video</string>
     <string name="custom_gallery_gallery">Gallery</string>
+    <string name="search_movie">Movie</string>
+    <string name="search_user">User</string>
 </resources>

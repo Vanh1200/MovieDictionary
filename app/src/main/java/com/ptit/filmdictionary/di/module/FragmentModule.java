@@ -1,9 +1,11 @@
 package com.ptit.filmdictionary.di.module;
 
 import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
+import com.ptit.filmdictionary.ui.feed.FeedFragment;
 import com.ptit.filmdictionary.ui.login.LoginFragment;
 import com.ptit.filmdictionary.ui.login.RegisterFragment;
 import com.ptit.filmdictionary.ui.movie_detail.info.MovieInfoFragment;
+import com.ptit.filmdictionary.ui.search_user.SearchUserFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -24,4 +26,7 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract CommentDialogFragment contributeCommentDialogFragment();
+
+    @ContributesAndroidInjector
+    abstract FeedFragment contributeFeedFragment();
 }
