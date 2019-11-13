@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:indeterminateTint="@color/color_black"
-            android:visibility="@{viewModel.isLoadingResults ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{viewModel.isLoadingSearchUser ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

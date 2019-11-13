@@ -7,6 +7,7 @@ import com.ptit.filmdictionary.ui.login.LoginActivity;
 import com.ptit.filmdictionary.ui.main.MainActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 import com.ptit.filmdictionary.ui.profile.ProfileActivity;
+import com.ptit.filmdictionary.ui.search.SearchActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -34,4 +35,7 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract CreatePostActivity contributeCreatePostActivity();
+
+    @ContributesAndroidInjector
+    abstract SearchActivity contributeSearchActivity();
 }

@@ -123,6 +123,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         mBinding.layoutBottomCreatePost.layoutCamera.setOnClickListener(this);
         mBinding.layoutBottomCreatePost.layoutImageVideo.setOnClickListener(this);
         mBinding.textDone.setOnClickListener(this);
+        mBinding.imageBack.setOnClickListener(this);
     }
 
 
@@ -146,6 +147,10 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                     requestPermissionGallery();
                 }
                 break;
+            case R.id.image_back:
+                onBackPressed();
+                break;
+
         }
 
     }

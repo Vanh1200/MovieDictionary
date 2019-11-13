@@ -50,8 +50,8 @@ public interface ApiSecondRequest {
     @POST("api/file")
     Single<FileResponse> uploadFile(@Part("file") RequestBody description, @Part MultipartBody.Part file);
 
-    @GET("api/users")
-    Single<BaseResponse<List<UserResponse>>> searchUser(@Query("q") String query);
+    @GET("api/user/search/{userId}")
+    Single<BaseResponse<List<UserResponse>>> searchUser(@Path("userId") String userId, @Query("q") String query, @Query("page") String page);
 
     @GET("api/users/{userId}")
     Single<BaseResponse<UserResponse>> getUser(@Path("userId") String userId);

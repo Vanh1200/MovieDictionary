@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.ui.search_user;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentSearchUserBinding;
+import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 import com.ptit.filmdictionary.ui.search.SearchViewModel;
 
 
@@ -39,7 +41,14 @@ public class SearchUserFragment extends Fragment implements UserHorizontalAdapte
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_user, container, false);
         initComponents();
+        observeLiveData();
         return mBinding.getRoot();
+    }
+
+    private void observeLiveData() {
+        mSearchViewModel.liveSearchUsers.observe(this, data -> {
+            mUserAdapter.setData(data);
+        });
     }
 
     private void initComponents() {
@@ -51,7 +60,7 @@ public class SearchUserFragment extends Fragment implements UserHorizontalAdapte
 
     @Override
     public void onClickUser(UserResponse user) {
-
+        ProfileActivity.start(getActivity(), user);
     }
 
     @Override

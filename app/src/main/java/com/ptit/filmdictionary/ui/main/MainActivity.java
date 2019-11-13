@@ -22,8 +22,8 @@ import dagger.android.AndroidInjection;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.
         OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HomeFragment.OnScrollListener {
     private static final int FRAGMENT_HOME = 0;
-    private static final int FRAGMENT_FAVORITE = 1;
-    private static final int FRAGMENT_SETTING = 2;
+    private static final int FRAGMENT_FAVORITE = 2;
+    private static final int FRAGMENT_DISCOVER = 1;
     private ViewPager mViewPager;
     private BottomNavigationView mNavigationView;
     private boolean isScrollToTop = false;
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //                    setSystemBarTheme(this, false);
 //                }
                 return true;
-            case R.id.menu_setting:
-                mViewPager.setCurrentItem(FRAGMENT_SETTING);
-                return false;
+            case R.id.menu_discover:
+                mViewPager.setCurrentItem(FRAGMENT_DISCOVER);
+                return true;
             default:
                 return false;
         }
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //                }
 
                 break;
-            case FRAGMENT_SETTING:
-                mNavigationView.setSelectedItemId(R.id.menu_setting);
+            case FRAGMENT_DISCOVER:
+                mNavigationView.setSelectedItemId(R.id.menu_discover);
 
             default:
                 break;

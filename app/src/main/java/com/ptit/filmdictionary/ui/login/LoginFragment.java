@@ -76,7 +76,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mViewModel.getLiveLoginResponse().observe(this, data -> {
             mDialog.dismiss();
             if (data != null) {
-                Toast.makeText(getActivity(), data.getUserName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Welcome " + data.getUserName(), Toast.LENGTH_SHORT).show();
                 mPreferenceUtil.setEmail(data.getLocal().getEmail());
                 mPreferenceUtil.setUserName(data.getUserName());
                 mPreferenceUtil.setPassword(data.getLocal().getPassword());

@@ -34,8 +34,8 @@ public class AuthRemoteDataSource implements AuthDataSource.Remote {
     }
 
     @Override
-    public Single<BaseResponse<List<UserResponse>>> searchUser(String query) {
-        return null;
+    public Single<BaseResponse<List<UserResponse>>> searchUser(String userId, String query, String page) {
+        return mApiRequest.searchUser(userId, query, page);
     }
 
 

@@ -22,6 +22,6 @@ public interface AuthDataSource {
 
         Single<BaseResponse<String>> register(RegisterBody body);
 
-        Single<BaseResponse<List<UserResponse>>> searchUser(String query);
+        Single<BaseResponse<List<UserResponse>>> searchUser(String userId, String query, String page);
     }
 }
