@@ -48,6 +48,13 @@ public class FeedAdapter extends RecyclerView.Adapter<BaseVH> {
         }
     }
 
+    public void addCreatedPost(BaseFeed data) {
+        if (data != null) {
+            mCards.add(0, data);
+            notifyItemInserted(1);
+        }
+    }
+
     public void setCallback(FeedCallback callback) {
         mCallback = callback;
     }

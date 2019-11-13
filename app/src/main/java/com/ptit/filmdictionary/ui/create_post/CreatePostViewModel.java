@@ -34,6 +34,9 @@ public class CreatePostViewModel extends ViewModel {
     private MutableLiveData<BaseFeed> mLiveCreatePost = new MutableLiveData<>();
 
     public MutableLiveData<BaseFeed> getLiveCreatePost() {
+        if (mLiveCreatePost == null) {
+            mLiveCreatePost = new MutableLiveData<>();
+        }
         return mLiveCreatePost;
     }
 
@@ -63,11 +66,12 @@ public class CreatePostViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
-                    Log.d("loadFeed: size", data.getData().getId() + "");
+                    Log.d("loadFeed: create post", data.getData().getId() + "");
                     mLiveCreatePost.setValue(data.getData());
                 }, throwable -> {
                     Log.d("loadFeed: error", throwable.toString());
                 });
+        mDisposable.add(disposable);
     }
 
     @Override

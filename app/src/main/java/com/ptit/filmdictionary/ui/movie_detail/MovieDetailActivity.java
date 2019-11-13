@@ -69,7 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity
     private void initViewPager() {
         mPageAdapter = new MoviePageAdapter(getSupportFragmentManager());
 
-        MovieInfoFragment infoFragment = MovieInfoFragment.newInstance(mMovieId);
+        MovieInfoFragment infoFragment = MovieInfoFragment.newInstance(mMovieId + "");
         infoFragment.setViewModel(mViewModel);
         TrailerFragment trailerFragment = TrailerFragment.getInstance();
         trailerFragment.setViewModel(mViewModel);

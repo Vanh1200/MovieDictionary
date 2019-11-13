@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.ui.create_post;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,13 +11,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
@@ -26,8 +27,10 @@ import com.ptit.filmdictionary.databinding.ActivityCreatePostBinding;
 import com.ptit.filmdictionary.ui.feed.CardType;
 import com.ptit.filmdictionary.ui.gallery.ActivityCustomGallery;
 import com.ptit.filmdictionary.ui.gallery.MediaType;
+import com.ptit.filmdictionary.utils.BaseHelper;
 import com.ptit.filmdictionary.utils.Constants;
 import com.ptit.filmdictionary.utils.ImageHelper;
+import com.ptit.filmdictionary.utils.MyApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +43,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import dmax.dialog.SpotsDialog;
 
 public class CreatePostActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String EXTRAS_IMAGE_PATH = "image_path";
@@ -53,6 +57,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     private List<ImageAndVideoModel> mImageAndVideoModels = new ArrayList<>();
     private BaseFeed mBaseFeed = new BaseFeed(); // base feed de upload
     private String image = "";
+    private AlertDialog mCreatePostDialog;
 
     @Inject
     CreatePostViewModel mViewModel;
@@ -72,17 +77,32 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         AndroidInjection.inject(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_post);
         getIncomingData();
+        initComponents();
         observeData();
         initListeners();
     }
 
+    private void initComponents() {
+        mCreatePostDialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setTheme(R.style.SpotDialogCustom)
+                .setMessage("Posting")
+                .setCancelable(false)
+                .build();
+    }
+
     private void observeData() {
         mViewModel.getLiveFileRes().observe(this, data -> {
-            image = Constants.BASE_VANH_URL + "file/" + data.getName();
+            image = Constants.BASE_VANH_URL_RELEASE + "api/file/" + data.getName();
             createPost();
         });
         mViewModel.getLiveCreatePost().observe(this, data -> {
-
+            mBaseFeed = data;
+            if (mCreatePostDialog.isShowing()) {
+                mCreatePostDialog.dismiss();
+                finish();
+            }
+            ((MyApplication)getApplication()).getLiveCreatePost().setValue(data);
         });
     }
 
@@ -110,11 +130,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.text_done:
-                if (mImageAndVideoModels.size() > 0) {
-                    uploadData();
-                } else {
-                    createPost();
-                }
+                handleDone();
                 break;
             case R.id.layout_camera:
                 if (checkPermissionCreatePost()) {
@@ -134,10 +150,26 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    private void handleDone() {
+        BaseHelper.hideKeyboardFrom(this, mBinding.getRoot());
+        if (!BaseHelper.isInternetOn(this)) {
+            Toast.makeText(this, getString(R.string.text_no_internet), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mImageAndVideoModels.size() > 0) {
+            uploadData();
+        } else {
+            createPost();
+        }
+    }
+
     private void createPost() {
         mBaseFeed.setCardType(CardType.CARD_TEXT_IMAGE); // todo tam thoi hard code the nay da
         if (image.isEmpty() && mBinding.textQuestion.getText().toString().isEmpty()) {
             return;
+        }
+        if (!mCreatePostDialog.isShowing()){
+            mCreatePostDialog.show();
         }
         mBaseFeed.setText(mBinding.textQuestion.getText().toString());
         mBaseFeed.setImageUrl(image);
@@ -146,6 +178,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
     private void uploadData() {
         if (mImageAndVideoModels.size() > 0) {
+            mCreatePostDialog.show();
             mViewModel.uploadFile(mImageAndVideoModels.get(0).getUrl());
         }
     }

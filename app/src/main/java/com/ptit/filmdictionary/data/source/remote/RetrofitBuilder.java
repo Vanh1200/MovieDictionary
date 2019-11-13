@@ -19,7 +19,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.ptit.filmdictionary.utils.Constants.BASE_VANH_URL;
+import static com.ptit.filmdictionary.utils.Constants.BASE_VANH_URL_DEV;
+import static com.ptit.filmdictionary.utils.Constants.BASE_VANH_URL_RELEASE;
 
 public class RetrofitBuilder {
     private static final String QUERRY_PARAMETER_API_KEY = "api_key";
@@ -50,7 +51,7 @@ public class RetrofitBuilder {
     public static Retrofit getSecondInstance(Context context) {
         if (sSecondRetrofit == null) {
             sSecondRetrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_VANH_URL)
+                    .baseUrl(BASE_VANH_URL_RELEASE)
                     .client(initSecondClient(context))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

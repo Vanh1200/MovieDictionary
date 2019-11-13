@@ -7,7 +7,7 @@ import com.ptit.filmdictionary.ui.feed.CardType;
 import java.util.List;
 
 public class BaseFeed {
-    @SerializedName("id")
+    @SerializedName("_id")
     private String id;
 
     @SerializedName("cardType")
@@ -24,10 +24,10 @@ public class BaseFeed {
     private int numComment;
 
     @SerializedName("createdAt")
-    private int createdAt;
+    private long createdAt;
 
     @SerializedName("updatedAt")
-    private int updatedAt;
+    private long updatedAt;
 
     @SerializedName("images")
     private List<String> images;
@@ -124,19 +124,19 @@ public class BaseFeed {
         this.numComment = numComment;
     }
 
-    public int getCreatedAt() {
+    public long getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(int createdAt) {
+    public void setCreatedAt(long createdAt) {
         this.createdAt = createdAt;
     }
 
-    public int getUpdatedAt() {
+    public long getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(int updatedAt) {
+    public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

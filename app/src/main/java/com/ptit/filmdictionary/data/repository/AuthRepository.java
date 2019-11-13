@@ -6,6 +6,8 @@ import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Single;
@@ -14,15 +16,7 @@ import io.reactivex.Single;
  * Created by vanh1200 on 16/10/2019
  */
 public class AuthRepository implements AuthDataSource.Remote {
-    private static AuthRepository sInstance;
     private AuthDataSource.Remote mRemote;
-
-//    public static AuthRepository getInstance(AuthDataSource.Remote remote) {
-//        if (sInstance == null) {
-//            sInstance = new AuthRepository(remote);
-//        }
-//        return sInstance;
-//    }
 
     @Inject
     public AuthRepository(AuthDataSource.Remote remote) {
@@ -37,5 +31,10 @@ public class AuthRepository implements AuthDataSource.Remote {
     @Override
     public Single<BaseResponse<String>> register(RegisterBody body) {
         return mRemote.register(body);
+    }
+
+    @Override
+    public Single<BaseResponse<List<UserResponse>>> searchUser(String query) {
+        return mRemote.searchUser(query);
     }
 }

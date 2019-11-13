@@ -27,8 +27,10 @@ import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentFeedBinding;
 import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
 import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
+import com.ptit.filmdictionary.ui.create_post.CreatePostViewModel;
 import com.ptit.filmdictionary.ui.feed.card.card_text_image.CardTextImage;
 import com.ptit.filmdictionary.ui.profile.ProfileActivity;
+import com.ptit.filmdictionary.utils.MyApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -95,6 +97,9 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         mFeedViewModel.getLiveFeed().observe(this, data -> {
             mFeedAdapter.setData(data);
         });
+        ((MyApplication)getActivity().getApplication()).getLiveCreatePost().observe(this, data -> {
+            mFeedAdapter.addCreatedPost(data);
+        });
     }
 
     private boolean checkPermissionFeed() {
@@ -112,55 +117,6 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             getActivity().requestPermissions(permissions, REQUEST_PERMISSION_CAMERA);
         }
-    }
-
-    private void fakeData() {
-        CardTextImage CardTextImage = new CardTextImage();
-        CardTextImage.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage1 = new CardTextImage();
-        CardTextImage1.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage2 = new CardTextImage();
-        CardTextImage2.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage3 = new CardTextImage();
-        CardTextImage3.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage4 = new CardTextImage();
-        CardTextImage4.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage5 = new CardTextImage();
-        CardTextImage5.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage6 = new CardTextImage();
-        CardTextImage6.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage7 = new CardTextImage();
-        CardTextImage7.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage8 = new CardTextImage();
-        CardTextImage8.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage9 = new CardTextImage();
-        CardTextImage9.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        CardTextImage CardTextImage10 = new CardTextImage();
-        CardTextImage10.setCardType(CardType.CARD_TEXT_IMAGE);
-
-        mData.add(CardTextImage);
-        mData.add(CardTextImage1);
-        mData.add(CardTextImage2);
-        mData.add(CardTextImage3);
-        mData.add(CardTextImage4);
-        mData.add(CardTextImage5);
-        mData.add(CardTextImage6);
-        mData.add(CardTextImage7);
-        mData.add(CardTextImage8);
-        mData.add(CardTextImage9);
-        mData.add(CardTextImage10);
-
-        mFeedAdapter.setData(mData);
     }
 
     private void initListeners() {

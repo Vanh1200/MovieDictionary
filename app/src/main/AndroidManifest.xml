@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:largeHeap="true"
         android:name=".utils.MyApplication">
         <activity
             android:name=".ui.movie_detail.MovieDetailActivity"

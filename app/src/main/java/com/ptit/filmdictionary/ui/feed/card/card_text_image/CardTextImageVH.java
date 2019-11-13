@@ -27,13 +27,18 @@ public class CardTextImageVH extends BaseVH implements View.OnClickListener {
     @Override
     public void bindData(BaseFeed baseFeed) {
         mBaseFeed = baseFeed;
-        ImageHelper.loadImage(mBinding.imageContent, baseFeed.getImageUrl());
+        if (!baseFeed.getImageUrl().isEmpty()) {
+            mBinding.imageContent.setVisibility(View.VISIBLE);
+            ImageHelper.loadImage(mBinding.imageContent, baseFeed.getImageUrl());
+        } else {
+            mBinding.imageContent.setVisibility(View.GONE);
+        }
         mBinding.textContent.setText(baseFeed.getText());
         ImageHelper.loadImage(mBinding.layoutHeader.imageAvatar, baseFeed.getUser().getAvatar());
         mBinding.layoutHeader.textUserName.setText(baseFeed.getUser().getUserName());
         mBinding.layoutHeader.textTimeAgo.setText(BaseHelper.convertTimeStampToTimeAgo(mBaseFeed.getCreatedAt()));
-        mBinding.layoutFooter.textNumLike.setText(baseFeed.getNumHeart());
-        mBinding.layoutFooter.textNumComment.setText(baseFeed.getNumComment());
+        mBinding.layoutFooter.textNumLike.setText(String.valueOf(baseFeed.getNumHeart()));
+        mBinding.layoutFooter.textNumComment.setText(String.valueOf(baseFeed.getNumComment()));
         if (baseFeed.isLike()) {
             mBinding.layoutFooter.imageHeart.setImageResource(R.drawable.ic_red_heart);
         } else {

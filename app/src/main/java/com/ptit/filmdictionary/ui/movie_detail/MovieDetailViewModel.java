@@ -75,8 +75,8 @@ public class MovieDetailViewModel {
         checkFavorite(movieId);
     }
 
-    public void loadComments(int movieId) {
-        Disposable disposable = mCommentRepository.getCommentsByTrailerId(movieId+"", 0)
+    public void loadComments(String movieId) {
+        Disposable disposable = mCommentRepository.getCommentsByTrailerId(movieId, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {

@@ -39,7 +39,7 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
     private static final String KEY_MOVIE_ID = "movie_id";
     private MovieDetailViewModel mViewModel;
     private FragmentMovieInfoBinding mBinding;
-    private int movieId;
+    private String movieId;
     private CommentAdapter mCommentAdapter;
 
     @Inject
@@ -49,10 +49,10 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
         // Required empty public constructor
     }
 
-    public static MovieInfoFragment newInstance(int movieId) {
+    public static MovieInfoFragment newInstance(String movieId) {
 
         Bundle args = new Bundle();
-        args.putInt(KEY_MOVIE_ID, movieId);
+        args.putString(KEY_MOVIE_ID, movieId);
 
         MovieInfoFragment fragment = new MovieInfoFragment();
         fragment.setArguments(args);
@@ -89,7 +89,7 @@ public class MovieInfoFragment extends Fragment implements GenreRecylerAdapter.I
     }
 
     private void getIncomingData() {
-        movieId = getArguments().getInt(KEY_MOVIE_ID);
+        movieId = getArguments().getString(KEY_MOVIE_ID);
     }
 
     private void loadData() {
