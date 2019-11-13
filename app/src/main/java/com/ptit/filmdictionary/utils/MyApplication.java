@@ -41,7 +41,7 @@ public class MyApplication extends Application implements HasActivityInjector, H
                 .inject(this);
 
         try {
-            mSocket = IO.socket(Constants.BASE_VANH_URL_DEV);
+            mSocket = IO.socket(Constants.BASE_VANH_URL_RELEASE);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
