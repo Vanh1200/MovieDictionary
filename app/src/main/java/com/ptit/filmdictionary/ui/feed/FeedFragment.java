@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.ui.feed;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -30,6 +31,8 @@ import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
 import com.ptit.filmdictionary.ui.create_post.CreatePostViewModel;
 import com.ptit.filmdictionary.ui.feed.card.card_text_image.CardTextImage;
 import com.ptit.filmdictionary.ui.profile.ProfileActivity;
+import com.ptit.filmdictionary.ui.search.SearchActivity;
+import com.ptit.filmdictionary.utils.ImageHelper;
 import com.ptit.filmdictionary.utils.MyApplication;
 
 import java.io.File;
@@ -90,6 +93,8 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     }
 
     private void loadFeed() {
+        mBinding.layoutToolbarFeed.textUserName.setText(mPreferenceUtil.getUserName());
+        ImageHelper.loadImage(mBinding.layoutToolbarFeed.imageAvatar, mPreferenceUtil.getUserAvatar());
         mFeedViewModel.loadFeed(mPreferenceUtil.getUserId());
     }
 
@@ -126,7 +131,11 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     }
 
     private void initComponents() {
-        mFeedAdapter = new FeedAdapter(getActivity());
+        UserResponse userResponse = new UserResponse();
+        userResponse.setAvatar(mPreferenceUtil.getUserAvatar());
+        userResponse.setId(mPreferenceUtil.getUserId());
+        userResponse.setUserName(mPreferenceUtil.getUserName());
+        mFeedAdapter = new FeedAdapter(getActivity(), userResponse);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mBinding.recyclerFeed.setLayoutManager(mLinearLayoutManager);
         mBinding.recyclerFeed.setAdapter(mFeedAdapter);
@@ -179,7 +188,11 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
     @Override
     public void onClickAvatarCreatePost() {
-        Toast.makeText(getActivity(), "Click Avatar", Toast.LENGTH_SHORT).show();
+        UserResponse currentUser = new UserResponse();
+        currentUser.setId(mPreferenceUtil.getUserId());
+        currentUser.setAvatar(mPreferenceUtil.getUserAvatar());
+        currentUser.setUserName(mPreferenceUtil.getUserName());
+        ProfileActivity.start(getActivity(), currentUser);
     }
 
     @Override
@@ -221,13 +234,17 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_avatar:
-                Toast.makeText(getActivity(), "Click Avatar at toolbar", Toast.LENGTH_SHORT).show();
+                UserResponse currentUser = new UserResponse();
+                currentUser.setId(mPreferenceUtil.getUserId());
+                currentUser.setAvatar(mPreferenceUtil.getUserAvatar());
+                currentUser.setUserName(mPreferenceUtil.getUserName());
+                ProfileActivity.start(getActivity(), currentUser);
                 break;
             case R.id.image_search:
-                Toast.makeText(getActivity(), "Click Search at toolbar", Toast.LENGTH_SHORT).show();
+                SearchActivity.startSearch(getActivity(), SearchActivity.TYPE_SEARCH_USER);
                 break;
             case R.id.image_notification:
-                Toast.makeText(getActivity(), "Click Notice at toolbar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "This feature is in development", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

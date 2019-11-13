@@ -4,12 +4,14 @@
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_home"
         android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/menu_discover"
+        android:icon="@drawable/ic_group"
+        android:title="@string/title_discover" />
+
     <item
         android:id="@+id/menu_favorite"
         android:icon="@drawable/ic_heart"
         android:title="@string/title_favorite" />
-    <item
-        android:id="@+id/menu_setting"
-        android:icon="@drawable/ic_setting"
-        android:title="@string/title_setting" />
 </menu>

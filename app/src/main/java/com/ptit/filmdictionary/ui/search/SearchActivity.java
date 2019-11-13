@@ -21,21 +21,39 @@ import com.ptit.filmdictionary.base.BaseActivity;
 import com.ptit.filmdictionary.base.BaseRecyclerViewAdapter;
 import com.ptit.filmdictionary.data.model.History;
 import com.ptit.filmdictionary.data.model.Movie;
+import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.repository.HistoryRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.local.MovieLocalDataSource;
+import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.databinding.ActivitySearchBinding;
 import com.ptit.filmdictionary.ui.history.HistoryDialogFragment;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 import com.ptit.filmdictionary.ui.search_movie.SearchNavigator;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchViewModel> implements
         SearchNavigator, TextWatcher, BaseRecyclerViewAdapter.ItemListener<Movie>, View.OnClickListener,
         TextView.OnEditorActionListener, HistoryDialogFragment.HistoryClickListener {
+    private static final String EXTRAS_TYPE_SEARCH = "type_search";
     private SearchViewModel mSearchViewModel;
     private ActivitySearchBinding mBinding;
     private SearchPagerAdapter mSearchPagerAdapter;
+
+    public static final int TYPE_SEARCH_USER = 1;
+    public static final int TYPE_SEARCH_MOVIE = 0;
+
+    private int type;
+
+    @Inject
+    AuthRepository mAuthRepository;
+
+    @Inject
+    PreferenceUtil mPreferenceUtil;
 
     @Override
     protected int getBindingVariable() {
@@ -45,19 +63,36 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             setTextStatusBarColor();
         }
         mBinding = getViewDataBinding();
         setUpActionBar();
+        getIncomingData();
         initComponents();
         initEvents();
+    }
+
+    private void getIncomingData() {
+        if (getIntent() != null && getIntent().hasExtra(EXTRAS_TYPE_SEARCH)) {
+            type = getIntent().getIntExtra(EXTRAS_TYPE_SEARCH, TYPE_SEARCH_MOVIE);
+        }
+    }
+
+    public static void startSearch(Context context, int type) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        intent.putExtra(EXTRAS_TYPE_SEARCH, type);
+        context.startActivity(intent);
     }
 
     private void initComponents() {
         mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchViewModel);
         mBinding.viewPager.setAdapter(mSearchPagerAdapter);
         mBinding.tabLayout.setupWithViewPager(mBinding.viewPager);
+        if (type == TYPE_SEARCH_USER) {
+            mBinding.viewPager.setCurrentItem(TYPE_SEARCH_USER);
+        }
     }
 
 
@@ -93,6 +128,9 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
                     MovieLocalDataSource.getInstance(this)),
                     HistoryRepository.getInstance()
             );
+            if (mAuthRepository != null) {
+                mSearchViewModel.setAuthRepository(mAuthRepository);
+            }
         }
         return mSearchViewModel;
     }
@@ -120,6 +158,10 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if (s.toString().isEmpty()) return;
         mSearchViewModel.loadResultByKeyword(s.toString());
+        if (mAuthRepository != null) {
+            mSearchViewModel.setAuthRepository(mAuthRepository);
+        }
+        mSearchViewModel.searchUser(mPreferenceUtil.getUserId(), s.toString());
     }
 
     @Override

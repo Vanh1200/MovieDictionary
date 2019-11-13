@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseVH;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.CardCreatePostBinding;
 import com.ptit.filmdictionary.databinding.CardTextImageBinding;
 import com.ptit.filmdictionary.ui.chat.ChatAdapter;
@@ -25,9 +26,11 @@ public class FeedAdapter extends RecyclerView.Adapter<BaseVH> {
     private LayoutInflater mInflater;
     private Context mContext;
     private FeedCallback mCallback;
+    private UserResponse mUserInfo;
 
-    public FeedAdapter(Context context) {
+    public FeedAdapter(Context context, UserResponse userInfo) {
         mContext = context;
+        mUserInfo = userInfo;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -84,6 +87,7 @@ public class FeedAdapter extends RecyclerView.Adapter<BaseVH> {
     @Override
     public void onBindViewHolder(@NonNull BaseVH holder, int position) {
         if (position == 0) {
+            ((CardCreatePostVH)holder).setUserInfo(mUserInfo);
             holder.bindData(null);
             return;
         }

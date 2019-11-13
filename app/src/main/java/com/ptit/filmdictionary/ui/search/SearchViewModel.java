@@ -4,15 +4,20 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
+import androidx.lifecycle.MutableLiveData;
 
 import com.ptit.filmdictionary.base.BaseRepository;
 import com.ptit.filmdictionary.base.BaseViewModel;
 import com.ptit.filmdictionary.data.model.Genre;
 import com.ptit.filmdictionary.data.model.History;
 import com.ptit.filmdictionary.data.model.Movie;
+import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.repository.HistoryRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.ui.search_movie.SearchNavigator;
+
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,11 +31,14 @@ public class SearchViewModel extends BaseViewModel<SearchNavigator> {
     public final ObservableInt totalResultObservable;
     public final ObservableBoolean isLoadedResults;
     public final ObservableBoolean isLoadingResults;
+    public final ObservableBoolean isLoadingSearchUser;
     public final ObservableBoolean isLoadingMoreResults;
     public final ObservableBoolean isLoadMore;
     public final ObservableList<Genre> genresObservable;
+    public MutableLiveData<List<UserResponse>> liveSearchUsers = new MutableLiveData<>();
     private MovieRepository mMovieRepository;
     private HistoryRepository mHistoryRepository;
+    private AuthRepository mAuthRepository;
     private String mQuery;
     private int mCurrentPage;
 
@@ -44,10 +52,15 @@ public class SearchViewModel extends BaseViewModel<SearchNavigator> {
         genresObservable = new ObservableArrayList<>();
         isLoadedResults = new ObservableBoolean(false);
         isLoadingResults = new ObservableBoolean(false);
+        isLoadingSearchUser = new ObservableBoolean(false);
         isLoadingMoreResults = new ObservableBoolean(false);
         isLoadMore = new ObservableBoolean(false);
         compositeDisposable = new CompositeDisposable();
         loadGenres();
+    }
+
+    public void setAuthRepository(AuthRepository authRepository) {
+        mAuthRepository = authRepository;
     }
 
     public int getCurrentPage() {
@@ -76,8 +89,20 @@ public class SearchViewModel extends BaseViewModel<SearchNavigator> {
         compositeDisposable.add(disposable);
     }
 
-    public void searchUser(String query) {
-//        Disposable disposable =
+    public void searchUser(String userId, String query) {
+        isLoadingSearchUser.set(true);
+        if (mAuthRepository == null) return;
+        Disposable disposable = mAuthRepository.searchUser(userId, query, "0") //todo add pagination later
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                            liveSearchUsers.postValue(data.getData());
+                            isLoadingSearchUser.set(false);
+                        },
+                        throwable -> {
+                            isLoadingSearchUser.set(false);
+                        });
+        compositeDisposable.add(disposable);
     }
 
     private void loadGenres() {

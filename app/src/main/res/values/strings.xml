@@ -2,7 +2,7 @@
     <string name="app_name">Film Dictionary</string>
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
-    <string name="title_setting">Setting</string>
+    <string name="title_discover">Discover</string>
     <string name="title_search">Search</string>
     <string name="text_genres">Genres</string>
     <string name="tab_information">Information</string>
@@ -17,7 +17,7 @@
     <string name="tab_trailer">Trailer</string>
     <string name="tab_actor">Actor</string>
     <string name="tab_producer">Producer</string>
-    <string name="text_search_movie">Search movies</string>
+    <string name="text_search_movie">Search movies and users</string>
     <string name="label_minutes">minutes</string>
     <string name="label_overview">Overview</string>
     <string name="label_empty">EMPTY</string>
