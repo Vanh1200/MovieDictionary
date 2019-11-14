@@ -37,6 +37,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         }
     }
 
+    public void addData(List<ImageAndVideoModel> models) {
+        if (models != null) {
+            int before = mImageAndVideoModels.size();
+            mImageAndVideoModels.addAll(models);
+            notifyItemRangeInserted(before, models.size());
+        }
+    }
+
     public GalleryAdapter(Context context, GalleryCallback callback) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
