@@ -531,6 +531,7 @@ public class FileUtils {
         RequestBody requestFile =
                 RequestBody.create(
                         MediaType.parse(getMimeType(path)),
+//                        MediaType.parse("multipart/form-data"),
                         file
                 );
 
@@ -544,6 +545,7 @@ public class FileUtils {
         if (extension != null) {
             type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         }
+        Log.d(TAG, "getMimeType: " + type);
         return type;
     }
 
