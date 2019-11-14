@@ -57,15 +57,16 @@ public interface ApiSecondRequest {
     Single<BaseResponse<UserResponse>> getUser(@Path("userId") String userId);
 
     @GET("api/posts/{userId}")
-    Single<BaseResponse<List<BaseFeed>>> loadFeed(@Path("userId") String userId);
+    Single<BaseResponse<List<BaseFeed>>> loadFeed(@Path("userId") String userId, @Query("page") String page);
 
     @POST("api/posts/create/{userId}")
     Single<BaseResponse<BaseFeed>> createPost(@Path("userId") String userId, @Body BaseFeed baseFeed);
 
+    @GET("api/posts/profile/{userId}")
+    Single<BaseResponse<List<BaseFeed>>> loadFeedProfile(@Path("userId") String userId, @Query("page") String page);
+
     // like
 
     // follow
-
-
 
 }

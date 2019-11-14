@@ -19,8 +19,13 @@ public class FeedRepository implements FeedDataSource.Remote {
     }
 
     @Override
-    public Single<BaseResponse<List<BaseFeed>>> loadFeed(String userId) {
-        return mRemote.loadFeed(userId);
+    public Single<BaseResponse<List<BaseFeed>>> loadFeed(String userId, String page) {
+        return mRemote.loadFeed(userId, page);
+    }
+
+    @Override
+    public Single<BaseResponse<List<BaseFeed>>> loadFeedProfile(String userId, String page) {
+        return mRemote.loadFeedProfile(userId, page);
     }
 
     @Override

@@ -30,7 +30,7 @@ public abstract class ActivityModule {
     @ContributesAndroidInjector
     abstract ChatActivity contributeChatActivity();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract ProfileActivity contributeProfileActivity();
 
     @ContributesAndroidInjector

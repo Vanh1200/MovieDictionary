@@ -5,6 +5,8 @@ import com.ptit.filmdictionary.ui.feed.FeedFragment;
 import com.ptit.filmdictionary.ui.login.LoginFragment;
 import com.ptit.filmdictionary.ui.login.RegisterFragment;
 import com.ptit.filmdictionary.ui.movie_detail.info.MovieInfoFragment;
+import com.ptit.filmdictionary.ui.profile.ProfileMovieFragment;
+import com.ptit.filmdictionary.ui.profile.ProfilePostFragment;
 import com.ptit.filmdictionary.ui.search_user.SearchUserFragment;
 
 import dagger.Module;
@@ -29,4 +31,10 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract FeedFragment contributeFeedFragment();
+
+    @ContributesAndroidInjector
+    abstract ProfileMovieFragment contributeProfileMovieFragment();
+
+    @ContributesAndroidInjector
+    abstract ProfilePostFragment contributeProfilePostFragment();
 }
