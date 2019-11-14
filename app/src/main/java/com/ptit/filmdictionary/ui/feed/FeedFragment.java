@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
@@ -54,6 +56,10 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     private static final int REQUEST_PERMISSION_CAMERA = 3;
     private static final int REQUEST_IMAGE_TAKEN_BY_CAM = 2;
     private FragmentFeedBinding mBinding;
+    private boolean isNoMoreData = false;
+    private static final int DEFAULT_PER_PAGE = 20;
+    private static final int DEFAUTL_PAGE = 0;
+    private int mCurrentPage = 0;
 
     @Inject
     FeedViewModel mFeedViewModel;
@@ -66,6 +72,9 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     private List<BaseFeed> mData = new ArrayList<>();
     private String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private String imageFilePath = "";
+    private boolean mIsScrolling = false;
+    private boolean mIsLoading = false;
+    private boolean mIsRefresh = true;
 
     public static FeedFragment newInstance() {
         Bundle args = new Bundle();
@@ -86,7 +95,6 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false);
         initComponents();
         initListeners();
-//        fakeData();
         loadFeed();
         observeData();
         return mBinding.getRoot();
@@ -95,12 +103,23 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     private void loadFeed() {
         mBinding.layoutToolbarFeed.textUserName.setText(mPreferenceUtil.getUserName());
         ImageHelper.loadImage(mBinding.layoutToolbarFeed.imageAvatar, mPreferenceUtil.getUserAvatar());
-        mFeedViewModel.loadFeed(mPreferenceUtil.getUserId());
+        mFeedViewModel.loadFeed(mPreferenceUtil.getUserId(), DEFAUTL_PAGE);
     }
 
     private void observeData() {
         mFeedViewModel.getLiveFeed().observe(this, data -> {
-            mFeedAdapter.setData(data);
+            mIsLoading = false;
+            if (mIsRefresh) {
+                isNoMoreData = false;
+                mFeedAdapter.setData(data);
+                mIsRefresh = false;
+            } else {
+                mFeedAdapter.removeLoadMore();
+                mFeedAdapter.addData(data);
+                if (data.size() < DEFAULT_PER_PAGE) {
+                    isNoMoreData = true;
+                }
+            }
         });
         ((MyApplication)getActivity().getApplication()).getLiveCreatePost().observe(this, data -> {
             mFeedAdapter.addCreatedPost(data);
@@ -139,6 +158,25 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mBinding.recyclerFeed.setLayoutManager(mLinearLayoutManager);
         mBinding.recyclerFeed.setAdapter(mFeedAdapter);
+        mBinding.recyclerFeed.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+//                    mIsScrolling = true;
+//                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!mIsLoading && mLinearLayoutManager.findLastVisibleItemPosition() == mFeedAdapter.getItemCount() - 1 && !isNoMoreData) {
+                    mIsLoading = true;
+                    mFeedViewModel.loadFeed(userResponse.getId(), ++mCurrentPage);
+                    mFeedAdapter.addLoadMore();
+                }
+            }
+        });
         mFeedAdapter.setCallback(this);
     }
 

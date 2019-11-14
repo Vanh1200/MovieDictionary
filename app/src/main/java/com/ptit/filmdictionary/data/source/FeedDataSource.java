@@ -9,7 +9,9 @@ import io.reactivex.Single;
 
 public interface FeedDataSource {
     interface Remote {
-        Single<BaseResponse<List<BaseFeed>>> loadFeed(String userId);
+        Single<BaseResponse<List<BaseFeed>>> loadFeed(String userId, String page);
+
+        Single<BaseResponse<List<BaseFeed>>> loadFeedProfile(String userId, String page);
 
         Single<BaseResponse<BaseFeed>> createPost(String userId, BaseFeed baseFeed);
     }

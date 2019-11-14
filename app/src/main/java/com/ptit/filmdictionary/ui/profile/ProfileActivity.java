@@ -29,9 +29,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private static final int DEFAULT_OFFSET = 1000;
     private UserResponse user;
     private boolean isMe;
+    private ProfilePagerAdapter mPagerAdapter;
 
     @Inject
     PreferenceUtil mPreferenceUtil;
+
+    @Inject
+    ProfileViewModel mProfileViewModel;
 
     public static void start(Context context, UserResponse user) {
         Intent intent = new Intent(context, ProfileActivity.class);
@@ -51,7 +55,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         getIncomingData();
         initData();
         initComponents();
+        loadData();
+        observeData();
         initListeners();
+    }
+
+    private void observeData() {
+
+    }
+
+    private void loadData() {
     }
 
     private void initData() {
@@ -71,6 +84,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             isMe = true;
             mBinding.buttonMessage.setImageResource(R.drawable.ic_edit);
         }
+        mPagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager(), user.getId());
+        mBinding.viewPager.setAdapter(mPagerAdapter);
+        mBinding.tabLayout.setupWithViewPager(mBinding.viewPager);
     }
 
     private void initListeners() {

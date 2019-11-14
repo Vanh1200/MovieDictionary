@@ -1,4 +1,4 @@
-package com.ptit.filmdictionary.ui.feed;
+package com.ptit.filmdictionary.ui.profile;
 
 import android.util.Log;
 
@@ -17,29 +17,30 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class FeedViewModel extends ViewModel {
+public class ProfileViewModel extends ViewModel {
+
     private FeedRepository mFeedRepository;
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
-    private MutableLiveData<List<BaseFeed>> mLiveFeed = new MutableLiveData<>();
+    private MutableLiveData<List<BaseFeed>> mLiveFeedProfile = new MutableLiveData<>();
 
     @Inject
-    public FeedViewModel(FeedRepository feedRepository) {
+    public ProfileViewModel(FeedRepository feedRepository) {
         mFeedRepository = feedRepository;
     }
 
-    public MutableLiveData<List<BaseFeed>> getLiveFeed() {
-        return mLiveFeed;
+    public MutableLiveData<List<BaseFeed>> getLiveFeedProfile() {
+        return mLiveFeedProfile;
     }
 
-    public void loadFeed(String userId, int page) {
-        Disposable disposable = mFeedRepository.loadFeed(userId, page +"")
+    public void loadFeedProfile(String userId, int page) {
+        Disposable disposable = mFeedRepository.loadFeedProfile(userId, page + "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
-                    Log.d("loadFeed: size", data.getData().size() + "");
-                    mLiveFeed.setValue(data.getData());
+                    Log.d("loadFeedProfile: size", data.getData().size() + "");
+                    mLiveFeedProfile.setValue(data.getData());
                 }, throwable -> {
-                    Log.d("loadFeed: error", throwable.toString());
+                    Log.d("loadFeedProfile: error", throwable.toString());
                 });
         mCompositeDisposable.add(disposable);
     }
@@ -49,4 +50,5 @@ public class FeedViewModel extends ViewModel {
         super.onCleared();
         mCompositeDisposable.dispose();
     }
+
 }

@@ -7,6 +7,7 @@ import com.ptit.filmdictionary.ui.chat.ChatViewModel;
 import com.ptit.filmdictionary.ui.comment.CommentViewModel;
 import com.ptit.filmdictionary.ui.create_post.CreatePostViewModel;
 import com.ptit.filmdictionary.ui.login.LoginViewModel;
+import com.ptit.filmdictionary.ui.profile.ProfileViewModel;
 import com.ptit.filmdictionary.utils.ViewModelFactory;
 
 import dagger.Binds;
@@ -42,5 +43,10 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CreatePostViewModel.class)
     protected abstract ViewModel createPostViewModel(CreatePostViewModel createPostViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel.class)
+    protected abstract ViewModel createProfileViewModel(ProfileViewModel profileViewModel);
 
 }
