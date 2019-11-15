@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //add tam thang login
         getSupportFragmentManager().beginTransaction().add(R.id.root_layout, LoginFragment.getInstance()).commit();
-
     }
 
 }

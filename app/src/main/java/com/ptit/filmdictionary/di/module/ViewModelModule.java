@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ptit.filmdictionary.ui.chat.ChatViewModel;
 import com.ptit.filmdictionary.ui.comment.CommentViewModel;
 import com.ptit.filmdictionary.ui.create_post.CreatePostViewModel;
+import com.ptit.filmdictionary.ui.follower.FollowViewModel;
 import com.ptit.filmdictionary.ui.login.LoginViewModel;
 import com.ptit.filmdictionary.ui.profile.ProfileViewModel;
 import com.ptit.filmdictionary.utils.ViewModelFactory;
@@ -48,5 +49,10 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel.class)
     protected abstract ViewModel createProfileViewModel(ProfileViewModel profileViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FollowViewModel.class)
+    protected abstract ViewModel followViewModel(FollowViewModel followViewModel);
 
 }

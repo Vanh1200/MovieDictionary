@@ -17,6 +17,7 @@ import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.ActivityProfileBinding;
 import com.ptit.filmdictionary.ui.chat.ChatActivity;
+import com.ptit.filmdictionary.ui.follower.FollowActivity;
 import com.ptit.filmdictionary.utils.ImageHelper;
 
 import javax.inject.Inject;
@@ -93,6 +94,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         mBinding.appBarLayout.addOnOffsetChangedListener(getAppBarListener());
         mBinding.buttonMessage.setOnClickListener(this);
         mBinding.imageBack.setOnClickListener(this);
+        mBinding.textBiography.setOnClickListener(this);
     }
 
     private AppBarLayout.OnOffsetChangedListener getAppBarListener() {
@@ -125,6 +127,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.image_back:
                 onBackPressed();
+                break;
+            case R.id.text_biography:
+                FollowActivity.start(this, user);
                 break;
             default:
                 break;

@@ -3,6 +3,7 @@ package com.ptit.filmdictionary.di.module;
 import com.ptit.filmdictionary.ui.chat.ChatActivity;
 import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
 import com.ptit.filmdictionary.ui.feed.FeedFragment;
+import com.ptit.filmdictionary.ui.follower.FollowActivity;
 import com.ptit.filmdictionary.ui.login.LoginActivity;
 import com.ptit.filmdictionary.ui.main.MainActivity;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
@@ -26,6 +27,9 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract MainActivity contributeMainActivity();
+
+    @ContributesAndroidInjector(modules = FragmentModule.class)
+    abstract FollowActivity contributeFollowActivity();
 
     @ContributesAndroidInjector
     abstract ChatActivity contributeChatActivity();

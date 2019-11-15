@@ -55,6 +55,8 @@
     // Profile
     <string name="profile_tab_post">Post</string>
     <string name="profile_tab_reviewed_movie">Reviewed Movie</string>
+    <string name="profile_follower">Follower</string>
+    <string name="profile_following">Following</string>
 
     // Feed
     <string name="feed_question_create_post">What is on your mind</string>
@@ -63,6 +65,7 @@
     <string name="feed_image">Image</string>
     <string name="feed_heart">Heart</string>
     <string name="feed_comment">Comment</string>
+    <string name="feed_load_more">Đang tải thêm dữ liệu</string>
 
     // Create post
     <string name="create_post_title">Create post</string>
@@ -79,5 +82,5 @@
     //Search
     <string name="search_movie">Movie</string>
     <string name="search_user">User</string>
-    <string name="feed_load_more">Đang tải thêm dữ liệu</string>
+
 </resources>

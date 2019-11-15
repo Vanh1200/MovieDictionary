@@ -95,9 +95,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void initListeners() {
         mBinding.buttonSignIn.setOnClickListener(this);
-
         mBinding.textUserName.setText("axitpicric@gmail.com");
         mBinding.textPassword.setText("Aa@123456");
+        mBinding.textSignUp.setOnClickListener(this);
     }
 
     @Override
@@ -106,7 +106,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.button_sign_in:
                 login();
                 break;
+            case R.id.text_sign_up:
+                openRegister();
+                break;
         }
+    }
+
+    private void openRegister() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                .replace(R.id.root_layout, RegisterFragment.newInstance()).addToBackStack(null).commit();
     }
 
     private void login() {

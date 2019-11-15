@@ -3,6 +3,7 @@ package com.ptit.filmdictionary.data.source.remote;
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
+import com.ptit.filmdictionary.data.source.remote.request.FollowBody;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.MessageBody;
 import com.ptit.filmdictionary.data.source.remote.request.MessageRequest;
@@ -65,8 +66,14 @@ public interface ApiSecondRequest {
     @GET("api/posts/profile/{userId}")
     Single<BaseResponse<List<BaseFeed>>> loadFeedProfile(@Path("userId") String userId, @Query("page") String page);
 
+    @GET("api/follower/{userId}")
+    Single<BaseResponse<List<UserResponse>>> userFollower(@Path("userId") String userId, @Query("page") String page);
+
+    @GET("api/following/{userId}")
+    Single<BaseResponse<List<UserResponse>>> userFollowing(@Path("userId") String userId, @Query("page") String page);
+
+    @POST("api/follow")
+    Single<BaseResponse<UserResponse>> follow(@Body FollowBody body);
+
     // like
-
-    // follow
-
 }

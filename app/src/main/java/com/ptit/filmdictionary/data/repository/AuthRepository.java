@@ -37,4 +37,14 @@ public class AuthRepository implements AuthDataSource.Remote {
     public Single<BaseResponse<List<UserResponse>>> searchUser(String userId, String query, String page) {
         return mRemote.searchUser(userId, query, page);
     }
+
+    @Override
+    public Single<BaseResponse<List<UserResponse>>> userFollower(String userId, String page) {
+        return mRemote.userFollower(userId, page);
+    }
+
+    @Override
+    public Single<BaseResponse<List<UserResponse>>> userFollowing(String userId, String page) {
+        return mRemote.userFollowing(userId, page);
+    }
 }
