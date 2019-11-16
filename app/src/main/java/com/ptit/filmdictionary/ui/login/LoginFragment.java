@@ -74,14 +74,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void initObservers() {
         mViewModel.getLiveLoginResponse().observe(this, data -> {
-            mDialog.dismiss();
-            if (data != null) {
+            if (data != null && mDialog.isShowing()) {
                 Toast.makeText(getActivity(), "Welcome " + data.getUserName(), Toast.LENGTH_SHORT).show();
                 mPreferenceUtil.setEmail(data.getLocal().getEmail());
                 mPreferenceUtil.setUserName(data.getUserName());
                 mPreferenceUtil.setPassword(data.getLocal().getPassword());
                 mPreferenceUtil.setUserId(data.getId());
                 mPreferenceUtil.setUserAvatar(data.getAvatar());
+                mDialog.dismiss();
                 MainActivity.start(getActivity());
             }
         });
