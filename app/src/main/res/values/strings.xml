@@ -82,5 +82,7 @@
     //Search
     <string name="search_movie">Movie</string>
     <string name="search_user">User</string>
+    <string name="register_male">male</string>
+    <string name="register_female">female</string>
 
 </resources>

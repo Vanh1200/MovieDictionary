@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.ptit.filmdictionary.base.BaseErrorResponse;
 import com.ptit.filmdictionary.data.repository.AuthRepository;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
+import com.ptit.filmdictionary.data.source.remote.request.RegisterBody;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.utils.NetworkUtils;
 
@@ -28,6 +29,8 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<UserResponse> mLiveLoginResponse = new MutableLiveData<>();
     private MutableLiveData<String> mLiveLoginFail = new MutableLiveData<>();
+    private MutableLiveData<String> mLiveRegisterResponse = new MutableLiveData<>();
+    private MutableLiveData<String> mLiveRegisterFailed = new MutableLiveData<>();
 
     public MutableLiveData<UserResponse> getLiveLoginResponse() {
         return mLiveLoginResponse;
@@ -48,19 +51,35 @@ public class LoginViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> mLiveLoginResponse.setValue(data.getData()),
                         throwable -> {
-                    String error = throwable.toString();
-                    BaseErrorResponse errorResponse = NetworkUtils.getErrorResponse(throwable);
-                    if (errorResponse != null) {
-                        error = errorResponse.getDescription();
-                    }
-                    mLiveLoginFail.setValue(error);
-                });
+                            String error = throwable.toString();
+                            BaseErrorResponse errorResponse = NetworkUtils.getErrorResponse(throwable);
+                            if (errorResponse != null) {
+                                error = errorResponse.getDescription();
+                            }
+                            mLiveLoginFail.setValue(error);
+                        });
+        mDisposable.add(disposable);
+    }
+
+    public void register(String username, String password, String gender) {
+        Disposable disposable = mAuthRepository.register(new RegisterBody(username, password, gender))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> mLiveRegisterResponse.setValue(data.getData()),
+                        throwable -> {
+                            String error = throwable.toString();
+                            BaseErrorResponse errorResponse = NetworkUtils.getErrorResponse(throwable);
+                            if (errorResponse != null) {
+                                error = errorResponse.getDescription();
+                            }
+                            mLiveRegisterFailed.setValue(error);
+                        });
         mDisposable.add(disposable);
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        mDisposable.clear();
+        mDisposable.dispose();
     }
 }

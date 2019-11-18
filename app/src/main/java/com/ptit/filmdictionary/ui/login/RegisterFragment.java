@@ -9,15 +9,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.databinding.FragmentRegisterBinding;
+import com.ptit.filmdictionary.utils.ViewModelFactory;
+
+import javax.inject.Inject;
 
 /**
  * Created by vanh1200 on 16/10/2019
  */
 public class RegisterFragment extends Fragment implements View.OnClickListener {
     private FragmentRegisterBinding mBinding;
+    private LoginViewModel mViewModel;
+
+    @Inject
+    ViewModelFactory mViewModelFactory;
 
     public static RegisterFragment newInstance() {
 
@@ -28,12 +36,23 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(LoginViewModel.class);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false);
         initListeners();
+        observeData();
         return mBinding.getRoot();
+    }
+
+    private void observeData() {
+
     }
 
     private void initListeners() {
