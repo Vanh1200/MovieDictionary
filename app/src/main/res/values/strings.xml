@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_discover">Discover</string>
+    <string name="title_profile">Profile</string>
     <string name="title_search">Search</string>
     <string name="text_genres">Genres</string>
     <string name="tab_information">Information</string>
@@ -32,6 +33,10 @@
     <string name="signup_email">Email</string>
     <string name="signup_re_password">Confirm password</string>
     <string name="signup_full_name">Full name</string>
+    <string name="signup_empty_field">Can not be empty</string>
+    <string name="signup_password_not_match">Password not match</string>
+    <string name="register_male">male</string>
+    <string name="register_female">female</string>
     <string name="text_no_internet">Please check your internet</string>
 
     // Comment
@@ -82,7 +87,5 @@
     //Search
     <string name="search_movie">Movie</string>
     <string name="search_user">User</string>
-    <string name="register_male">male</string>
-    <string name="register_female">female</string>
 
 </resources>

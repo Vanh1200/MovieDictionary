@@ -120,15 +120,20 @@
             android:layout_marginTop="@dimen/dp_16">
 
             <RadioButton
+                android:id="@+id/button_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_male"
+                android:checked="true"
+                android:buttonTint="@color/color_accent"
                 android:textColor="@color/color_white"/>
 
             <RadioButton
+                android:id="@+id/button_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_female"
+                android:buttonTint="@color/color_accent"
                 android:textColor="@color/color_white"/>
 
         </RadioGroup>

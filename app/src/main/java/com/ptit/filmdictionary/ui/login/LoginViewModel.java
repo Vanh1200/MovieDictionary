@@ -40,6 +40,14 @@ public class LoginViewModel extends ViewModel {
         return mLiveLoginFail;
     }
 
+    public MutableLiveData<String> getLiveRegisterFailed() {
+        return mLiveRegisterFailed;
+    }
+
+    public MutableLiveData<String> getLiveRegisterResponse() {
+        return mLiveRegisterResponse;
+    }
+
     @Inject
     public LoginViewModel(AuthRepository authRepository) {
         mAuthRepository = authRepository;

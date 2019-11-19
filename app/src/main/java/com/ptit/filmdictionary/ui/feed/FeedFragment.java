@@ -1,18 +1,17 @@
 package com.ptit.filmdictionary.ui.feed;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,8 +29,6 @@ import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentFeedBinding;
 import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
 import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
-import com.ptit.filmdictionary.ui.create_post.CreatePostViewModel;
-import com.ptit.filmdictionary.ui.feed.card.card_text_image.CardTextImage;
 import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 import com.ptit.filmdictionary.ui.search.SearchActivity;
 import com.ptit.filmdictionary.utils.ImageHelper;
@@ -109,19 +106,21 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     private void observeData() {
         mFeedViewModel.getLiveFeed().observe(this, data -> {
             mIsLoading = false;
-            if (mIsRefresh) {
-                isNoMoreData = false;
-                mFeedAdapter.setData(data);
-                mIsRefresh = false;
-            } else {
-                mFeedAdapter.removeLoadMore();
-                mFeedAdapter.addData(data);
-                if (data.size() < DEFAULT_PER_PAGE) {
-                    isNoMoreData = true;
+            if (data != null && data.size() > 0) {
+                if (mIsRefresh) {
+                    isNoMoreData = false;
+                    mFeedAdapter.setData(data);
+                    mIsRefresh = false;
+                } else {
+                    mFeedAdapter.removeLoadMore();
+                    mFeedAdapter.addData(data);
+                    if (data.size() < DEFAULT_PER_PAGE) {
+                        isNoMoreData = true;
+                    }
                 }
             }
         });
-        ((MyApplication)getActivity().getApplication()).getLiveCreatePost().observe(this, data -> {
+        ((MyApplication) getActivity().getApplication()).getLiveCreatePost().observe(this, data -> {
             mFeedAdapter.addCreatedPost(data);
         });
     }
@@ -173,7 +172,9 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
                 if (!mIsLoading && mLinearLayoutManager.findLastVisibleItemPosition() == mFeedAdapter.getItemCount() - 1 && !isNoMoreData) {
                     mIsLoading = true;
                     mFeedViewModel.loadFeed(userResponse.getId(), ++mCurrentPage);
-                    mFeedAdapter.addLoadMore();
+                    recyclerView.post(() -> {
+                        mFeedAdapter.addLoadMore();
+                    });
                 }
             }
         });
@@ -314,4 +315,6 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
         return image;
     }
+
+
 }

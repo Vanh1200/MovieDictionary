@@ -6,6 +6,7 @@ import com.ptit.filmdictionary.ui.follower.FollowFragment;
 import com.ptit.filmdictionary.ui.login.LoginFragment;
 import com.ptit.filmdictionary.ui.login.RegisterFragment;
 import com.ptit.filmdictionary.ui.movie_detail.info.MovieInfoFragment;
+import com.ptit.filmdictionary.ui.profile.ProfileFragment;
 import com.ptit.filmdictionary.ui.profile.ProfileMovieFragment;
 import com.ptit.filmdictionary.ui.profile.ProfilePostFragment;
 import com.ptit.filmdictionary.ui.search_user.SearchUserFragment;
@@ -41,4 +42,8 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract FollowFragment contributeFollowFragment();
+
+    @ContributesAndroidInjector
+    abstract ProfileFragment contributeProfileFragment();
+
 }

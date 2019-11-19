@@ -1,21 +1,25 @@
 package com.ptit.filmdictionary.ui.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ptit.filmdictionary.R;
+import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
+import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.ui.home.HomeFragment;
 import com.ptit.filmdictionary.ui.home.MainAdapter;
+
+import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
@@ -24,9 +28,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_FAVORITE = 2;
     private static final int FRAGMENT_DISCOVER = 1;
+    private static final int FRAGMENT_PROFILE = 3;
     private ViewPager mViewPager;
     private BottomNavigationView mNavigationView;
-    private boolean isScrollToTop = false;
+
+    @Inject
+    PreferenceUtil mPreferenceUtil;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -35,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AndroidInjection.inject(this);
@@ -48,10 +54,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void initViewPager() {
-        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(mPreferenceUtil.getUserId());
+        userResponse.setAvatar(mPreferenceUtil.getUserAvatar());
+        userResponse.setUserName(mPreferenceUtil.getUserName());
+        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), userResponse);
         mViewPager.setAdapter(mainAdapter);
         mViewPager.addOnPageChangeListener(this);
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(3);
         HomeFragment.getInstance().setListener(this);
     }
 
@@ -72,13 +82,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
             case R.id.menu_favorite:
                 mViewPager.setCurrentItem(FRAGMENT_FAVORITE);
-                // TODO: 20/03/2019 cho nay gay ra bug: bam sang favorite -> tro ve home -> slide khong hien???
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    setSystemBarTheme(this, false);
-//                }
                 return true;
             case R.id.menu_discover:
                 mViewPager.setCurrentItem(FRAGMENT_DISCOVER);
+                return true;
+            case R.id.menu_profile:
+                mViewPager.setCurrentItem(FRAGMENT_PROFILE);
                 return true;
             default:
                 return false;
@@ -95,32 +104,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (i) {
             case FRAGMENT_HOME:
                 mNavigationView.setSelectedItemId(R.id.menu_home);
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    setSystemBarTheme(this, !isScrollToTop);
-//                }
                 break;
             case FRAGMENT_FAVORITE:
                 mNavigationView.setSelectedItemId(R.id.menu_favorite);
-                // TODO: 20/03/2019 cho nay gay ra bug: bam sang favorite -> tro ve home -> slide khong hien???
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    setSystemBarTheme(this, false);
-//                }
-
                 break;
             case FRAGMENT_DISCOVER:
                 mNavigationView.setSelectedItemId(R.id.menu_discover);
-
+                break;
+            case FRAGMENT_PROFILE:
+                mNavigationView.setSelectedItemId(R.id.menu_profile);
+                break;
             default:
                 break;
         }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setSystemBarTheme(final Activity pActivity, boolean isDark) {
-        int lFlags = pActivity.getWindow().getDecorView().getSystemUiVisibility();
-        getWindow().getDecorView().setSystemUiVisibility(isDark ?
-                (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) :
-                (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
     }
 
     @Override

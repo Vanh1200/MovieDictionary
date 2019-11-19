@@ -24,9 +24,7 @@
         <activity android:name=".ui.producer.ProducerActivity" />
         <activity android:name=".ui.genre.GenreActivity" />
         <activity android:name=".ui.category.CategoryActivity" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:theme="@style/SplashTheme"/>
+        <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
