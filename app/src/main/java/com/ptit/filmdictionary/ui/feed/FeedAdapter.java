@@ -15,11 +15,13 @@ import com.ptit.filmdictionary.base.BaseVH;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.CardCreatePostBinding;
 import com.ptit.filmdictionary.databinding.CardLoadMoreBinding;
+import com.ptit.filmdictionary.databinding.CardReviewBinding;
 import com.ptit.filmdictionary.databinding.CardTextImageBinding;
 import com.ptit.filmdictionary.ui.chat.ChatAdapter;
 import com.ptit.filmdictionary.ui.feed.card.card_create_post.CardCreatePostVH;
 import com.ptit.filmdictionary.ui.feed.card.card_load_more.CardLoadMore;
 import com.ptit.filmdictionary.ui.feed.card.card_load_more.CardLoadMoreVH;
+import com.ptit.filmdictionary.ui.feed.card.card_review.CardReviewVH;
 import com.ptit.filmdictionary.ui.feed.card.card_text_image.CardTextImageVH;
 
 import java.util.ArrayList;
@@ -103,6 +105,9 @@ public class FeedAdapter extends RecyclerView.Adapter<BaseVH> {
             case CardType.CARD_TEXT_IMAGE:
                 CardTextImageBinding binding1 = DataBindingUtil.inflate(mInflater, R.layout.card_text_image, parent,false);
                 return new CardTextImageVH(binding1, mCallback);
+            case CardType.CARD_REVIEW:
+                CardReviewBinding binding3 = DataBindingUtil.inflate(mInflater, R.layout.card_review, parent, false);
+                return new CardReviewVH(binding3, mCallback);
         }
         CardCreatePostBinding binding = DataBindingUtil.inflate(mInflater, R.layout.card_create_post, parent, false);
         return new CardCreatePostVH(binding, mCallback);

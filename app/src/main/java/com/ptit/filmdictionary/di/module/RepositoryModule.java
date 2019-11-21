@@ -10,7 +10,7 @@ import com.ptit.filmdictionary.data.repository.MessageRepository;
 import com.ptit.filmdictionary.data.source.AuthDataSource;
 import com.ptit.filmdictionary.data.source.CommentDataSource;
 import com.ptit.filmdictionary.data.source.FeedDataSource;
-import com.ptit.filmdictionary.data.source.FeedRemoteDataSource;
+import com.ptit.filmdictionary.data.source.remote.FeedRemoteDataSource;
 import com.ptit.filmdictionary.data.source.FileDataSource;
 import com.ptit.filmdictionary.data.source.MessageDataSource;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;

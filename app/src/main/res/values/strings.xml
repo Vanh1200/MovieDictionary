@@ -70,7 +70,9 @@
     <string name="feed_image">Image</string>
     <string name="feed_heart">Heart</string>
     <string name="feed_comment">Comment</string>
-    <string name="feed_load_more">Đang tải thêm dữ liệu</string>
+    <string name="feed_load_more">loading more data</string>
+    <string name="feed_type_planning">&#160;is planning to watch&#160;</string>
+    <string name="feed_type_reviewing">&#160;has reviewed&#160;</string>
 
     // Create post
     <string name="create_post_title">Create post</string>

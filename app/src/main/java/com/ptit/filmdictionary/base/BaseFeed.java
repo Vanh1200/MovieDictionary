@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.base;
 
 import com.google.gson.annotations.SerializedName;
+import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.ui.feed.CardType;
 
@@ -35,11 +36,14 @@ public class BaseFeed {
     @SerializedName("text")
     private String text;
 
-    @SerializedName("trailerId")
-    private String trailerId;
+    @SerializedName("trailer")
+    private Movie movie;
 
     @SerializedName("imageUrl")
     private String imageUrl;
+
+    @SerializedName("reviewType")
+    private int reviewType;
 
     @SerializedName("isLike")
     private boolean isLike;
@@ -68,12 +72,12 @@ public class BaseFeed {
         this.text = text;
     }
 
-    public String getTrailerId() {
-        return trailerId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setTrailerId(String trailerId) {
-        this.trailerId = trailerId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public String getImageUrl() {
@@ -82,6 +86,14 @@ public class BaseFeed {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getReviewType() {
+        return reviewType;
+    }
+
+    public void setReviewType(int reviewType) {
+        this.reviewType = reviewType;
     }
 
     public String getId() {

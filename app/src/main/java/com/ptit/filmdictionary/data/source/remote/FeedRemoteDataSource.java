@@ -1,16 +1,18 @@
-package com.ptit.filmdictionary.data.source;
+package com.ptit.filmdictionary.data.source.remote;
 
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseResponse;
+import com.ptit.filmdictionary.data.source.FeedDataSource;
 import com.ptit.filmdictionary.data.source.remote.ApiSecondRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Single;
 
-public class FeedRemoteDataSource implements FeedDataSource.Remote{
+public class FeedRemoteDataSource implements FeedDataSource.Remote {
     private ApiSecondRequest mApiSecondRequest;
 
     @Inject

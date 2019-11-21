@@ -21,6 +21,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
@@ -29,6 +30,7 @@ import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentFeedBinding;
 import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
 import com.ptit.filmdictionary.ui.create_post.CreatePostActivity;
+import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 import com.ptit.filmdictionary.ui.search.SearchActivity;
 import com.ptit.filmdictionary.utils.ImageHelper;
@@ -48,7 +50,7 @@ import dagger.android.support.AndroidSupportInjection;
 
 import static android.app.Activity.RESULT_OK;
 
-public class FeedFragment extends Fragment implements FeedCallback, View.OnClickListener {
+public class FeedFragment extends Fragment implements FeedCallback, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private static final int REQUEST_PERMISSION_CODE_STORAGE = 1;
     private static final int REQUEST_PERMISSION_CAMERA = 3;
     private static final int REQUEST_IMAGE_TAKEN_BY_CAM = 2;
@@ -98,6 +100,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     }
 
     private void loadFeed() {
+        mIsLoading = true;
         mBinding.layoutToolbarFeed.textUserName.setText(mPreferenceUtil.getUserName());
         ImageHelper.loadImage(mBinding.layoutToolbarFeed.imageAvatar, mPreferenceUtil.getUserAvatar());
         mFeedViewModel.loadFeed(mPreferenceUtil.getUserId(), DEFAUTL_PAGE);
@@ -111,6 +114,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
                     isNoMoreData = false;
                     mFeedAdapter.setData(data);
                     mIsRefresh = false;
+                    mBinding.swipeRefresh.setRefreshing(false);
                 } else {
                     mFeedAdapter.removeLoadMore();
                     mFeedAdapter.addData(data);
@@ -146,6 +150,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
         mBinding.layoutToolbarFeed.imageAvatar.setOnClickListener(this);
         mBinding.layoutToolbarFeed.imageSearch.setOnClickListener(this);
         mBinding.layoutToolbarFeed.imageNotification.setOnClickListener(this);
+        mBinding.swipeRefresh.setOnRefreshListener(this);
     }
 
     private void initComponents() {
@@ -266,7 +271,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
     @Override
     public void onClickMovie(BaseFeed item, int position) {
-        Toast.makeText(getActivity(), "Click Movie at" + position, Toast.LENGTH_SHORT).show();
+        startActivity(MovieDetailActivity.getIntent(getContext(), item.getMovie().getId(), item.getMovie().getTitle()));
     }
 
     @Override
@@ -317,4 +322,10 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
     }
 
 
+    @Override
+    public void onRefresh() {
+        mCurrentPage = 0;
+        mIsRefresh = true;
+        loadFeed();
+    }
 }
