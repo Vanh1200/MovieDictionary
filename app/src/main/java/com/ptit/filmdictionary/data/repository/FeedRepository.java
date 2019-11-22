@@ -32,4 +32,14 @@ public class FeedRepository implements FeedDataSource.Remote {
     public Single<BaseResponse<BaseFeed>> createPost(String userId, BaseFeed baseFeed) {
         return mRemote.createPost(userId, baseFeed);
     }
+
+    @Override
+    public Single<BaseResponse<String>> likePost(String userId, String postId, boolean isLike) {
+        return mRemote.likePost(userId, postId, isLike);
+    }
+
+    @Override
+    public Single<BaseResponse<String>> followUser(String userId, String userIdFollow, boolean isFollow) {
+        return mRemote.followUser(userId, userIdFollow, isFollow);
+    }
 }

@@ -12,6 +12,12 @@ public class FollowBody {
     @SerializedName("isFollow")
     private boolean isFollow;
 
+    public FollowBody(String userId, String opponentUserId, boolean isFollow) {
+        this.userId = userId;
+        this.opponentUserId = opponentUserId;
+        this.isFollow = isFollow;
+    }
+
     public String getUserId() {
         return userId;
     }

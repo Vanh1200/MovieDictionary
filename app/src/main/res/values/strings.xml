@@ -60,8 +60,11 @@
     // Profile
     <string name="profile_tab_post">Post</string>
     <string name="profile_tab_reviewed_movie">Reviewed Movie</string>
-    <string name="profile_follower">Follower</string>
-    <string name="profile_following">Following</string>
+    <string name="profile_follower">Followers</string>
+    <string name="profile_following">Followings</string>
+    <string name="profile_message">Message</string>
+    <string name="profile_edit">Edit profile</string>
+    <string name="profile_follow">Follow</string>
 
     // Feed
     <string name="feed_question_create_post">What is on your mind</string>
@@ -73,6 +76,8 @@
     <string name="feed_load_more">loading more data</string>
     <string name="feed_type_planning">&#160;is planning to watch&#160;</string>
     <string name="feed_type_reviewing">&#160;has reviewed&#160;</string>
+    <string name="profile_post">Posts</string>
+
 
     // Create post
     <string name="create_post_title">Create post</string>

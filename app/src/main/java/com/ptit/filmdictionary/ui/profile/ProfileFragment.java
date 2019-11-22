@@ -86,7 +86,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mBinding.appBarLayout.addOnOffsetChangedListener(getAppBarListener());
         mBinding.buttonMessage.setOnClickListener(this);
         mBinding.imageBack.setOnClickListener(this);
-        mBinding.textBiography.setOnClickListener(this);
+        mBinding.viewFollowers.setOnClickListener(this);
+        mBinding.viewFollowings.setOnClickListener(this);
+        mBinding.textFollow.setOnClickListener(this);
+        mBinding.textMessage.setOnClickListener(this);
+        mBinding.textEditProfile.setOnClickListener(this);
     }
 
     private AppBarLayout.OnOffsetChangedListener getAppBarListener() {
@@ -115,11 +119,24 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             case R.id.image_back:
                 getActivity().onBackPressed();
                 break;
-            case R.id.text_biography:
-                FollowActivity.start(getActivity(), user);
+            case R.id.view_followers:
+                FollowActivity.start(getActivity(), user, false);
+                break;
+            case R.id.view_followings:
+                FollowActivity.start(getActivity(), user, true);
+                break;
+            case R.id.text_message:
+                    ChatActivity.start(getActivity(), user);
+                break;
+            case R.id.text_follow:
+                handleFollow();
                 break;
             default:
                 break;
         }
+    }
+
+    private void handleFollow() {
+
     }
 }

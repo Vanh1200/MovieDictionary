@@ -4,6 +4,7 @@ import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.source.remote.request.CommentBody;
 import com.ptit.filmdictionary.data.source.remote.request.FollowBody;
+import com.ptit.filmdictionary.data.source.remote.request.LikeBody;
 import com.ptit.filmdictionary.data.source.remote.request.LoginBody;
 import com.ptit.filmdictionary.data.source.remote.request.MessageBody;
 import com.ptit.filmdictionary.data.source.remote.request.MessageRequest;
@@ -55,7 +56,7 @@ public interface ApiSecondRequest {
     Single<BaseResponse<List<UserResponse>>> searchUser(@Path("userId") String userId, @Query("q") String query, @Query("page") String page);
 
     @GET("api/users/{userId}")
-    Single<BaseResponse<UserResponse>> getUser(@Path("userId") String userId);
+    Single<BaseResponse<UserResponse>> getUser(@Path("userId") String userId, @Body String userIdGet);
 
     @GET("api/posts/{userId}")
     Single<BaseResponse<List<BaseFeed>>> loadFeed(@Path("userId") String userId, @Query("page") String page);
@@ -73,7 +74,9 @@ public interface ApiSecondRequest {
     Single<BaseResponse<List<UserResponse>>> userFollowing(@Path("userId") String userId, @Query("page") String page);
 
     @POST("api/follow")
-    Single<BaseResponse<UserResponse>> follow(@Body FollowBody body);
+    Single<BaseResponse<String>> followUser(@Body FollowBody body);
 
-    // like
+    @POST("api/like")
+    Single<BaseResponse<String>> likePost(@Body LikeBody body);
+
 }

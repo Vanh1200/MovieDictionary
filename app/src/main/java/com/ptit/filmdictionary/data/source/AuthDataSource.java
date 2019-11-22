@@ -27,5 +27,7 @@ public interface AuthDataSource {
         Single<BaseResponse<List<UserResponse>>> userFollower(String userId, String page);
 
         Single<BaseResponse<List<UserResponse>>> userFollowing(String userId, String page);
+
+        Single<BaseResponse<UserResponse>> getUserById (String userId, String userIdGet);
     }
 }

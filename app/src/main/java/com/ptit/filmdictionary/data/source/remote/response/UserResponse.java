@@ -30,6 +30,9 @@ public class UserResponse implements Parcelable {
     @SerializedName("username")
     private String userName;
 
+    @SerializedName("isFollow")
+    private boolean isFollow;
+
     @SerializedName("updatedAt")
     private long updatedAt;
 
@@ -69,6 +72,14 @@ public class UserResponse implements Parcelable {
             return new UserResponse[size];
         }
     };
+
+    public boolean isFollow() {
+        return isFollow;
+    }
+
+    public void setFollow(boolean follow) {
+        isFollow = follow;
+    }
 
     public String getUserName() {
         return userName;

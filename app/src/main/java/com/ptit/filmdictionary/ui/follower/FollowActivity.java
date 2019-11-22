@@ -22,6 +22,7 @@ import dagger.android.AndroidInjection;
 
 public class FollowActivity extends AppCompatActivity implements View.OnClickListener {
     private static String EXTRAS_USER = "user";
+    private static String EXTRAS_FOLLOWING = "following";
     @Inject
     ViewModelFactory mViewModelFactory;
     @Inject
@@ -30,10 +31,12 @@ public class FollowActivity extends AppCompatActivity implements View.OnClickLis
     private FollowPagerAdapter mFollowPagerAdapter;
     private FollowViewModel mFollowViewModel;
     private UserResponse mUser;
+    private boolean isFollowingTab;
 
-    public static void start(Context context, UserResponse user) {
+    public static void start(Context context, UserResponse user, boolean isFollowingTab) {
         Intent intent = new Intent(context, FollowActivity.class);
         intent.putExtra(EXTRAS_USER, user);
+        intent.putExtra(EXTRAS_FOLLOWING, isFollowingTab);
         context.startActivity(intent);
     }
 
@@ -55,6 +58,7 @@ public class FollowActivity extends AppCompatActivity implements View.OnClickLis
 
     private void getIncomingData() {
         mUser = getIntent().getParcelableExtra(EXTRAS_USER);
+        isFollowingTab = getIntent().getBooleanExtra(EXTRAS_FOLLOWING, false);
         mBinding.textUserName.setText(mUser.getUserName());
     }
 
@@ -67,6 +71,9 @@ public class FollowActivity extends AppCompatActivity implements View.OnClickLis
         mFollowPagerAdapter = new FollowPagerAdapter(getSupportFragmentManager());
         mBinding.viewpager.setAdapter(mFollowPagerAdapter);
         mBinding.tabLayout.setupWithViewPager(mBinding.viewpager);
+        if (isFollowingTab) {
+            mBinding.viewpager.setCurrentItem(1);
+        }
     }
 
     @Override

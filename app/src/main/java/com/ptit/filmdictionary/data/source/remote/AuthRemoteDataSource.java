@@ -103,4 +103,9 @@ public class AuthRemoteDataSource implements AuthDataSource.Remote {
 
     }
 
+    @Override
+    public Single<BaseResponse<UserResponse>> getUserById(String userId, String userIdGet) {
+        return mApiRequest.getUser(userId, userIdGet);
+    }
+
 }

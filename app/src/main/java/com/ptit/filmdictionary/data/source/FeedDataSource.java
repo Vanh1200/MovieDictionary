@@ -14,5 +14,9 @@ public interface FeedDataSource {
         Single<BaseResponse<List<BaseFeed>>> loadFeedProfile(String userId, String page);
 
         Single<BaseResponse<BaseFeed>> createPost(String userId, BaseFeed baseFeed);
+
+        Single<BaseResponse<String>> likePost (String userId, String postId, boolean isLike);
+
+        Single<BaseResponse<String>> followUser (String userId, String userIdFollow, boolean isFollow);
     }
 }

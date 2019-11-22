@@ -4,6 +4,8 @@ import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.source.FeedDataSource;
 import com.ptit.filmdictionary.data.source.remote.ApiSecondRequest;
+import com.ptit.filmdictionary.data.source.remote.request.FollowBody;
+import com.ptit.filmdictionary.data.source.remote.request.LikeBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +35,15 @@ public class FeedRemoteDataSource implements FeedDataSource.Remote {
     @Override
     public Single<BaseResponse<BaseFeed>> createPost(String userId, BaseFeed baseFeed) {
         return mApiSecondRequest.createPost(userId, baseFeed);
+    }
+
+    @Override
+    public Single<BaseResponse<String>> likePost(String userId, String postId, boolean isLike) {
+        return mApiSecondRequest.likePost(new LikeBody(userId, postId, isLike));
+    }
+
+    @Override
+    public Single<BaseResponse<String>> followUser(String userId, String userIdFollow, boolean isFollow) {
+        return mApiSecondRequest.followUser(new FollowBody(userId, userIdFollow, isFollow));
     }
 }
