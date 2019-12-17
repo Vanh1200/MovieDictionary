@@ -13,29 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_avatar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_230"
-            android:src="@drawable/image_logo"
-            android:tint="@color/color_white"
-            android:paddingTop="@dimen/dp_30"
-            android:paddingBottom="@dimen/dp_30"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/color_accent"/>
 
         <ImageView
             android:id="@+id/image_background_full_name"
             android:layout_width="@dimen/dp_300"
             android:layout_height="@dimen/dp_48"
-            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_120"
             android:src="@drawable/bg_edittext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_avatar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/text_user_name"
@@ -47,7 +34,7 @@
             android:hint="@string/signin_username"
             android:inputType="textPersonName"
             android:textColor="@color/color_dark_gray"
-            android:textColorHint="@color/color_light_gray"
+            android:textColorHint="@color/color_dark_gray"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@+id/image_background_full_name"
@@ -75,7 +62,7 @@
             android:hint="@string/signin_password"
             android:inputType="textPassword"
             android:textColor="@color/color_dark_gray"
-            android:textColorHint="@color/color_light_gray"
+            android:textColorHint="@color/color_dark_gray"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@+id/image_background_email"
@@ -97,7 +84,7 @@
             android:id="@+id/image_background_email"
             android:layout_width="@dimen/dp_300"
             android:layout_height="@dimen/dp_48"
-            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
             android:src="@drawable/bg_edittext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,14 +92,14 @@
 
         <Button
             android:id="@+id/button_sign_in"
-            android:layout_width="@dimen/dp_250"
-            android:layout_height="@dimen/dp_52"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
             android:layout_marginTop="@dimen/dp_32"
             android:background="@drawable/bg_button_sign_in"
             android:text="@string/signin"
             android:textColor="@color/color_black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/image_background_email"
+            app:layout_constraintStart_toStartOf="@id/image_background_email"
             app:layout_constraintTop_toBottomOf="@+id/image_background_email" />
 
         <TextView

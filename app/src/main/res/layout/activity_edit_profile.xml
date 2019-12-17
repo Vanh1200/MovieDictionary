@@ -6,16 +6,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_favorite"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Edit profile">
+
+            <ImageView
+                android:id="@+id/image_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:src="@drawable/ic_search" />
+
+        </androidx.appcompat.widget.Toolbar>
+
         <ImageView
             android:id="@+id/image_avatar"
             android:layout_width="@dimen/dp_150"
             android:layout_height="@dimen/dp_150"
-            android:layout_marginTop="@dimen/dp_56"
+            android:layout_marginTop="@dimen/dp_30"
             android:src="@drawable/avatar_def"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_favorite" />
 
         <ImageView
             android:id="@+id/image_background_full_name"
@@ -34,6 +54,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:background="@null"
             android:ems="10"
+            android:text="axitpicric"
             android:hint="@string/signup_full_name"
             android:inputType="textPersonName"
             android:textColor="@color/color_dark_gray"
@@ -61,6 +82,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:background="@null"
             android:ems="10"
+            android:text="axitpicric@gmail.com"
             android:hint="@string/signup_email"
             android:inputType="textEmailAddress"
             android:textColor="@color/color_dark_gray"
@@ -193,7 +215,7 @@
             android:layout_height="@dimen/dp_52"
             android:layout_marginTop="@dimen/dp_16"
             android:background="@drawable/bg_button_sign_in"
-            android:text="@string/signup"
+            android:text="Done"
             android:textColor="@color/color_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

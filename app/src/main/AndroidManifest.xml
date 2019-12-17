@@ -38,6 +38,7 @@
         <activity android:name=".ui.create_post.CreatePostActivity" />
         <activity android:name=".ui.gallery.ActivityCustomGallery" />
         <activity android:name=".ui.follower.FollowActivity" />
+        <activity android:name=".ui.edit_profile.ActivityEditProfile" />
 
         <provider
             android:authorities="${applicationId}.provider"

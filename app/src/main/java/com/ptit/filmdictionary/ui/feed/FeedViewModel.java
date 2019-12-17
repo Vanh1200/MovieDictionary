@@ -45,8 +45,10 @@ public class FeedViewModel extends ViewModel {
                     baseFeed.setCardType(CardType.CARD_REVIEW);
                     if (new Random().nextInt(2) == 1) {
                         baseFeed.setReviewType(ReviewType.TYPE_REVIEW);
+                        baseFeed.setText("Bộ phim hay nhất từng xem là đâyyyy");
                     } else {
                         baseFeed.setReviewType(ReviewType.TYPE_PLAN);
+                        baseFeed.setText("Phim này có hay không hả mọi người ơiii");
                     }
                     Movie movie = new Movie();
                     movie.setOverview("The failed coup d'état of February 23, 1981, which began with the capture of the Congress of Deputies and ended with the release of parliamentarians, put at serious risk the Spanish democracy.");

@@ -1,5 +1,6 @@
 package com.ptit.filmdictionary.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.FragmentProfileBinding;
 import com.ptit.filmdictionary.ui.chat.ChatActivity;
+import com.ptit.filmdictionary.ui.edit_profile.ActivityEditProfile;
 import com.ptit.filmdictionary.ui.follower.FollowActivity;
 import com.ptit.filmdictionary.utils.ImageHelper;
 
@@ -115,6 +117,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             case R.id.button_message:
                 if (!isMe)
                     ChatActivity.start(getActivity(), user);
+                else {
+                    startActivity(new Intent(getActivity(), ActivityEditProfile.class));
+                }
                 break;
             case R.id.image_back:
                 getActivity().onBackPressed();

@@ -37,6 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/color_dark_gray"
+                        android:src="@drawable/img_cover"
                         android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
 
@@ -51,8 +52,10 @@
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
+                    android:text="Fast and furious 8"
                     app:layout_constraintBottom_toTopOf="@id/rating_bar"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@id/card_poster"
                     app:layout_constraintTop_toTopOf="@id/card_poster"
                     app:layout_constraintVertical_bias="0"
@@ -64,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_5"
+                    android:rating="9"
                     android:numStars="10"
                     android:progressBackgroundTint="@color/color_star"
                     android:progressTint="@color/color_star"
@@ -77,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_5"
+                    android:text="2011-12-12"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/text_overview"
                     app:layout_constraintStart_toEndOf="@id/card_poster"
@@ -89,6 +94,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginEnd="@dimen/dp_4"
                     android:ellipsize="end"
+                    android:text="Fast Furious 8 Plot Summary Dominic Toretto and Leslie are enjoying ... He hands over his own car to his cousin and goes his own way"
                     android:maxLines="3"
                     android:textColor="@color/color_black"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -56,7 +56,7 @@ public class ProfileMovieFragment extends Fragment {
     }
 
     private void observeData() {
-        mViewModel.getLiveFeedProfile().observe(this, data -> {
+        mViewModel.getLiveMovieFeedProfile().observe(this, data -> {
             mProfileAdapter.setData(data);
         });
     }

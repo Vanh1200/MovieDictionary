@@ -64,6 +64,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
     @Inject
     PreferenceUtil mPreferenceUtil;
+    private boolean isShow = false;
 
     public static void start(Context context, String imagePath) {
         Intent intent = new Intent(context, CreatePostActivity.class);
@@ -122,6 +123,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     private void initListeners() {
         mBinding.layoutBottomCreatePost.layoutCamera.setOnClickListener(this);
         mBinding.layoutBottomCreatePost.layoutImageVideo.setOnClickListener(this);
+        mBinding.layoutBottomCreatePost.layoutMovie.setOnClickListener(this);
         mBinding.textDone.setOnClickListener(this);
         mBinding.imageBack.setOnClickListener(this);
     }
@@ -139,6 +141,14 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                 } else {
                     requestPermissionCamera();
                 }
+                break;
+            case R.id.layout_movie:
+                if(!isShow) {
+                    mBinding.layoutCard.getRoot().setVisibility(View.VISIBLE);
+                } else {
+                    mBinding.layoutCard.getRoot().setVisibility(View.GONE);
+                }
+                isShow = !isShow;
                 break;
             case R.id.layout_image_video:
                 if (checkPermissionCreatePost()) {
