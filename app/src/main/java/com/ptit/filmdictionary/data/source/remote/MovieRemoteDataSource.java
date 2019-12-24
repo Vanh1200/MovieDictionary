@@ -8,13 +8,16 @@ import com.ptit.filmdictionary.data.source.MovieDataSource;
 import com.ptit.filmdictionary.data.source.remote.response.GenreResponse;
 import com.ptit.filmdictionary.data.source.remote.response.MovieResponse;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 public class MovieRemoteDataSource implements MovieDataSource.Remote {
     private static MovieRemoteDataSource sMovieRemoteDataSource;
     private ApiRequest mApiRequest;
 
-    private MovieRemoteDataSource(ApiRequest apiRequest) {
+    @Inject
+    public MovieRemoteDataSource(ApiRequest apiRequest) {
         mApiRequest = apiRequest;
     }
 

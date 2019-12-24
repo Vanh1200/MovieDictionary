@@ -1,6 +1,7 @@
 package com.ptit.filmdictionary.di.module;
 
 import com.ptit.filmdictionary.ui.comment.CommentDialogFragment;
+import com.ptit.filmdictionary.ui.create_post.SearchDialogFragment;
 import com.ptit.filmdictionary.ui.feed.FeedFragment;
 import com.ptit.filmdictionary.ui.follower.FollowFragment;
 import com.ptit.filmdictionary.ui.login.LoginFragment;
@@ -45,5 +46,8 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract ProfileFragment contributeProfileFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchDialogFragment contributeSearchFragment();
 
 }

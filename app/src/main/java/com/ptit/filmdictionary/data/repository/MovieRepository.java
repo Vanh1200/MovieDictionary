@@ -11,15 +11,18 @@ import com.ptit.filmdictionary.data.source.remote.MovieRemoteDataSource;
 import com.ptit.filmdictionary.data.source.remote.response.GenreResponse;
 import com.ptit.filmdictionary.data.source.remote.response.MovieResponse;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 public class MovieRepository extends BaseRepository implements MovieDataSource.Local, MovieDataSource.Remote {
     private static MovieRepository sInstance;
-    private MovieRemoteDataSource mRemote;
-    private MovieLocalDataSource mLocal;
+    private MovieDataSource.Remote mRemote;
+    private MovieDataSource.Local mLocal;
 
-    private MovieRepository(MovieRemoteDataSource remote,
-                            MovieLocalDataSource local) {
+    @Inject
+    public MovieRepository(MovieDataSource.Remote remote,
+                            MovieDataSource.Local local) {
         mRemote = remote;
         mLocal = local;
     }

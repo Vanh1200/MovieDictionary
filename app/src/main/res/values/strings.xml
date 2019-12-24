@@ -93,6 +93,7 @@
 
     //Search
     <string name="search_movie">Movie</string>
+    <string name="search_movie_hint">Search movie</string>
     <string name="search_user">User</string>
 
 </resources>

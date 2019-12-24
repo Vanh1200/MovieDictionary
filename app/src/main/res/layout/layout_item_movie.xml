@@ -54,12 +54,23 @@
                     android:textStyle="bold"
                     android:text="Fast and furious 8"
                     app:layout_constraintBottom_toTopOf="@id/rating_bar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/image_delete"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@id/card_poster"
                     app:layout_constraintTop_toTopOf="@id/card_poster"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintVertical_chainStyle="packed" />
+
+                <ImageView
+                    android:id="@+id/image_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:src="@drawable/ic_delete_black_24dp"
+                    android:tint="@color/color_star"
+                    app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_title" />
 
                 <RatingBar
                     android:id="@+id/rating_bar"

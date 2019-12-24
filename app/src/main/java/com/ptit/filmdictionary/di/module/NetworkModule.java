@@ -22,4 +22,10 @@ public class NetworkModule {
     ApiSecondRequest provideApiSecondRequest (Application application) {
         return NetworkService.getSecondInstance(application.getApplicationContext());
     }
+
+    @Provides
+    @Singleton
+    ApiRequest provideApiRequest (Application application) {
+        return NetworkService.getInstance(application.getApplicationContext());
+    }
 }

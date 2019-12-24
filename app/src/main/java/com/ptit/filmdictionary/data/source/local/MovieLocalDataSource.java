@@ -6,11 +6,14 @@ import androidx.databinding.ObservableArrayList;
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.source.MovieDataSource;
 
+import javax.inject.Inject;
+
 public class MovieLocalDataSource implements MovieDataSource.Local {
     private static MovieLocalDataSource sInstance;
     private DataBaseHelper mDbHelper;
 
-    private MovieLocalDataSource(Context context) {
+    @Inject
+    public MovieLocalDataSource(Context context) {
         mDbHelper = new DataBaseHelper(context);
     }
 

@@ -19,18 +19,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.data.model.ImageAndVideoModel;
+import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.databinding.ActivityCreatePostBinding;
 import com.ptit.filmdictionary.ui.feed.CardType;
 import com.ptit.filmdictionary.ui.gallery.ActivityCustomGallery;
 import com.ptit.filmdictionary.ui.gallery.MediaType;
+import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
+import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 import com.ptit.filmdictionary.utils.BaseHelper;
 import com.ptit.filmdictionary.utils.Constants;
 import com.ptit.filmdictionary.utils.ImageHelper;
 import com.ptit.filmdictionary.utils.MyApplication;
+import com.ptit.filmdictionary.utils.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +50,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 import dmax.dialog.SpotsDialog;
 
-public class CreatePostActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreatePostActivity extends AppCompatActivity implements View.OnClickListener, SearchDialogFragment.SearchDialogListener {
     private static final String EXTRAS_IMAGE_PATH = "image_path";
     private ActivityCreatePostBinding mBinding;
     private static final int REQUEST_PERMISSION_GALLERY = 1;
@@ -58,6 +63,8 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     private BaseFeed mBaseFeed = new BaseFeed(); // base feed de upload
     private String image = "";
     private AlertDialog mCreatePostDialog;
+    private SearchDialogFragment mSearchDialogFragment;
+    private Movie mMovie;
 
     @Inject
     CreatePostViewModel mViewModel;
@@ -90,6 +97,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                 .setMessage("Posting")
                 .setCancelable(false)
                 .build();
+        mSearchDialogFragment = SearchDialogFragment.newInstance();
     }
 
     private void observeData() {
@@ -126,6 +134,9 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         mBinding.layoutBottomCreatePost.layoutMovie.setOnClickListener(this);
         mBinding.textDone.setOnClickListener(this);
         mBinding.imageBack.setOnClickListener(this);
+        mSearchDialogFragment.setListener(this);
+        mBinding.layoutCard.getRoot().setOnClickListener(this);
+        mBinding.layoutCard.imageDelete.setOnClickListener(this);
     }
 
 
@@ -143,12 +154,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.layout_movie:
-                if(!isShow) {
-                    mBinding.layoutCard.getRoot().setVisibility(View.VISIBLE);
-                } else {
-                    mBinding.layoutCard.getRoot().setVisibility(View.GONE);
-                }
-                isShow = !isShow;
+                mSearchDialogFragment.show(getSupportFragmentManager(), null);
                 break;
             case R.id.layout_image_video:
                 if (checkPermissionCreatePost()) {
@@ -159,6 +165,15 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.image_back:
                 onBackPressed();
+                break;
+            case R.id.layout_card:
+                if(mMovie != null) {
+                    startActivity(MovieDetailActivity.getIntent(CreatePostActivity.this, mMovie.getId(), mMovie.getTitle()));
+                }
+                break;
+            case R.id.image_delete:
+                mBinding.layoutCard.getRoot().setVisibility(View.GONE);
+                mMovie = null;
                 break;
 
         }
@@ -296,4 +311,20 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         return image;
     }
 
+    @Override
+    public void onClickMovie(Movie movie) {
+        mMovie = movie;
+        if (mSearchDialogFragment.isVisible()) {
+            mSearchDialogFragment.dismiss();
+            mBinding.layoutCard.textTitle.setText(movie.getTitle());
+            mBinding.layoutCard.textReleaseDate.setText(movie.getReleaseDate());
+            mBinding.layoutCard.ratingBar.setRating((float) movie.getVoteAverage());
+            mBinding.layoutCard.textOverview.setText(movie.getOverview());
+            Glide.with(this)
+                    .load(StringUtils.getSmallImage(movie.getPosterPath()))
+                    .error(R.drawable.no_image)
+                    .into(mBinding.layoutCard.imagePoster);
+            mBinding.layoutCard.getRoot().setVisibility(View.VISIBLE);
+        }
+    }
 }
