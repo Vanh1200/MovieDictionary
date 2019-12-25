@@ -91,6 +91,43 @@
             app:layout_constraintTop_toBottomOf="@id/text_question"
             android:background="@color/color_white"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_card"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_5"
+            android:visibility="gone"
+            android:paddingBottom="@dimen/dp_5">
+
+            <View
+                android:id="@+id/view_dot"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/bg_circle_light_black"/>
+
+            <TextView
+                android:id="@+id/text_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="planing to watch"
+                android:layout_marginStart="@dimen/dp_10"
+                app:layout_constraintStart_toEndOf="@id/view_dot"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/sp_15"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
         <include android:id="@+id/layout_card"
             android:visibility="gone"
             layout="@layout/layout_item_movie"

@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.data.model.ImageAndVideoModel;
@@ -27,10 +28,10 @@ import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.source.local.sharepref.PreferenceUtil;
 import com.ptit.filmdictionary.databinding.ActivityCreatePostBinding;
 import com.ptit.filmdictionary.ui.feed.CardType;
+import com.ptit.filmdictionary.ui.feed.card.card_review.ReviewType;
 import com.ptit.filmdictionary.ui.gallery.ActivityCustomGallery;
 import com.ptit.filmdictionary.ui.gallery.MediaType;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
-import com.ptit.filmdictionary.ui.profile.ProfileActivity;
 import com.ptit.filmdictionary.utils.BaseHelper;
 import com.ptit.filmdictionary.utils.Constants;
 import com.ptit.filmdictionary.utils.ImageHelper;
@@ -65,6 +66,8 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     private AlertDialog mCreatePostDialog;
     private SearchDialogFragment mSearchDialogFragment;
     private Movie mMovie;
+    @ReviewType
+    private int reviewType = -1;
 
     @Inject
     CreatePostViewModel mViewModel;
@@ -103,7 +106,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     private void observeData() {
         mViewModel.getLiveFileRes().observe(this, data -> {
             image = Constants.BASE_VANH_URL_RELEASE + "api/file/" + data.getName();
-            createPost();
+            createPostTextImage();
         });
         mViewModel.getLiveCreatePost().observe(this, data -> {
             mBaseFeed = data;
@@ -137,6 +140,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         mSearchDialogFragment.setListener(this);
         mBinding.layoutCard.getRoot().setOnClickListener(this);
         mBinding.layoutCard.imageDelete.setOnClickListener(this);
+        mBinding.layoutType.setOnClickListener(this);
     }
 
 
@@ -172,9 +176,18 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.image_delete:
-                mBinding.layoutCard.getRoot().setVisibility(View.GONE);
-                mMovie = null;
+                resetNormalMode();
                 break;
+            case R.id.layout_type:
+                if (reviewType != -1) {
+                    if (reviewType == ReviewType.TYPE_PLAN) {
+                        reviewType = ReviewType.TYPE_REVIEW;
+                        mBinding.textType.setText(getString(R.string.feed_type_reviewing));
+                    } else {
+                        reviewType = ReviewType.TYPE_PLAN;
+                        mBinding.textType.setText(getString(R.string.feed_type_planning));
+                    }
+                }
 
         }
 
@@ -186,14 +199,31 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
             Toast.makeText(this, getString(R.string.text_no_internet), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (mImageAndVideoModels.size() > 0) {
-            uploadData();
+        if (mMovie != null & reviewType != -1) {
+            createPostMovie();
         } else {
-            createPost();
+            if (mImageAndVideoModels.size() > 0) {
+                uploadData();
+            } else {
+                createPostTextImage();
+            }
         }
     }
 
-    private void createPost() {
+    private void createPostMovie() {
+        mBaseFeed = new BaseFeed();
+        mBaseFeed.setCardType(CardType.CARD_MOVIE);
+        mMovie.setReviewType(reviewType);
+        mBaseFeed.setMovie(new Gson().toJson(mMovie));
+        if (!mCreatePostDialog.isShowing()){
+            mCreatePostDialog.show();
+        }
+        mBaseFeed.setText(mBinding.textQuestion.getText().toString());
+        mViewModel.createPost(mPreferenceUtil.getUserId(), mBaseFeed);
+    }
+
+    private void createPostTextImage() {
+        mBaseFeed = new BaseFeed();
         mBaseFeed.setCardType(CardType.CARD_TEXT_IMAGE); // todo tam thoi hard code the nay da
         if (image.isEmpty() && mBinding.textQuestion.getText().toString().isEmpty()) {
             return;
@@ -253,6 +283,13 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    private void resetNormalMode() {
+        mMovie = null;
+        mBinding.layoutCard.getRoot().setVisibility(View.GONE);
+        mBinding.layoutType.setVisibility(View.GONE);
+        reviewType = -1;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -266,6 +303,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                     imageAndVideoModel.setMeDiaType(MediaType.TYPE_IMAGE);
                     mImageAndVideoModels.clear();
                     mImageAndVideoModels.add(imageAndVideoModel);
+                    resetNormalMode();
                 }
                 break;
             case REQUEST_CUSTOM_GALLERY:
@@ -273,6 +311,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                     mImageAndVideoModels = data.getParcelableArrayListExtra(ActivityCustomGallery.EXTRAS_LIST_IMAGE_VIDEO);
                     if (mImageAndVideoModels.get(0) != null) {
                         ImageHelper.loadImage(mBinding.imagePost, mImageAndVideoModels.get(0).getUrl());
+                        resetNormalMode();
                     }
                 }
                 break;
@@ -325,6 +364,9 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
                     .error(R.drawable.no_image)
                     .into(mBinding.layoutCard.imagePoster);
             mBinding.layoutCard.getRoot().setVisibility(View.VISIBLE);
+            mBinding.layoutType.setVisibility(View.VISIBLE);
+            mBinding.textType.setText(getString(R.string.feed_type_planning));
+            reviewType = ReviewType.TYPE_PLAN;
         }
     }
 }

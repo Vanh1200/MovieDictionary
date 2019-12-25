@@ -7,7 +7,6 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.view.View;
 
@@ -20,6 +19,7 @@ import com.ptit.filmdictionary.databinding.CardReviewBinding;
 import com.ptit.filmdictionary.ui.feed.FeedCallback;
 import com.ptit.filmdictionary.utils.BaseHelper;
 import com.ptit.filmdictionary.utils.ImageHelper;
+import com.ptit.filmdictionary.utils.StringUtils;
 
 public class CardReviewVH extends BaseVH implements View.OnClickListener {
     private CardReviewBinding mBinding;
@@ -37,12 +37,12 @@ public class CardReviewVH extends BaseVH implements View.OnClickListener {
     public void bindData(BaseFeed baseFeed) {
         mBaseFeed = baseFeed;
         mBinding.layoutHeader.textUserName.setMovementMethod(LinkMovementMethod.getInstance());
-        if (baseFeed.getMovie() != null) {
-            ImageHelper.loadImage(mBinding.layoutCard.imagePoster, baseFeed.getMovie().getBackdropPath());
-            mBinding.layoutCard.textOverview.setText(baseFeed.getMovie().getOverview());
-            mBinding.layoutCard.ratingBar.setRating((float) baseFeed.getMovie().getVoteAverage());
-            mBinding.layoutCard.textTitle.setText(baseFeed.getMovie().getTitle());
-            mBinding.layoutCard.textReleaseDate.setText(baseFeed.getMovie().getReleaseDate());
+        if (baseFeed.getMovieObject() != null) {
+            ImageHelper.loadImage(mBinding.layoutCard.imagePoster, StringUtils.getImage(baseFeed.getMovieObject().getPosterPath()));
+            mBinding.layoutCard.textOverview.setText(baseFeed.getMovieObject().getOverview());
+            mBinding.layoutCard.ratingBar.setRating((float) baseFeed.getMovieObject().getVoteAverage());
+            mBinding.layoutCard.textTitle.setText(baseFeed.getMovieObject().getTitle());
+            mBinding.layoutCard.textReleaseDate.setText(baseFeed.getMovieObject().getReleaseDate());
             setTitle(baseFeed);
         }
         mBinding.textContent.setText(baseFeed.getText());
@@ -85,7 +85,7 @@ public class CardReviewVH extends BaseVH implements View.OnClickListener {
         spannableStringBuilder.setSpan(new TypefaceSpan(Typeface.create(mBinding.getRoot().getResources().getResourceName(R.font.san_francisco_display_regular), Typeface.NORMAL)), spannableStringBuilder.length() - type.length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableStringBuilder.setSpan(new ForegroundColorSpan(mBinding.getRoot().getResources().getColor(R.color.color_darker_gray)), spannableStringBuilder.length() - type.length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        spannableStringBuilder.append(baseFeed.getMovie().getTitle());
+        spannableStringBuilder.append(baseFeed.getMovieObject().getTitle());
         spannableStringBuilder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
@@ -99,8 +99,8 @@ public class CardReviewVH extends BaseVH implements View.OnClickListener {
                 super.updateDrawState(ds);
                 ds.setUnderlineText(false);
             }
-        }, spannableStringBuilder.length() - baseFeed.getMovie().getTitle().length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringBuilder.setSpan(new ForegroundColorSpan(mBinding.getRoot().getResources().getColor(R.color.color_black)), spannableStringBuilder.length() - baseFeed.getMovie().getTitle().length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }, spannableStringBuilder.length() - baseFeed.getMovieObject().getTitle().length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new ForegroundColorSpan(mBinding.getRoot().getResources().getColor(R.color.color_black)), spannableStringBuilder.length() - baseFeed.getMovieObject().getTitle().length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mBinding.layoutHeader.textUserName.setText(spannableStringBuilder);
     }
 

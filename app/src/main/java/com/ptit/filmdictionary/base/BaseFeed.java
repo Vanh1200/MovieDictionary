@@ -1,9 +1,13 @@
 package com.ptit.filmdictionary.base;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.ui.feed.CardType;
+import com.ptit.filmdictionary.ui.feed.card.card_review.ReviewType;
 
 import java.util.List;
 
@@ -36,8 +40,8 @@ public class BaseFeed {
     @SerializedName("text")
     private String text;
 
-    @SerializedName("trailer")
-    private Movie movie;
+    @SerializedName("trailerId")
+    private String movie;
 
     @SerializedName("imageUrl")
     private String imageUrl;
@@ -47,6 +51,22 @@ public class BaseFeed {
 
     @SerializedName("isLike")
     private boolean isLike;
+
+    public Movie getMovieObject() {
+        try {
+            return new Gson().fromJson(movie, Movie.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String getMovie() {
+        return movie;
+    }
+
+    public void setMovie(String movie) {
+        this.movie = movie;
+    }
 
     public boolean isLike() {
         return isLike;
@@ -72,14 +92,6 @@ public class BaseFeed {
         this.text = text;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -89,7 +101,11 @@ public class BaseFeed {
     }
 
     public int getReviewType() {
-        return reviewType;
+        try {
+            return new Gson().fromJson(movie, Movie.class).getReviewType();
+        } catch (Exception e) {
+            return ReviewType.TYPE_PLAN;
+        }
     }
 
     public void setReviewType(int reviewType) {

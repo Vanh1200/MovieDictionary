@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Movie {
+    private int reviewType;
+
     @SerializedName("id")
     @Expose
     private int mId;
@@ -55,6 +57,14 @@ public class Movie {
     private CastResult mCastResult;
 
     public Movie() {
+    }
+
+    public int getReviewType() {
+        return reviewType;
+    }
+
+    public void setReviewType(int reviewType) {
+        this.reviewType = reviewType;
     }
 
     public int getId() {

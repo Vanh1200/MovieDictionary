@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.base.BaseFeed;
 import com.ptit.filmdictionary.base.BaseVH;
-import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.CardCreatePostBinding;
 import com.ptit.filmdictionary.databinding.CardLoadMoreBinding;
 import com.ptit.filmdictionary.databinding.CardReviewBinding;
@@ -88,7 +87,7 @@ public class FeedProfileAdapter extends RecyclerView.Adapter<BaseVH> {
             case CardType.CARD_TEXT_IMAGE:
                 CardTextImageBinding binding1 = DataBindingUtil.inflate(mInflater, R.layout.card_text_image, parent,false);
                 return new CardTextImageVH(binding1, mCallback);
-            case CardType.CARD_REVIEW:
+            case CardType.CARD_MOVIE:
                 CardReviewBinding binding3 = DataBindingUtil.inflate(mInflater, R.layout.card_review, parent, false);
                 return new CardReviewVH(binding3, mCallback);
         }

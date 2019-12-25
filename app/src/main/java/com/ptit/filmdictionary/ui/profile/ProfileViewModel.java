@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ptit.filmdictionary.base.BaseFeed;
-import com.ptit.filmdictionary.base.BaseResponse;
 import com.ptit.filmdictionary.data.model.Movie;
 import com.ptit.filmdictionary.data.repository.FeedRepository;
 import com.ptit.filmdictionary.ui.feed.CardType;
@@ -51,25 +50,8 @@ public class ProfileViewModel extends ViewModel {
                     Log.d("loadFeedProfile: size", data.getData().size() + "");
                     List<BaseFeed> baseFeeds = data.getData();
                     if (baseFeeds.size() > 0) {
-                        BaseFeed baseFeed = baseFeeds.get(baseFeeds.size() - 1);
-                        baseFeed.setCardType(CardType.CARD_REVIEW);
-                        if (new Random().nextInt(2) == 1) {
-                            baseFeed.setReviewType(ReviewType.TYPE_REVIEW);
-                            baseFeed.setText("Bộ phim hay nhất từng xem là đâyyyy");
-                        } else {
-                            baseFeed.setReviewType(ReviewType.TYPE_PLAN);
-                            baseFeed.setText("Phim này có hay không hả mọi người ơiii");
-                        }
-                        Movie movie = new Movie();
-                        movie.setOverview("The failed coup d'état of February 23, 1981, which began with the capture of the Congress of Deputies and ended with the release of parliamentarians, put at serious risk the Spanish democracy.");
-                        movie.setReleaseDate("2011-02-23");
-                        movie.setVoteAverage(5.6);
-                        movie.setTitle("23-F: la película");
-                        movie.setBackdropPath("https://image.tmdb.org/t/p/w500//veDMW7eX6tat86EapsvGEICJ8Tq.jpg");
-                        movie.setId(101411);
-                        baseFeed.setMovie(movie);
                         mLiveFeedProfile.setValue(data.getData());
-                        fakeData(data.getData());
+                        filterData(data.getData());
                     } else {
                         mLiveFeedProfile.setValue(data.getData());
                     }
@@ -80,14 +62,14 @@ public class ProfileViewModel extends ViewModel {
         mCompositeDisposable.add(disposable);
     }
 
-    private void fakeData(List<BaseFeed> data) {
-        List<BaseFeed> fake = new ArrayList<>();
+    private void filterData(List<BaseFeed> data) {
+        List<BaseFeed> filter = new ArrayList<>();
         for (BaseFeed baseFeed: data) {
-            if (baseFeed.getCardType() == CardType.CARD_REVIEW) {
-                fake.add(baseFeed);
+            if (baseFeed.getCardType() == CardType.CARD_MOVIE) {
+                filter.add(baseFeed);
             }
         }
-        mLiveFeedMovieProfile.setValue(fake);
+        mLiveFeedMovieProfile.setValue(filter);
     }
 
 

@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -271,7 +270,7 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
 
     @Override
     public void onClickMovie(BaseFeed item, int position) {
-        startActivity(MovieDetailActivity.getIntent(getContext(), item.getMovie().getId(), item.getMovie().getTitle()));
+        startActivity(MovieDetailActivity.getIntent(getContext(), item.getMovieObject().getId(), item.getMovieObject().getTitle()));
     }
 
     @Override
