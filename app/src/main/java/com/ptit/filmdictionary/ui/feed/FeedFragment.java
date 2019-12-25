@@ -113,15 +113,15 @@ public class FeedFragment extends Fragment implements FeedCallback, View.OnClick
                     isNoMoreData = false;
                     mFeedAdapter.setData(data);
                     mIsRefresh = false;
-                    mBinding.swipeRefresh.setRefreshing(false);
                 } else {
                     mFeedAdapter.removeLoadMore();
                     mFeedAdapter.addData(data);
-                    if (data.size() < DEFAULT_PER_PAGE) {
-                        isNoMoreData = true;
-                    }
+                }
+                if (data.size() < DEFAULT_PER_PAGE) {
+                    isNoMoreData = true;
                 }
             }
+            mBinding.swipeRefresh.setRefreshing(false);
         });
         ((MyApplication) getActivity().getApplication()).getLiveCreatePost().observe(this, data -> {
             mFeedAdapter.addCreatedPost(data);

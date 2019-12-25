@@ -284,7 +284,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/image_more"
+                            app:layout_constraintEnd_toStartOf="@id/image_logout"
                             app:layout_constraintStart_toEndOf="@id/image_back"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -315,12 +315,11 @@
 
 
                         <ImageView
-                            android:id="@+id/image_more"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/image_logout"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_20"
                             android:layout_marginEnd="@dimen/dp_15"
-                            android:rotation="90"
-                            android:src="@drawable/ic_more_white_horizontal"
+                            android:src="@drawable/ic_logout"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />

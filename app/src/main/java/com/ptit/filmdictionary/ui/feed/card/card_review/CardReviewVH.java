@@ -43,6 +43,7 @@ public class CardReviewVH extends BaseVH implements View.OnClickListener {
             mBinding.layoutCard.ratingBar.setRating((float) baseFeed.getMovieObject().getVoteAverage());
             mBinding.layoutCard.textTitle.setText(baseFeed.getMovieObject().getTitle());
             mBinding.layoutCard.textReleaseDate.setText(baseFeed.getMovieObject().getReleaseDate());
+            mBinding.layoutCard.imageDelete.setVisibility(View.GONE);
             setTitle(baseFeed);
         }
         mBinding.textContent.setText(baseFeed.getText());

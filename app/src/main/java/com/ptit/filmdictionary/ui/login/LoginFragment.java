@@ -86,10 +86,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }
         });
         mViewModel.getLiveLoginFail().observe(this, data -> {
-            mDialog.dismiss();
             if (data != null && mDialog.isShowing()) {
                 Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
             }
+            mDialog.dismiss();
         });
     }
 

@@ -74,9 +74,9 @@ public class ProfilePostFragment extends Fragment {
             } else {
                 mProfileAdapter.removeLoadMore();
                 mProfileAdapter.addData(data);
-                if (data.size() < DEFAULT_PER_PAGE) {
-                    isNoMoreData = true;
-                }
+            }
+            if (data.size() < DEFAULT_PER_PAGE) {
+                isNoMoreData = true;
             }
         });
     }

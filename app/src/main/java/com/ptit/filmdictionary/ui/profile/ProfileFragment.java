@@ -78,6 +78,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (user != null && mPreferenceUtil.getUserId().equals(user.getId())) {
             isMe = true;
             mBinding.buttonMessage.setImageResource(R.drawable.ic_edit);
+            mBinding.textEditProfile.setVisibility(View.VISIBLE);
+            mBinding.textMessage.setVisibility(View.GONE);
+            mBinding.textFollow.setVisibility(View.GONE);
+            mBinding.imageLogout.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.imageLogout.setVisibility(View.GONE);
         }
         mPagerAdapter = new ProfilePagerAdapter(getChildFragmentManager(), user.getId());
         mBinding.viewPager.setAdapter(mPagerAdapter);
@@ -93,6 +99,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mBinding.textFollow.setOnClickListener(this);
         mBinding.textMessage.setOnClickListener(this);
         mBinding.textEditProfile.setOnClickListener(this);
+        mBinding.imageLogout.setOnClickListener(this);
     }
 
     private AppBarLayout.OnOffsetChangedListener getAppBarListener() {
@@ -101,12 +108,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 mBinding.linearInfo.setAlpha(Math.abs((verticalOffset + DEFAULT_OFFSET) / (float) (appBarLayout.getTotalScrollRange() - DEFAULT_OFFSET)));
                 mBinding.linearBio.setAlpha(1 - Math.abs((verticalOffset + DEFAULT_OFFSET) / (float) (appBarLayout.getTotalScrollRange() - DEFAULT_OFFSET)));
                 mBinding.imageBack.setImageResource(R.drawable.ic_arrow_left_black_24dp);
-                mBinding.imageMore.setImageResource(R.drawable.ic_more_black_horizontal);
+                mBinding.imageLogout.setImageResource(R.drawable.ic_logout);
             } else {
                 mBinding.linearInfo.setAlpha(0);
                 mBinding.linearBio.setAlpha(1);
                 mBinding.imageBack.setImageResource(R.drawable.ic_arrow_left_white_24dp);
-                mBinding.imageMore.setImageResource(R.drawable.ic_more_white_horizontal);
+                mBinding.imageLogout.setImageResource(R.drawable.ic_logout_white);
             }
         };
     }
@@ -118,7 +125,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (!isMe)
                     ChatActivity.start(getActivity(), user);
                 else {
-                    startActivity(new Intent(getActivity(), ActivityEditProfile.class));
+                    startActivityForResult(new Intent(getActivity(), ActivityEditProfile.class), 123);
                 }
                 break;
             case R.id.image_back:
@@ -136,8 +143,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             case R.id.text_follow:
                 handleFollow();
                 break;
+            case R.id.text_edit_profile:
+                startActivityForResult(new Intent(getActivity(), ActivityEditProfile.class), 123);
+                break;
+            case R.id.image_logout:
+                getActivity().finish();
+                break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 123 && data != null) {
+            mBinding.textUserName.setText(data.getStringExtra("fullname"));
+            mBinding.textUserNameToolbar.setText(data.getStringExtra("fullname"));
         }
     }
 
