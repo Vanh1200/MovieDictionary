@@ -12,4 +12,5 @@ public @interface MessageViewHolderType {
     int RECEIVED_TEXT_MESSAGE = 1;
     int SENT_IMAGE_MESSAGE = 2;
     int RECEIVED_IMAGE_MESSAGE = 3;
+    int LOAD_MORE = 4;
 }

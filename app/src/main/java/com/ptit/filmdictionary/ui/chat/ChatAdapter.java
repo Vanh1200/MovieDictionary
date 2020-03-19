@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ptit.filmdictionary.R;
 import com.ptit.filmdictionary.data.model.MessageType;
 import com.ptit.filmdictionary.data.source.remote.response.MessageResponse;
-import com.ptit.filmdictionary.data.source.remote.response.UserResponse;
 import com.ptit.filmdictionary.databinding.ItemImageReceiveBinding;
 import com.ptit.filmdictionary.databinding.ItemImageSendBinding;
 import com.ptit.filmdictionary.databinding.ItemTextReceiveBinding;
 import com.ptit.filmdictionary.databinding.ItemTextSendBinding;
+import com.ptit.filmdictionary.databinding.LayoutLoadmoreChatBinding;
 import com.ptit.filmdictionary.utils.ImageHelper;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater mInflater;
     private Context mContext;
     private List<MessageResponse> mMessages = new ArrayList<>();
-    private String  mCurrentUserId;
+    private String mCurrentUserId;
 
     public ChatAdapter(Context context, String currentUserId) {
         mContext = context;
@@ -38,7 +38,23 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (messages != null) {
             mMessages.clear();
             mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
             notifyDataSetChanged();
+        }
+    }
+
+    public void addData(List<MessageResponse> messages) {
+        if (messages != null) {
+            int oldPosition = mMessages.size();
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            mMessages.addAll(messages);
+            notifyItemRangeChanged(oldPosition, messages.size() * 5);
         }
     }
 
@@ -63,6 +79,22 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public void addLoadMore() {
+        if (mMessages.size() > 0) {
+            MessageResponse more = new MessageResponse();
+            more.setType(MessageType.LOAD_MORE);
+            mMessages.add(more);
+            notifyItemInserted(mMessages.size() - 1);
+        }
+    }
+
+    public void removeLoadMore() {
+        if (mMessages.size() > 0 && mMessages.get(mMessages.size() - 1).getType() == MessageType.LOAD_MORE) {
+            mMessages.remove(mMessages.size() - 1);
+            notifyItemRemoved(mMessages.size());
+        }
+    }
+
     @Override
     public int getItemViewType(int position) {
         int serverType = mMessages.get(position).getType();
@@ -75,9 +107,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 if (mMessages.get(position).getSernder().getId().equals(mCurrentUserId))
                     return MessageViewHolderType.SENT_IMAGE_MESSAGE;
                 return MessageViewHolderType.RECEIVED_IMAGE_MESSAGE;
+            case MessageType.LOAD_MORE:
+                return MessageViewHolderType.LOAD_MORE;
             default:
                 return 0;
-         }
+        }
     }
 
     @NonNull
@@ -96,6 +130,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case MessageViewHolderType.RECEIVED_IMAGE_MESSAGE:
                 ItemImageReceiveBinding binding3 = DataBindingUtil.inflate(mInflater, R.layout.item_image_receive, parent, false);
                 return new ReceivedImageVH(binding3);
+            case MessageViewHolderType.LOAD_MORE:
+                LayoutLoadmoreChatBinding binding4 = DataBindingUtil.inflate(mInflater, R.layout.layout_loadmore_chat, parent, false);
+                return new LoadMoreVH(binding4);
             default:
                 return new UnknownVH(null);
         }
@@ -179,6 +216,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ImageHelper.loadImageCircle(mBinding.imageAvatar, message.getSernder().getAvatar());
         }
     }
+
+    public class LoadMoreVH extends RecyclerView.ViewHolder {
+        private LayoutLoadmoreChatBinding mBinding;
+
+        LoadMoreVH(@NonNull LayoutLoadmoreChatBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+    }
+
 
     public class UnknownVH extends RecyclerView.ViewHolder {
 

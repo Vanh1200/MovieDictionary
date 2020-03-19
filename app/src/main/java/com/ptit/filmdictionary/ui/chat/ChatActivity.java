@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -64,6 +65,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private boolean mTyping = false;
     private Handler mTypingHandler = new Handler();
     private Boolean isConnected = true;
+    private boolean isLoading = false;
+    private boolean isLoadMore = false;
 
     @Inject
     ChatViewModel mViewModel;
@@ -115,7 +118,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private void observeLiveData() {
         mViewModel.getLiveGetMessages().observe(this, data -> {
-            mChatAdapter.setData(data);
+            isLoading = false;
+            mChatAdapter.removeLoadMore();
+            if (!isLoadMore) {
+                mChatAdapter.setData(data);
+            } else {
+                mChatAdapter.addData(data);
+            }
         });
         mViewModel.getLiveSendMessages().observe(this, data -> {
             if (data != null) {
@@ -146,6 +155,26 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mLinearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, true);
         mBinding.recyclerMessage.setLayoutManager(mLinearLayoutManager);
         mBinding.recyclerMessage.setAdapter(mChatAdapter);
+        mBinding.recyclerMessage.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.d(TAG, "onScrolled 1: " + mLinearLayoutManager.findFirstCompletelyVisibleItemPosition());
+                Log.d(TAG, "onScrolled 2: " + mLinearLayoutManager.findLastCompletelyVisibleItemPosition());
+                Log.d("Vanh1200 onScrolled", "onScrolled : " + mLinearLayoutManager.findFirstVisibleItemPosition());
+                if (mLinearLayoutManager.findLastVisibleItemPosition() == mLinearLayoutManager.getItemCount() - 1 && !isLoading) {
+                    isLoading = true;
+                    isLoadMore = true;
+                    loadData();
+                    mChatAdapter.addLoadMore();
+                }
+            }
+        });
         setupAnimationTextMessage();
         mBinding.layoutSomeoneTyping.textSomeoneTyping.setText(String.format(getString(R.string.chat_opponent_typing), mInteractiveUser.getUserName()));
     }

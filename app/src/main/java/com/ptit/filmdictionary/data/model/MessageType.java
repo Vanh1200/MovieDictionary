@@ -8,4 +8,5 @@ import androidx.annotation.IntDef;
 public @interface MessageType {
     int TEXT_MESSAGE = 0;
     int IMAGE_MESSAGE = 1;
+    int LOAD_MORE = 2;
 }
