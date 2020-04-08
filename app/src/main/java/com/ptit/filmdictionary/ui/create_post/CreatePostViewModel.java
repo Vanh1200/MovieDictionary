@@ -12,7 +12,9 @@ import com.ptit.filmdictionary.data.repository.FeedRepository;
 import com.ptit.filmdictionary.data.repository.FileRepository;
 import com.ptit.filmdictionary.data.repository.MovieRepository;
 import com.ptit.filmdictionary.data.source.remote.response.FileResponse;
+import com.ptit.filmdictionary.utils.CountingRequestBody;
 import com.ptit.filmdictionary.utils.FileUtils;
+import com.ptit.filmdictionary.utils.ProgressRequestBody;
 
 import java.io.File;
 import java.util.List;
@@ -63,8 +65,10 @@ public class CreatePostViewModel extends ViewModel {
         mMovieRepository = movieRepository;
     }
 
-    public void uploadFile(String path) {
-        MultipartBody.Part body = FileUtils.prepareFilePart("file", path);
+    public void uploadFile(String path, ProgressRequestBody.UploadCallbacks listener) {
+//        MultipartBody.Part body = FileUtils.prepareFilePartCounting("file", path, listener);
+        MultipartBody.Part body = FileUtils.prepareFilePartProgress("file", path, listener);
+//        MultipartBody.Part body = FileUtils.prepareFilePart("file", path);
         RequestBody description = FileUtils.createPartFromString("cai nay chi de cho vui");
         Disposable disposable = mFileRepository.uploadFile(description, body)
                 .subscribeOn(Schedulers.io())

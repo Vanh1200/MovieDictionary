@@ -16,9 +16,6 @@ import android.webkit.MimeTypeMap;
 
 
 import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
-
-import com.ptit.filmdictionary.data.model.ImageAndVideoModel;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -537,6 +534,42 @@ public class FileUtils {
 
         // MultipartBody.Part is used to send also the actual file name
         return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
+    }
+
+    @NonNull
+    public static MultipartBody.Part prepareFilePartCounting(String partName, String path, CountingRequestBody.Listener listener) {
+        // use the FileUtils to get the actual file by uri
+        File file = new File(path);
+
+        // create RequestBody instance from file
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse(getMimeType(path)),
+//                        MediaType.parse("multipart/form-data"),
+                        file
+                );
+        CountingRequestBody countingRequestBody = new CountingRequestBody(requestFile, listener);
+
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData(partName, file.getName(), countingRequestBody);
+    }
+
+    @NonNull
+    public static MultipartBody.Part prepareFilePartProgress(String partName, String path, ProgressRequestBody.UploadCallbacks callbacks) {
+        // use the FileUtils to get the actual file by uri
+        File file = new File(path);
+        ProgressRequestBody requestBody = new ProgressRequestBody(file, getMimeType(path), callbacks);
+
+//        // create RequestBody instance from file
+//        RequestBody requestFile =
+//                RequestBody.create(
+//                        MediaType.parse(getMimeType(path)),
+////                        MediaType.parse("multipart/form-data"),
+//                        file
+//                );
+
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestBody);
     }
 
     public static String getMimeType(String url) {

@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,8 +35,10 @@ import com.ptit.filmdictionary.ui.gallery.MediaType;
 import com.ptit.filmdictionary.ui.movie_detail.MovieDetailActivity;
 import com.ptit.filmdictionary.utils.BaseHelper;
 import com.ptit.filmdictionary.utils.Constants;
+import com.ptit.filmdictionary.utils.CountingRequestBody;
 import com.ptit.filmdictionary.utils.ImageHelper;
 import com.ptit.filmdictionary.utils.MyApplication;
+import com.ptit.filmdictionary.utils.ProgressRequestBody;
 import com.ptit.filmdictionary.utils.StringUtils;
 
 import java.io.File;
@@ -239,7 +242,29 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     private void uploadData() {
         if (mImageAndVideoModels.size() > 0) {
             mCreatePostDialog.show();
-            mViewModel.uploadFile(mImageAndVideoModels.get(0).getUrl());
+            mViewModel.uploadFile(mImageAndVideoModels.get(0).getUrl(), new ProgressRequestBody.UploadCallbacks() {
+                @Override
+                public void onProgressUpdate(int percentage) {
+                    Log.d(CreatePostActivity.class.getName(), "onProgressUpdate: " + percentage);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+            });
+
+//            mViewModel.uploadFile(mImageAndVideoModels.get(0).getUrl(), new CountingRequestBody.Listener() {
+//                @Override
+//                public void onRequestProgress(long bytesWritten, long contentLength) {
+//                    Log.d(CreatePostActivity.class.getName(), "onProgressUpdate: " + ((double)bytesWritten / contentLength) * 100);
+//                }
+//            });
         }
     }
 
